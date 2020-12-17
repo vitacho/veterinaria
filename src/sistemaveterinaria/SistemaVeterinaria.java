@@ -16,7 +16,7 @@ public class SistemaVeterinaria {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        System.out.println("holi como vas");
+        System.out.println("holi como vas bien");
       //hola es una prueba de repositorio xD
     }
     
