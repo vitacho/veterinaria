@@ -19,8 +19,9 @@ public class Mascota {
     private String tamanio;
     private String sexo;
     private String colorPelaje;
+    private Persona persona;
 
-    public Mascota(int id, String external_mascota, String nombre, int edad, String raza, String especie, String tamanio, String sexo, String colorPelaje) {
+    public Mascota(int id, String external_mascota, String nombre, int edad, String raza, String especie, String tamanio, String sexo, String colorPelaje, Persona persona) {
         this.id = id;
         this.external_mascota = external_mascota;
         this.nombre = nombre;
@@ -30,11 +31,21 @@ public class Mascota {
         this.tamanio = tamanio;
         this.sexo = sexo;
         this.colorPelaje = colorPelaje;
+        this.persona = persona;
     }
 
     public Mascota() {
     }
 
+    public Persona getPersona() {
+        return persona;
+    }
+
+    public void setPersona(Persona persona) {
+        this.persona = persona;
+    }
+    
+    
     public int getId() {
         return id;
     }
