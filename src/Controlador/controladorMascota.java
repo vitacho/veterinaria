@@ -29,10 +29,10 @@ public class controladorMascota {
         listaMascotas.add(new Mascota(id, external_mascota, nombre, edad, raza, especie, tamanio, sexo, colorPelaje, persona));
     }
     
-    public ArrayList<Mascota> buscarMascotas(int cedula){
+    public ArrayList<Mascota> buscarMascotas(String cedula){
         ArrayList<Mascota> listMascota = new ArrayList<>();
         for (Mascota mascota : listaMascotas) {
-            if(mascota.getPersona().getCedula()==cedula){
+            if(mascota.getPersona().getCedula().equals(cedula)){
                 listMascota.add(mascota);
             }
         }

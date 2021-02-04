@@ -15,14 +15,14 @@ public class Persona {
     private String nombre;
     private String apellido;
     private String correoElectronico;
-    private int cedula;
+    private String cedula;
     private String telefono;
     private String direccion;
 
     public Persona() {
     }
 
-    public Persona(int id, String external_persona, String nombre, String apellido, String correoElectronico, int cedula, String telefono, String direccion) {
+    public Persona(int id, String external_persona, String nombre, String apellido, String correoElectronico, String cedula, String telefono, String direccion) {
         this.id = id;
         this.external_persona = external_persona;
         this.nombre = nombre;
@@ -75,14 +75,15 @@ public class Persona {
         this.correoElectronico = correoElectronico;
     }
 
-    public int getCedula() {
+    public String getCedula() {
         return cedula;
     }
 
-    public void setCedula(int cedula) {
+    public void setCedula(String cedula) {
         this.cedula = cedula;
     }
 
+    
     
     public String getTelefono() {
         return telefono;
