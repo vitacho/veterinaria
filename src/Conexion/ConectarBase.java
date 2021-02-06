@@ -14,10 +14,10 @@ import java.sql.SQLException;
  * @author Personal
  */
 public class ConectarBase {
-        private static String us = "";//agregar
+        private static String us = "root";//agregar
     private static String pas = "";//nada
-    private static String bd = "";//agregar nombrebd
-    private static String url = ""+bd;//agregar enlace
+    private static String bd = "veterinaria";//agregar nombrebd
+    private static String url =  "jdbc:mysql://localhost:3306/"+bd;//agregar enlace
 
     public static String getUs() {
         return us;
@@ -36,7 +36,7 @@ public class ConectarBase {
     public ConectarBase(){
         try{
             Class.forName("com.mysql.jdbc.Driver");
-            con = DriverManager.getConnection(url, us,pas);
+            con = DriverManager.getConnection(url,us,pas);
             
             if(con!=null){
                 System.out.println("Conexion en Linea");
