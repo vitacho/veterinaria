@@ -5,22 +5,31 @@
  */
 package Modelo;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author DELL
  */
-public class DetalleFactura {
+public class DetalleFactura implements Serializable {
     private String iddetallefactura;
     private int cantidad;
     private String detalle;
-    private String descuento;
+    private String descripcion;
     private double preciounitario;
     private double preciototal;
     private String esternal_hos;
     private String external_consulta;
     private int id_factura;
-    private int servicio; 
-
+    private int id_servicio; 
+    private Factura factura;
+    private Servicio servicio;
+    
+    List<Servicio> listaServicios=new ArrayList<>();
+    
+    
     public String getIddetallefactura() {
         return iddetallefactura;
     }
@@ -43,14 +52,6 @@ public class DetalleFactura {
 
     public void setDetalle(String detalle) {
         this.detalle = detalle;
-    }
-
-    public String getDescuento() {
-        return descuento;
-    }
-
-    public void setDescuento(String descuento) {
-        this.descuento = descuento;
     }
 
     public double getPreciounitario() {
@@ -94,11 +95,11 @@ public class DetalleFactura {
     }
 
     public int getServicio() {
-        return servicio;
+        return id_servicio;
     }
 
     public void setServicio(int servicio) {
-        this.servicio = servicio;
+        this.id_servicio = servicio;
     }
     
 }

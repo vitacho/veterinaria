@@ -5,18 +5,32 @@
  */
 package Modelo;
 
+import java.io.Serializable;
+import java.util.Date;
+
 /**
  *
  * @author DELL
  */
-public class Factura {
+public class Factura implements Serializable{
     private int id;
     private String externa_Factura;
     private int nro_fatura;
-    //va variable de la fecha
+    private Date date;
     private float iva;
     private String tipo_de_pago;
     private String id_persona;
+    private Persona persona;
+
+    
+    
+    public Persona getPersona() {
+        return persona;
+    }
+
+    public void setPersona(Persona persona) {
+        this.persona = persona;
+    }
 
     public int getId() {
         return id;
