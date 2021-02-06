@@ -89,6 +89,7 @@ public class Servicio implements Serializable {
     public void setEstado(String estado) {
         this.estado = estado;
     }
+    
         @OneToMany(mappedBy = "servicio", cascade = CascadeType.ALL)
     public List<Factura> getListaFactura() {
         return ListaFactura;
