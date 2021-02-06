@@ -20,9 +20,7 @@ public class controladorMascota {
     }
     
     public void crearLista(){
-        if(listaMascotas==null){
-            listaMascotas=new ArrayList<>();
-        }
+        listaMascotas=new ArrayList<>();
     }
     
     public void agregarMacota(int id, String external_mascota, String nombre, int edad, String raza, String especie, String tamanio, String sexo, String colorPelaje, Persona persona){
@@ -37,6 +35,10 @@ public class controladorMascota {
             }
         }
         return listMascota;
+    }
+    
+    public ArrayList<Mascota> getListaMascota(){
+        return listaMascotas;
     }
     
     
