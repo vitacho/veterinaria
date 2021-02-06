@@ -30,11 +30,12 @@ public class frmInicioSesion extends javax.swing.JDialog {
 
         jLabel5 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jbutton1 = new javax.swing.JButton();
+        txtUsuario = new javax.swing.JTextField();
+        btnIngresar = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        txtcontra = new javax.swing.JPasswordField();
+        btnCancelar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -47,15 +48,15 @@ public class frmInicioSesion extends javax.swing.JDialog {
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel4.setText("Contraseña:");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 160, 120, 40));
-        getContentPane().add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 100, 190, 30));
+        getContentPane().add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 100, 190, 30));
 
-        jbutton1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jbutton1.setText("Ingresar");
-        getContentPane().add(jbutton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 250, 90, 30));
+        btnIngresar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnIngresar.setText("Ingresar");
+        getContentPane().add(btnIngresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 240, 90, 30));
 
         jButton2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButton2.setText("Salir");
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 250, 80, 30));
+        jButton2.setText("x");
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 0, 80, 30));
 
         jLabel2.setBackground(new java.awt.Color(0, 0, 0));
         jLabel2.setFont(new java.awt.Font("Constantia", 1, 24)); // NOI18N
@@ -63,9 +64,17 @@ public class frmInicioSesion extends javax.swing.JDialog {
         jLabel2.setText("INICIO DE SESIÓN");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 30, 260, 50));
 
-        jPasswordField1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jPasswordField1.setText("jPasswordField1");
-        getContentPane().add(jPasswordField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 160, 190, 30));
+        txtcontra.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtcontra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtcontraActionPerformed(evt);
+            }
+        });
+        getContentPane().add(txtcontra, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 160, 190, 30));
+
+        btnCancelar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnCancelar.setText("Cancelar");
+        getContentPane().add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 240, 90, 30));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/FONDOP1.jpg"))); // NOI18N
         jLabel1.setText("jLabel1");
@@ -73,6 +82,10 @@ public class frmInicioSesion extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void txtcontraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtcontraActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtcontraActionPerformed
 
     /**
      * @param args the command line arguments
@@ -118,13 +131,14 @@ public class frmInicioSesion extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCancelar;
+    private javax.swing.JButton btnIngresar;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JButton jbutton1;
+    private javax.swing.JTextField txtUsuario;
+    private javax.swing.JPasswordField txtcontra;
     // End of variables declaration//GEN-END:variables
 }

@@ -25,8 +25,17 @@ public class Servicio implements Serializable {
     private String external_serv;
     private int nro_servicio;
     private String codigo_serv;
+
+    public String getNombre_servicio() {
+        return nombre_servicio;
+    }
+
+    public void setNombre_servicio(String nombre_servicio) {
+        this.nombre_servicio = nombre_servicio;
+    }
     private float precio;
-    private String descripcion;
+    private String descripcion,nombre_servicio;
+    
 
     
     private String estado;

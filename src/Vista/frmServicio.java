@@ -6,7 +6,10 @@
 package Vista;
 
 import Controlador.ServicioDB;
-import controlador.validaciones;
+import Modelo.Servicio;
+//import controlador.validaciones;
+import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -16,7 +19,7 @@ import javax.swing.table.DefaultTableModel;
 public class frmServicio extends javax.swing.JDialog {
     ServicioDB servicioDB  = new ServicioDB();
       DefaultTableModel model = new DefaultTableModel();
-    validaciones val = new validaciones();
+   // validaciones val = new validaciones();
     
     /**
      * Creates new form ListaServicio
@@ -24,6 +27,7 @@ public class frmServicio extends javax.swing.JDialog {
     public frmServicio(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        inicio();
     }
 
     /**
@@ -41,24 +45,26 @@ public class frmServicio extends javax.swing.JDialog {
         jPanel1 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        txtNombre = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTextArea2 = new javax.swing.JTextArea();
-        jTextField3 = new javax.swing.JTextField();
+        txtDescripcion = new javax.swing.JTextArea();
+        txtCodigo = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        txtCosto = new javax.swing.JTextField();
         jRadioButton3 = new javax.swing.JRadioButton();
-        jButton5 = new javax.swing.JButton();
+        btnEditar = new javax.swing.JButton();
         jRadioButton2 = new javax.swing.JRadioButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
+        btnGuardar = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tablaServicios = new javax.swing.JTable();
         jRadioButton4 = new javax.swing.JRadioButton();
+        btnNuevo = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -91,26 +97,26 @@ public class frmServicio extends javax.swing.JDialog {
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel7.setText("Descripción:");
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(26, 108, -1, -1));
-        jPanel1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(125, 32, 133, -1));
+        jPanel1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(125, 32, 133, -1));
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel8.setText("Costo:");
         jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(26, 70, -1, -1));
 
-        jTextArea2.setColumns(20);
-        jTextArea2.setLineWrap(true);
-        jTextArea2.setRows(5);
-        jTextArea2.setWrapStyleWord(true);
-        jScrollPane3.setViewportView(jTextArea2);
+        txtDescripcion.setColumns(20);
+        txtDescripcion.setLineWrap(true);
+        txtDescripcion.setRows(5);
+        txtDescripcion.setWrapStyleWord(true);
+        jScrollPane3.setViewportView(txtDescripcion);
 
         jPanel1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(119, 108, 420, 151));
 
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+        txtCodigo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
+                txtCodigoActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 70, 120, -1));
+        jPanel1.add(txtCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 70, 120, -1));
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel9.setText("Código:");
@@ -120,21 +126,26 @@ public class frmServicio extends javax.swing.JDialog {
         jLabel10.setText("Estado:");
         jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 30, -1, -1));
 
-        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+        txtCosto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField4ActionPerformed(evt);
+                txtCostoActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(125, 70, 133, -1));
+        jPanel1.add(txtCosto, new org.netbeans.lib.awtextra.AbsoluteConstraints(125, 70, 133, -1));
 
         jRadioButton3.setOpaque(false);
         jPanel1.add(jRadioButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 30, -1, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 320, -1, -1));
 
-        jButton5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButton5.setText("Editar");
-        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 630, 98, -1));
+        btnEditar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnEditar.setText("Editar");
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 630, 98, -1));
 
         jRadioButton2.setOpaque(false);
         getContentPane().add(jRadioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 120, -1, -1));
@@ -148,14 +159,24 @@ public class frmServicio extends javax.swing.JDialog {
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 120, -1, 30));
 
         jButton6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButton6.setText("Atrás");
-        getContentPane().add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 630, 88, -1));
+        jButton6.setText("Salir");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 630, 88, -1));
 
-        jButton7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButton7.setText("Guardar");
-        getContentPane().add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 630, 98, -1));
+        btnGuardar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnGuardar.setText("Guardar");
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 630, 98, -1));
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tablaServicios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -163,12 +184,34 @@ public class frmServicio extends javax.swing.JDialog {
                 "CÓDIGO", "NOMBRE", "COSTO", "ESTADO"
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        tablaServicios.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaServiciosMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(tablaServicios);
 
         getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 180, 470, 130));
 
         jRadioButton4.setOpaque(false);
         getContentPane().add(jRadioButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 120, -1, -1));
+
+        btnNuevo.setText("Nuevo");
+        btnNuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNuevoActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 630, -1, -1));
+
+        btnCancelar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 630, 98, -1));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/FONDOP1.jpg"))); // NOI18N
@@ -182,14 +225,67 @@ public class frmServicio extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
 
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+    private void txtCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodigoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
+    }//GEN-LAST:event_txtCodigoActionPerformed
 
-    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
+    private void txtCostoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCostoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField4ActionPerformed
+    }//GEN-LAST:event_txtCostoActionPerformed
 
+    private void tablaServiciosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaServiciosMouseClicked
+ int selectRow = tablaServicios.getSelectedRow();
+        int idServ = Integer.parseInt(model.getValueAt(selectRow, 0).toString());
+        Servicio serv = servicioDB.traeServicio(idServ);
+        txtNombre.setText(serv.getNombre_servicio());
+        txtDescripcion.setText(serv.getDescripcion());
+        //falta
+        Bloquear(true);    }//GEN-LAST:event_tablaServiciosMouseClicked
+
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+guardar();    }//GEN-LAST:event_btnGuardarActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+ this.dispose();    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+ Editar();    }//GEN-LAST:event_btnEditarActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+  tablaServicios.setEnabled(true);
+        activa_Desac_Panel(false);
+        inicio();    }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
+        tablaServicios.setEnabled(false);
+        btnNuevo.setEnabled(false);
+        btnGuardar.setEnabled(true);
+        btnCancelar.setEnabled(true);
+        activa_Desac_Panel(true);
+        txtNombre.requestFocus();
+    }//GEN-LAST:event_btnNuevoActionPerformed
+     private void Editar() {
+        activa_Desac_Panel(true);
+        btnNuevo.setEnabled(false);
+        btnCancelar.setEnabled(true);
+        btnGuardar.setEnabled(true);
+        btnGuardar.setText("Actualizar");
+        btnEditar.setEnabled(false);
+
+    }
+    
+    private void Bloquear(boolean flag) {
+
+        if (flag == true) {
+            btnEditar.setEnabled(true);
+            btnNuevo.setEnabled(false);
+            txtNombre.setEnabled(false);
+            txtDescripcion.setEnabled(false);
+
+            btnGuardar.setEnabled(false);
+            btnCancelar.setEnabled(true);
+        }
+    }
     /**
      * @param args the command line arguments
      */
@@ -236,10 +332,12 @@ public class frmServicio extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCancelar;
+    private javax.swing.JButton btnEditar;
+    private javax.swing.JButton btnGuardar;
+    private javax.swing.JButton btnNuevo;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel3;
@@ -255,11 +353,118 @@ public class frmServicio extends javax.swing.JDialog {
     private javax.swing.JRadioButton jRadioButton4;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTextArea jTextArea2;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
+    private javax.swing.JTable tablaServicios;
+    private javax.swing.JTextField txtCodigo;
+    private javax.swing.JTextField txtCosto;
+    private javax.swing.JTextArea txtDescripcion;
+    private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
+
+    private void inicio() {
+        btnNuevo.setEnabled(true);
+        btnGuardar.setText("Guardar");
+        btnEditar.setEnabled(false);
+        btnGuardar.setEnabled(false);
+        btnCancelar.setEnabled(true);
+        tablaModel();
+        llenarTablaServico("A");
+        activa_Desac_Panel(false);
+        tablaServicios.setEnabled(true);    }
+    
+     private void tablaModel() {
+        tablaServicios.getColumnModel().getColumn(0).setMaxWidth(0);
+        tablaServicios.getColumnModel().getColumn(0).setMinWidth(0);
+        tablaServicios.getColumnModel().getColumn(0).setMaxWidth(0);
+        tablaServicios.getColumnModel().getColumn(1).setMaxWidth(230);
+        tablaServicios.getColumnModel().getColumn(2).setMaxWidth(230);
+        model = (DefaultTableModel) tablaServicios.getModel();
+        model.setNumRows(0);
+    }
+     private void llenarTablaServico(String estado) {
+        tablaModel();
+        List<Servicio> listaServ = null;
+        listaServ = servicioDB .cargaServicio(estado, listaServ);
+
+        for (Servicio lista : listaServ) {
+            model.addRow(new Object[]{
+                lista.getCodigo_serv(),lista.getNombre_servicio(),lista.getPrecio()
+            });
+        }
+    }
+      private void activa_Desac_Panel(Boolean flag) {
+
+        txtNombre.setEnabled(flag);
+        txtDescripcion.setEnabled(flag);
+        txtCosto.setEnabled(flag);
+
+        if (flag == false) {
+            txtNombre.setText(null);
+            txtNombre.setText(null);
+             txtCosto.setText(null);
+        }
+    }
+      
+     private void guardar() {
+        Servicio serv = null;
+
+        if (btnGuardar.getText().equals("Guardar")) {
+            serv = servicioDB.traeNombreServicio(txtNombre.getText());
+
+            if (serv == null) {
+                if (ValidarCampos() == true) {
+                    serv = new Servicio();
+                    serv.setNombre_servicio(txtNombre.getText());
+                    serv.setDescripcion(txtDescripcion.getText());
+                    serv.setEstado("A");
+                   // serv.setCodigo_serv(txtCodigo.getText());
+                   //  serv.setPrecio(txtCosto.getText());
+
+                    servicioDB.nuevoServicio(serv);
+                } else {
+                    JOptionPane.showMessageDialog(null, "LLENAR CAMPOS REQUERIDOS", "Mensaje", JOptionPane.WARNING_MESSAGE);
+                    activa_Desac_Panel(false);
+                    inicio();
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "EL NOMBRE DE LA ESPECIALIDAD YA EXISTE EN EL SISTEMA", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
+            }
+
+        } else {
+            if (btnGuardar.getText().equals("Actualizar")) {
+                if (ValidarCampos() == true) {
+                    int selectRow = tablaServicios.getSelectedRow();
+                    int idEspecial = Integer.parseInt(model.getValueAt(selectRow, 0).toString());
+                    serv= servicioDB.traeServicio(idEspecial);
+                   
+                    serv.setNombre_servicio(txtNombre.getText());
+                    serv.setDescripcion(txtDescripcion.getText());
+                    serv.setEstado("A");
+                    //falta float
+                    servicioDB.actualizaServicio(serv);
+
+                    JOptionPane.showMessageDialog(null, "DATOS ACTUALIZADOS", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
+                    activa_Desac_Panel(false);
+
+                } else {
+                    JOptionPane.showMessageDialog(null, "LLENAR CAMPOS REQUERIDOS", "Mensaje", JOptionPane.WARNING_MESSAGE);
+                    activa_Desac_Panel(false);
+                    inicio();
+                }
+            }
+        }
+        inicio();
+    }
+
+
+      private boolean ValidarCampos() {
+        boolean lleno = true;
+
+        if (txtNombre.getText().equals("") || txtDescripcion.getText().equals("")|| txtCodigo.getText().equals("")) {
+            lleno = false;
+        } else {
+            lleno = true;
+        }
+        return lleno;
+    }
 }
