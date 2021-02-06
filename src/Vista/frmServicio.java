@@ -6,6 +6,7 @@
 package Vista;
 
 import Controlador.ServicioDB;
+import controlador.validaciones;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -16,6 +17,7 @@ public class frmServicio extends javax.swing.JDialog {
     ServicioDB servicioDB  = new ServicioDB();
       DefaultTableModel model = new DefaultTableModel();
     validaciones val = new validaciones();
+    
     /**
      * Creates new form ListaServicio
      */
