@@ -20,6 +20,7 @@ import javax.persistence.OneToMany;
  */
 public class Servicio implements Serializable {
 
+    
     private int id_serv;
     private String external_serv;
     private int nro_servicio;
