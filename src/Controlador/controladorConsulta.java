@@ -5,8 +5,9 @@
  */
 package Controlador;
 
-import Modelo.Persona;
+import Modelo.Consulta;
 import java.util.ArrayList;
+
 
 /**
  *
@@ -14,6 +15,7 @@ import java.util.ArrayList;
  */
 public class controladorConsulta {
     
+    ArrayList<Consulta> listaPersona = new ArrayList<>();
     
     
 }

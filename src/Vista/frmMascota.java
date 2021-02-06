@@ -5,18 +5,27 @@
  */
 package Vista;
 
+import Controlador.controladorMascota;
+import Modelo.Mascota;
+import Modelo.Persona;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+
 /**
  *
  * @author Personal
  */
 public class frmMascota extends javax.swing.JDialog {
-
+    controladorMascota listaMascotas;
     /**
      * Creates new form frmMascota
      */
     public frmMascota(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        //bloquearJtext();
+        
     }
 
     /**
@@ -28,47 +37,53 @@ public class frmMascota extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel6 = new javax.swing.JLabel();
+        jLabelTitulo = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTableMascotas = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         jLabel23 = new javax.swing.JLabel();
-        jTextField9 = new javax.swing.JTextField();
+        jTextColorPelaje = new javax.swing.JTextField();
         jLabel20 = new javax.swing.JLabel();
-        jTextField10 = new javax.swing.JTextField();
+        jTextNombreMascota = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
-        Guardar = new javax.swing.JButton();
-        Guardar1 = new javax.swing.JButton();
+        jComboBoxSexo = new javax.swing.JComboBox<>();
+        jButtonModificar = new javax.swing.JButton();
+        jButtonRegistrar = new javax.swing.JButton();
+        jButtonCancelar = new javax.swing.JButton();
         jLabel24 = new javax.swing.JLabel();
-        jComboBox3 = new javax.swing.JComboBox<>();
+        jComboBoxTamaño = new javax.swing.JComboBox<>();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
-        jTextField11 = new javax.swing.JTextField();
-        jTextField14 = new javax.swing.JTextField();
-        jTextField15 = new javax.swing.JTextField();
+        Alertas = new javax.swing.JLabel();
+        jTextRaza = new javax.swing.JTextField();
+        jTextEdad = new javax.swing.JTextField();
+        jTextEspecie = new javax.swing.JTextField();
         jPanel6 = new javax.swing.JPanel();
         jLabel26 = new javax.swing.JLabel();
         jLabel27 = new javax.swing.JLabel();
-        jTextField12 = new javax.swing.JTextField();
-        jTextField13 = new javax.swing.JTextField();
+        jTextPresentarNombrePersona = new javax.swing.JTextField();
+        jTextFieldPresentarApellidoPersona = new javax.swing.JTextField();
         jLabel28 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jButton3 = new javax.swing.JButton();
+        jTextBuscarCedula = new javax.swing.JTextField();
+        jButtonBuscar = new javax.swing.JButton();
+        AlertaBuscar = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        jLabelFondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("REGISTRAR MASCOTA");
         setAlwaysOnTop(true);
+        setMinimumSize(new java.awt.Dimension(1366, 768));
+        setPreferredSize(new java.awt.Dimension(1366, 768));
+        setSize(new java.awt.Dimension(0, 0));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel6.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
-        jLabel6.setText("REGISTRAR MASCOTA");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 40, -1, -1));
+        jLabelTitulo.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
+        jLabelTitulo.setText("REGISTRAR MASCOTA");
+        getContentPane().add(jLabelTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 40, -1, -1));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTableMascotas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -76,9 +91,10 @@ public class frmMascota extends javax.swing.JDialog {
                 "NOMBRE ", "ESPECIE", "RAZA", "SEXO", "CÉDULA", "DUEÑO"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jTableMascotas.setGridColor(new java.awt.Color(153, 153, 255));
+        jScrollPane1.setViewportView(jTableMascotas);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 210, 1090, 246));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 210, 1090, 246));
 
         jPanel1.setOpaque(false);
         jPanel1.addAncestorListener(new javax.swing.event.AncestorListener() {
@@ -92,181 +108,270 @@ public class frmMascota extends javax.swing.JDialog {
         });
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel23.setFont(new java.awt.Font("Constantia", 0, 14)); // NOI18N
+        jLabel23.setFont(new java.awt.Font("Constantia", 1, 14)); // NOI18N
         jLabel23.setText("Raza:");
         jPanel1.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 60, -1, -1));
 
-        jTextField9.addActionListener(new java.awt.event.ActionListener() {
+        jTextColorPelaje.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField9ActionPerformed(evt);
+                jTextColorPelajeActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextField9, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 110, 155, 30));
+        jPanel1.add(jTextColorPelaje, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 110, 155, 30));
 
-        jLabel20.setFont(new java.awt.Font("Constantia", 0, 14)); // NOI18N
+        jLabel20.setFont(new java.awt.Font("Constantia", 1, 14)); // NOI18N
         jLabel20.setText("Nombre:");
         jPanel1.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 57, -1, -1));
 
-        jTextField10.addActionListener(new java.awt.event.ActionListener() {
+        jTextNombreMascota.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField10ActionPerformed(evt);
+                jTextNombreMascotaActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextField10, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 50, 270, 30));
+        jPanel1.add(jTextNombreMascota, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 50, 270, 30));
 
-        jLabel10.setFont(new java.awt.Font("Constantia", 0, 14)); // NOI18N
+        jLabel10.setFont(new java.awt.Font("Constantia", 1, 14)); // NOI18N
         jLabel10.setText("Sexo: ");
         jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 120, 50, -1));
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Macho", "Hembra" }));
-        jPanel1.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 110, 90, 30));
+        jComboBoxSexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Macho", "Hembra" }));
+        jPanel1.add(jComboBoxSexo, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 110, 90, 30));
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButton1.setText("Modificar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonModificar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButtonModificar.setText("Modificar");
+        jButtonModificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButtonModificarActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 170, 90, 30));
+        jPanel1.add(jButtonModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 170, 90, 30));
 
-        Guardar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        Guardar.setText("Registrar");
-        Guardar.addActionListener(new java.awt.event.ActionListener() {
+        jButtonRegistrar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButtonRegistrar.setText("Registrar");
+        jButtonRegistrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                GuardarActionPerformed(evt);
+                jButtonRegistrarActionPerformed(evt);
             }
         });
-        jPanel1.add(Guardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 170, 100, 30));
+        jPanel1.add(jButtonRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 170, 100, 30));
 
-        Guardar1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        Guardar1.setText("Cancelar");
-        Guardar1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonCancelar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButtonCancelar.setText("Cancelar");
+        jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Guardar1ActionPerformed(evt);
+                jButtonCancelarActionPerformed(evt);
             }
         });
-        jPanel1.add(Guardar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 170, 90, 30));
+        jPanel1.add(jButtonCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 170, 90, 30));
 
-        jLabel24.setFont(new java.awt.Font("Constantia", 0, 14)); // NOI18N
+        jLabel24.setFont(new java.awt.Font("Constantia", 1, 14)); // NOI18N
         jLabel24.setText("Tamaño");
         jPanel1.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, -1, -1));
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Grande", "Mediano", "Pequeño" }));
-        jPanel1.add(jComboBox3, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 110, 100, 30));
+        jComboBoxTamaño.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Grande", "Mediano", "Pequeño" }));
+        jPanel1.add(jComboBoxTamaño, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 110, 100, 30));
 
-        jLabel11.setFont(new java.awt.Font("Constantia", 0, 14)); // NOI18N
+        jLabel11.setFont(new java.awt.Font("Constantia", 1, 14)); // NOI18N
         jLabel11.setText("Especie: ");
         jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 50, 60, 30));
 
-        jLabel12.setFont(new java.awt.Font("Constantia", 0, 14)); // NOI18N
+        jLabel12.setFont(new java.awt.Font("Constantia", 1, 14)); // NOI18N
         jLabel12.setText("Edad:");
         jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 120, 87, -1));
 
-        jLabel25.setFont(new java.awt.Font("Constantia", 0, 14)); // NOI18N
+        jLabel25.setFont(new java.awt.Font("Constantia", 1, 14)); // NOI18N
         jLabel25.setText("Color de Pelaje :");
-        jPanel1.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 120, -1, -1));
+        jPanel1.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 120, -1, -1));
 
-        jTextField11.addActionListener(new java.awt.event.ActionListener() {
+        Alertas.setFont(new java.awt.Font("Constantia", 1, 14)); // NOI18N
+        Alertas.setForeground(new java.awt.Color(255, 0, 0));
+        jPanel1.add(Alertas, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 170, 290, 40));
+
+        jTextRaza.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField11ActionPerformed(evt);
+                jTextRazaActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextField11, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 50, 155, 30));
+        jPanel1.add(jTextRaza, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 50, 155, 30));
 
-        jTextField14.addActionListener(new java.awt.event.ActionListener() {
+        jTextEdad.setToolTipText("");
+        jTextEdad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField14ActionPerformed(evt);
+                jTextEdadActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextField14, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 110, 155, 30));
+        jPanel1.add(jTextEdad, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 110, 155, 30));
 
-        jTextField15.addActionListener(new java.awt.event.ActionListener() {
+        jTextEspecie.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField15ActionPerformed(evt);
+                jTextEspecieActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextField15, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 50, 155, 30));
+        jPanel1.add(jTextEspecie, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 50, 155, 30));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 470, 1090, 220));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 490, 1030, 220));
 
         jPanel6.setOpaque(false);
         jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel26.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel26.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel26.setText("Apellido");
         jPanel6.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 30, -1, 20));
         jPanel6.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(56, 148, -1, -1));
-        jPanel6.add(jTextField12, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 30, 180, 30));
-        jPanel6.add(jTextField13, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 30, 170, 30));
 
-        jLabel28.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextPresentarNombrePersona.setEditable(false);
+        jPanel6.add(jTextPresentarNombrePersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 30, 180, 30));
+
+        jTextFieldPresentarApellidoPersona.setEditable(false);
+        jPanel6.add(jTextFieldPresentarApellidoPersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 30, 170, 30));
+
+        jLabel28.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel28.setText("Nombre");
         jPanel6.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 30, -1, -1));
 
-        getContentPane().add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 130, 630, 80));
+        getContentPane().add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 130, 630, 80));
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        jTextBuscarCedula.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                jTextBuscarCedulaActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 100, 310, 30));
+        getContentPane().add(jTextBuscarCedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 100, 310, 30));
 
-        jButton3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButton3.setText("Buscar");
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 100, -1, 30));
+        jButtonBuscar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButtonBuscar.setText("Buscar");
+        getContentPane().add(jButtonBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 100, -1, 30));
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        AlertaBuscar.setFont(new java.awt.Font("Constantia", 1, 14)); // NOI18N
+        AlertaBuscar.setForeground(new java.awt.Color(255, 0, 0));
+        getContentPane().add(AlertaBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 100, 190, 30));
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel3.setText("Número de Cédula");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 100, -1, 30));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 100, -1, 30));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/FONDOP1.jpg"))); // NOI18N
-        jLabel2.setText("jLabel2");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        jLabelFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/FONDOP1.jpg"))); // NOI18N
+        jLabelFondo.setText("jLabel2");
+        getContentPane().add(jLabelFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField9ActionPerformed
+    private void jTextColorPelajeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextColorPelajeActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField9ActionPerformed
+    }//GEN-LAST:event_jTextColorPelajeActionPerformed
 
-    private void jTextField10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField10ActionPerformed
+    private void jTextNombreMascotaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextNombreMascotaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField10ActionPerformed
+    }//GEN-LAST:event_jTextNombreMascotaActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jButtonModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jButtonModificarActionPerformed
 
-    private void GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarActionPerformed
+    private void jButtonRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegistrarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_GuardarActionPerformed
-
-    private void Guardar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Guardar1ActionPerformed
+        if(listaMascotas==null){
+            listaMascotas=new controladorMascota();
+            listaMascotas.crearLista();
+        }
+        habititalJtext();        
+        if(!jTextNombreMascota.getText().equals("")&&!jTextEspecie.getText().equals("")&&!jTextRaza.getText().equals("")
+           &&!jTextEdad.getText().equals("")&&!jTextColorPelaje.getText().equals("")){
+            if(esNumerico(jTextEdad.getText())){
+                Persona p = new Persona(001, "PSN01", "CARLOS", "ORDOÑES", "GMAIL", "1150250921", "2572220", "MEXICO");
+                int edad = Integer.parseInt(jTextEdad.getText());
+                String nombreMascota = jTextNombreMascota.getText();
+                listaMascotas.agregarMacota(001, "MT01",nombreMascota , edad, jTextRaza.getText(), jTextEspecie.getText(), jComboBoxTamaño.getSelectedItem().toString(), jComboBoxSexo.getSelectedItem().toString(), jTextColorPelaje.getText(), p);
+                llenarTabla(listaMascotas.getListaMascota());
+                limpiarJtext();
+                Alertas.setText("");
+            }else{
+                jTextEdad.setText("");
+                Alertas.setText("INGRESE LA EDAD EN NUMEROS");
+            }
+        }else{
+            Alertas.setText("LLENE TODOS LOS CAMPOS");
+        }
+    }//GEN-LAST:event_jButtonRegistrarActionPerformed
+    public void llenarTabla(ArrayList<Mascota> lista){
+        DefaultTableModel modelo = new DefaultTableModel(new String[]{"NOMBRE","ESPECIE","RAZA","SEXO","CEDULA","DUEÑO"},lista.size());
+        jTableMascotas.setModel(modelo);
+        TableModel modeloDatos = jTableMascotas.getModel();
+        for (int i = 0; i < lista.size(); i++) {
+            Mascota mascota= lista.get(i);
+            modeloDatos.setValueAt(mascota.getNombre(), i, 0);
+            modeloDatos.setValueAt(mascota.getEspecie(), i, 1);
+            modeloDatos.setValueAt(mascota.getRaza(), i, 2);
+            modeloDatos.setValueAt(mascota.getSexo(), i, 3);
+            modeloDatos.setValueAt(mascota.getPersona().getCedula(), i, 4);
+            String dueño = mascota.getPersona().getNombre()+" "+mascota.getPersona().getApellido();
+            modeloDatos.setValueAt(dueño, i, 5);
+        }
+    }
+    
+    private static boolean esNumerico(String cadena){
+	try {
+		Integer.parseInt(cadena);
+		return true;
+	} catch (NumberFormatException nfe){
+		return false;
+	}
+    }
+    public void limpiarJtext(){
+        jTextNombreMascota.setText("");
+        jTextColorPelaje.setText("");
+        jTextEdad.setText("");
+        jTextRaza.setText("");
+        jTextEspecie.setText("");
+        jTextBuscarCedula.setText("");
+    }
+    
+    public void bloquearJtext(){
+        jTextNombreMascota.disable();
+        jComboBoxTamaño.disable();
+        jTextColorPelaje.disable();
+        jTextEdad.disable();
+        jTextRaza.disable();
+        jComboBoxSexo.disable();
+        jTextEspecie.disable();
+    }
+    public void habititalJtext(){
+        jTextNombreMascota.enable();
+        jComboBoxTamaño.enable();
+        jTextColorPelaje.enable();
+        jTextEdad.enable();
+        jTextRaza.enable();
+        jComboBoxSexo.enable();
+        jTextEspecie.enable();
+    }
+    private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_Guardar1ActionPerformed
+        
+    }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     private void jPanel1AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jPanel1AncestorAdded
 
     }//GEN-LAST:event_jPanel1AncestorAdded
 
-    private void jTextField11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField11ActionPerformed
+    private void jTextRazaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextRazaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField11ActionPerformed
+    }//GEN-LAST:event_jTextRazaActionPerformed
 
-    private void jTextField14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField14ActionPerformed
+    private void jTextEdadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextEdadActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField14ActionPerformed
+    }//GEN-LAST:event_jTextEdadActionPerformed
 
-    private void jTextField15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField15ActionPerformed
+    private void jTextEspecieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextEspecieActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField15ActionPerformed
+    }//GEN-LAST:event_jTextEspecieActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void jTextBuscarCedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextBuscarCedulaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+        
+        
+        
+    }//GEN-LAST:event_jTextBuscarCedulaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -311,16 +416,17 @@ public class frmMascota extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Guardar;
-    private javax.swing.JButton Guardar1;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox<String> jComboBox3;
+    private javax.swing.JLabel AlertaBuscar;
+    private javax.swing.JLabel Alertas;
+    private javax.swing.JButton jButtonBuscar;
+    private javax.swing.JButton jButtonCancelar;
+    private javax.swing.JButton jButtonModificar;
+    private javax.swing.JButton jButtonRegistrar;
+    private javax.swing.JComboBox<String> jComboBoxSexo;
+    private javax.swing.JComboBox<String> jComboBoxTamaño;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
@@ -329,18 +435,19 @@ public class frmMascota extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabelFondo;
+    private javax.swing.JLabel jLabelTitulo;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField10;
-    private javax.swing.JTextField jTextField11;
-    private javax.swing.JTextField jTextField12;
-    private javax.swing.JTextField jTextField13;
-    private javax.swing.JTextField jTextField14;
-    private javax.swing.JTextField jTextField15;
-    private javax.swing.JTextField jTextField9;
+    private javax.swing.JTable jTableMascotas;
+    private javax.swing.JTextField jTextBuscarCedula;
+    private javax.swing.JTextField jTextColorPelaje;
+    private javax.swing.JTextField jTextEdad;
+    private javax.swing.JTextField jTextEspecie;
+    private javax.swing.JTextField jTextFieldPresentarApellidoPersona;
+    private javax.swing.JTextField jTextNombreMascota;
+    private javax.swing.JTextField jTextPresentarNombrePersona;
+    private javax.swing.JTextField jTextRaza;
     // End of variables declaration//GEN-END:variables
 }
