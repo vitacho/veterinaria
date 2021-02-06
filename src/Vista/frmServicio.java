@@ -5,12 +5,17 @@
  */
 package Vista;
 
+import Controlador.ServicioDB;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Personal
  */
 public class frmServicio extends javax.swing.JDialog {
-
+    ServicioDB servicioDB  = new ServicioDB();
+      DefaultTableModel model = new DefaultTableModel();
+    validaciones val = new validaciones();
     /**
      * Creates new form ListaServicio
      */
