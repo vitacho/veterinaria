@@ -6,8 +6,10 @@
 package Vista;
 
 import Controlador.controladorMascota;
+import Modelo.Cuenta;
 import Modelo.Mascota;
 import Modelo.Persona;
+import Modelo.Rol;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
@@ -98,10 +100,10 @@ public class frmMascota extends javax.swing.JDialog {
 
         jPanel1.setOpaque(false);
         jPanel1.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
                 jPanel1AncestorAdded(evt);
-            }
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
             }
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
             }
@@ -279,7 +281,9 @@ public class frmMascota extends javax.swing.JDialog {
         if(!jTextNombreMascota.getText().equals("")&&!jTextEspecie.getText().equals("")&&!jTextRaza.getText().equals("")
            &&!jTextEdad.getText().equals("")&&!jTextColorPelaje.getText().equals("")){
             if(esNumerico(jTextEdad.getText())){
-                Persona p = new Persona(001, "PSN01", "CARLOS", "ORDOÑES", "GMAIL", "1150250921", "2572220", "MEXICO");
+                Rol r = new Rol(001, "Administrador");
+                Cuenta c = new Cuenta(1, "CTA1", "123", true);
+                Persona p = new Persona(001, "PSN01", "CARLOS", "ORDOÑES", "GMAIL", "1150250921", "2572220", "MEXICO", r, c);
                 int edad = Integer.parseInt(jTextEdad.getText());
                 String nombreMascota = jTextNombreMascota.getText();
                 listaMascotas.agregarMacota(001, "MT01",nombreMascota , edad, jTextRaza.getText(), jTextEspecie.getText(), jComboBoxTamaño.getSelectedItem().toString(), jComboBoxSexo.getSelectedItem().toString(), jTextColorPelaje.getText(), p);
@@ -325,13 +329,12 @@ public class frmMascota extends javax.swing.JDialog {
         jTextRaza.setText("");
         jTextEspecie.setText("");
         jTextBuscarCedula.setText("");
-    }
-    
+    } 
     public void bloquearJtext(){
         jTextNombreMascota.disable();
         jComboBoxTamaño.disable();
         jTextColorPelaje.disable();
-        jTextEdad.disable();
+        jTextEdad.disable(); 
         jTextRaza.disable();
         jComboBoxSexo.disable();
         jTextEspecie.disable();

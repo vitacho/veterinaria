@@ -5,7 +5,9 @@
  */
 package Controlador;
 
+import Modelo.Cuenta;
 import Modelo.Persona;
+import Modelo.Rol;
 import java.util.ArrayList;
 
 /**
@@ -16,8 +18,8 @@ public class controladorPersona {
     
     ArrayList<Persona> listaPersona = new ArrayList<>();
     
-    public void agregarPersona(int id, String external_persona, String nombre, String apellido, String correo, String cedula, String telefono, String direccion){
-        listaPersona.add(new Persona(id, external_persona, nombre, apellido, telefono, cedula, telefono, direccion));
+    public void agregarPersona(int id, String external_persona, String nombre, String apellido, String correo, String cedula, String telefono, String direccion,Rol rol,Cuenta cuenta){
+        listaPersona.add(new Persona(id, external_persona, nombre, apellido, telefono, cedula, telefono, direccion, rol, cuenta));
     }
 
 }

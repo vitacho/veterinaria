@@ -19,11 +19,13 @@ public class Persona {
     private String cedula;
     private String telefono;
     private String direccion;
+    private Rol rol;
+    private Cuenta cuenta;
 
     public Persona() {
     }
 
-    public Persona(int id, String external_persona, String nombre, String apellido, String correoElectronico, String cedula, String telefono, String direccion) {
+    public Persona(int id, String external_persona, String nombre, String apellido, String correoElectronico, String cedula, String telefono, String direccion, Rol rol, Cuenta cuenta) {
         this.id = id;
         this.external_persona = external_persona;
         this.nombre = nombre;
@@ -32,7 +34,29 @@ public class Persona {
         this.cedula = cedula;
         this.telefono = telefono;
         this.direccion = direccion;
+        this.rol = rol;
+        this.cuenta = cuenta;
     }
+
+    public Cuenta getCuenta() {
+        return cuenta;
+    }
+
+    public void setCuenta(Cuenta cuenta) {
+        this.cuenta = cuenta;
+    }
+
+    
+
+    public Rol getRol() {
+        return rol;
+    }
+
+    public void setRol(Rol rol) {
+        this.rol = rol;
+    }
+
+    
 
     public int getId() {
         return id;
