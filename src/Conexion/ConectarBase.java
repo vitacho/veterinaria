@@ -14,8 +14,9 @@ import java.sql.SQLException;
  * @author Personal
  */
 public class ConectarBase {
-        private static String us = "root";//agregar
-    private static String pas = "";//nada
+    
+    private static String us = "root";//agregar
+    private static String pas = "XavierVill2525";//nada
     private static String bd = "veterinaria";//agregar nombrebd
     private static String url =  "jdbc:mysql://localhost:3306/"+bd;//agregar enlace
 
