@@ -10,6 +10,7 @@ package Modelo;
  * @author DELL
  */
 public class Persona {
+
     private int id;
     private String external_persona;
     private String nombre;
@@ -32,8 +33,6 @@ public class Persona {
         this.telefono = telefono;
         this.direccion = direccion;
     }
-
-    
 
     public int getId() {
         return id;
@@ -83,8 +82,6 @@ public class Persona {
         this.cedula = cedula;
     }
 
-    
-    
     public String getTelefono() {
         return telefono;
     }
@@ -100,6 +97,5 @@ public class Persona {
     public void setDireccion(String direccion) {
         this.direccion = direccion;
     }
-    
-    
+
 }
