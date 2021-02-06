@@ -6,20 +6,33 @@
 package Modelo;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.CascadeType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 /**
  *
  * @author Personal
  */
-public class Servicio implements Serializable{
-     private int id_serv;
-     private String external_serv;
-     private int nro_servicio;
-     private String codigo_serv;
-     private float precio;
-     private String descripcion;
-     private String estado;
+public class Servicio implements Serializable {
 
+    private int id_serv;
+    private String external_serv;
+    private int nro_servicio;
+    private String codigo_serv;
+    private float precio;
+    private String descripcion;
+
+    
+    private String estado;
+    private List<Factura> ListaFactura = new ArrayList<Factura>();
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int getId_serv() {
         return id_serv;
     }
@@ -75,7 +88,13 @@ public class Servicio implements Serializable{
     public void setEstado(String estado) {
         this.estado = estado;
     }
-     
-     
+        @OneToMany(mappedBy = "servicio", cascade = CascadeType.ALL)
+    public List<Factura> getListaFactura() {
+        return ListaFactura;
+    }
+
+    public void setListaFactura(List<Factura> ListaFactura) {
+        this.ListaFactura = ListaFactura;
+    }
     
-}
+     }
