@@ -112,12 +112,12 @@ public class frmMascota extends javax.swing.JDialog {
 
         jPanel1.setOpaque(false);
         jPanel1.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
                 jPanel1AncestorAdded(evt);
             }
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
-            }
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
             }
         });
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -492,7 +492,7 @@ public class frmMascota extends javax.swing.JDialog {
 
     private void jButtonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarActionPerformed
         // TODO add your handling code here:
-         if(listaMascotas==null){
+        if(listaMascotas==null){
             listaMascotas=new controladorMascota();
             listaMascotas.crearLista();
         }
@@ -547,8 +547,6 @@ public class frmMascota extends javax.swing.JDialog {
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
-        frmPrincipal principal =new frmPrincipal();
-        principal.setVisible(true);
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     /**
