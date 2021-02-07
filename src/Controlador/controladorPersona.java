@@ -46,9 +46,57 @@ public class controladorPersona {
         return persona;
     }
     
-    public boolean validarPasword(String cedula1,String cedula2){
-        if(cedula1.equals(cedula2))return true;
+    public boolean validarPasword(String pass1,String pass2){
+        if(pass1.equals(pass2))return true;
         else return false;
+    }
+    
+    public boolean validarCedula(String cedula) {
+        boolean cedulaCorrecta = false;
+        try {
+            // ConstantesApp.LongitudCedula
+            if (cedula.length() == 10){
+                int tercerDigito = Integer.parseInt(cedula.substring(2, 3));
+                if (tercerDigito < 6) {
+                    // Coeficientes de validación cédula
+                    // El decimo digito se lo considera dígito verificador
+                    int[] coefValCedula = { 2, 1, 2, 1, 2, 1, 2, 1, 2 };
+                    int verificador = Integer.parseInt(cedula.substring(9,10));
+                    int suma = 0;
+                    int digito = 0;
+                    for (int i = 0; i < (cedula.length() - 1); i++) {
+                        digito = Integer.parseInt(cedula.substring(i, i + 1))* coefValCedula[i];
+                        suma += ((digito % 10) + (digito / 10));
+                    }
+                    if ((suma % 10 == 0) && (suma % 10 == verificador)) {
+                        cedulaCorrecta = true;
+                    }else if ((10 - (suma % 10)) == verificador) {
+                        cedulaCorrecta = true;
+                    } else cedulaCorrecta = false;
+                } else cedulaCorrecta = false;
+            }else cedulaCorrecta = false;
+        } catch (NumberFormatException nfe) {
+            cedulaCorrecta = false;
+        } catch (Exception err) {
+            cedulaCorrecta = false;
+        }
+        if (!cedulaCorrecta) {
+            System.out.println("La Cédula ingresada es Incorrecta");
+        }
+        return cedulaCorrecta;
+    }
+    
+    public ArrayList<Persona> getListaPersonas(){
+        return listaPersona;
+    }
+    
+    public boolean cedulaRepetida(String cedula){
+        for (Persona persona : listaPersona) {
+            if(persona.getCedula().equals(cedula)){
+                return true;
+            }
+        }
+        return false;
     }
 
 }
