@@ -26,14 +26,17 @@ public class controladorConsulta {
         
     }
     
-    public ArrayList<Consulta> buscarMascotas(String cedula){
-        ArrayList<Consulta> listaConsulta = new ArrayList<>();
+    public ArrayList<Consulta> buscarConsulta(String cedula){
         for (Consulta con : listaConsulta) {
             if(con.getMascota().getPersona().getCedula().equals(cedula)){
                 listaConsulta.add(con);
             }
         }
         return listaConsulta;
+    }
+    
+    public ArrayList<Consulta> obtenerLista (ArrayList<Consulta> lista){
+        return lista = listaConsulta;
     }
 
 }

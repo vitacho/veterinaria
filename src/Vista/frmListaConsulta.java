@@ -6,10 +6,12 @@
 package Vista;
 
 import Controlador.controladorConsulta;
+import Controlador.controladorMascota;
 import Modelo.Consulta;
 import java.util.ArrayList;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 /**
  *
@@ -19,13 +21,11 @@ public class frmListaConsulta extends javax.swing.JDialog {
 
     controladorConsulta cc = new controladorConsulta();
     ArrayList<Consulta> listaConsulta = new ArrayList<>();
-    DefaultTableModel tabla = new DefaultTableModel();
 
     public void actualizarPantalla() {
         SwingUtilities.updateComponentTreeUI(this);
         //SwingUtilities.updateTreeUI(this);
-        
-        
+
         this.validateTree();
     }
 
@@ -35,7 +35,23 @@ public class frmListaConsulta extends javax.swing.JDialog {
     public frmListaConsulta(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        listaConsulta = cc.obtenerLista(listaConsulta);
+        DefaultTableModel tabla = new DefaultTableModel(new String[]{"MASCOTA", "SEXO", "PRESIÓN", "TEMPERATURA", "PESO", "CEDULA", "DUEÑO", "VETERINARIO", "FECHA"}, listaConsulta.size());
+        jTableConsultas.setModel(tabla);
+        TableModel datosTabla = jTableConsultas.getModel();
 
+        for (int i = 0; i < listaConsulta.size(); i++) {
+            datosTabla.setValueAt(listaConsulta.get(i).getMascota().getNombre(), i, 0);
+            datosTabla.setValueAt(listaConsulta.get(i).getMascota().getSexo(), i, 1);
+            datosTabla.setValueAt(listaConsulta.get(i).getPresion(), i, 2);
+            datosTabla.setValueAt(listaConsulta.get(i).getTemp(), i, 3);
+            datosTabla.setValueAt(listaConsulta.get(i).getPeso(), i, 4);
+            datosTabla.setValueAt(listaConsulta.get(i).getMascota().getPersona().getCedula(), i, 5);
+            String nombres = listaConsulta.get(i).getMascota().getPersona().getNombre() + " " + listaConsulta.get(i).getMascota().getPersona().getApellido();
+            datosTabla.setValueAt(nombres, i, 6);
+            datosTabla.setValueAt(listaConsulta.get(i).getVeterinario(), i, 7);
+            datosTabla.setValueAt(listaConsulta.get(i).getFecha(), i, 8);
+        }
     }
 
     /**
@@ -48,25 +64,25 @@ public class frmListaConsulta extends javax.swing.JDialog {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTableConsultas = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
-        jButton3 = new javax.swing.JButton();
+        jButtonbuscarConsulta = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        jTextAreaMotivo = new javax.swing.JTextArea();
         jPanel5 = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTextArea2 = new javax.swing.JTextArea();
+        jTextAreaDiagnostico = new javax.swing.JTextArea();
         jButton1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTableConsultas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -74,7 +90,7 @@ public class frmListaConsulta extends javax.swing.JDialog {
                 "MASCOTA", "SEXO", "PRESIÓN", "TEMPERATURA", "PESO", "CÉDULA", "DUEÑO", "VETERINARIO", "FECHA"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jTableConsultas);
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 140, 1060, 220));
 
@@ -89,14 +105,14 @@ public class frmListaConsulta extends javax.swing.JDialog {
         });
         getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 90, 310, 30));
 
-        jButton3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButton3.setText("Buscar por CI");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        jButtonbuscarConsulta.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButtonbuscarConsulta.setText("Buscar por CI");
+        jButtonbuscarConsulta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                jButtonbuscarConsultaActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 90, -1, 30));
+        getContentPane().add(jButtonbuscarConsulta, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 90, -1, 30));
 
         jPanel2.setOpaque(false);
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -105,9 +121,9 @@ public class frmListaConsulta extends javax.swing.JDialog {
         jLabel15.setText("Motivo de la consulta");
         jPanel2.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane2.setViewportView(jTextArea1);
+        jTextAreaMotivo.setColumns(20);
+        jTextAreaMotivo.setRows(5);
+        jScrollPane2.setViewportView(jTextAreaMotivo);
 
         jPanel2.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 10, 910, 120));
 
@@ -120,11 +136,11 @@ public class frmListaConsulta extends javax.swing.JDialog {
         jLabel14.setText("Diagnóstico");
         jPanel5.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
 
-        jTextArea2.setColumns(20);
-        jTextArea2.setLineWrap(true);
-        jTextArea2.setRows(5);
-        jTextArea2.setWrapStyleWord(true);
-        jScrollPane3.setViewportView(jTextArea2);
+        jTextAreaDiagnostico.setColumns(20);
+        jTextAreaDiagnostico.setLineWrap(true);
+        jTextAreaDiagnostico.setRows(5);
+        jTextAreaDiagnostico.setWrapStyleWord(true);
+        jScrollPane3.setViewportView(jTextAreaDiagnostico);
 
         jPanel5.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 20, 910, 120));
 
@@ -155,12 +171,11 @@ public class frmListaConsulta extends javax.swing.JDialog {
         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void jButtonbuscarConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonbuscarConsultaActionPerformed
         // TODO add your handling code here:
         String cedula = jTextField1.getText();
-        listaConsulta = cc.buscarMascotas(cedula);
-
-    }//GEN-LAST:event_jButton3ActionPerformed
+        listaConsulta = cc.buscarConsulta(cedula);
+    }//GEN-LAST:event_jButtonbuscarConsultaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -207,7 +222,7 @@ public class frmListaConsulta extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButtonbuscarConsulta;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
@@ -217,9 +232,9 @@ public class frmListaConsulta extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextArea jTextArea2;
+    private javax.swing.JTable jTableConsultas;
+    private javax.swing.JTextArea jTextAreaDiagnostico;
+    private javax.swing.JTextArea jTextAreaMotivo;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }
