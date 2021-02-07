@@ -5,6 +5,10 @@
  */
 package Modelo;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 /**
  *
  * @author DELL
@@ -16,11 +20,12 @@ public class Rol {
     public Rol() {
     }
 
-    public Rol(int id, String Nombre) {
-        this.id = id;
+    public Rol(String Nombre) {
         this.Nombre = Nombre;
     }
-
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int getId() {
         return id;
     }

@@ -224,16 +224,16 @@ public class frmListaPersonas extends javax.swing.JDialog {
             listaPersonas = new controladorPersona();
             listaPersonas.crearLista();
         }
-        Rol rol = new Rol(1, "Cliente");
-        Cuenta cuenta = new Cuenta(1, "CTA1", "", true);
+        Rol rol = new Rol("Cliente");
+        Cuenta cuenta = new Cuenta("CTA1", "", true);
         String nombre = "Carlos";
         String apellido = "Lopez";
         String correo = "@";
         String telefono = "1324242";
         String direccion = "loja";
-        listaPersonas.agregarPersona(1, "P01",nombre, "Perez", correo, "01", telefono, direccion, rol, cuenta);
-        listaPersonas.agregarPersona(1, "P02","Carlos", apellido, correo, "02", telefono, direccion, rol, cuenta);
-        listaPersonas.agregarPersona(1, "P01",nombre, apellido, correo, "03", telefono, direccion, rol, cuenta);
+        listaPersonas.agregarPersona("P01",nombre, "Perez", correo, "01", telefono, direccion, rol, cuenta);
+        listaPersonas.agregarPersona("P02","Carlos", apellido, correo, "02", telefono, direccion, rol, cuenta);
+        listaPersonas.agregarPersona("P01",nombre, apellido, correo, "03", telefono, direccion, rol, cuenta);
     }
     /**
      * @param args the command line arguments

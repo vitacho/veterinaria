@@ -235,17 +235,17 @@ public class frmPersona extends javax.swing.JDialog {
                     if(esNumerico(jTextTelefono.getText().trim())){
                         if(listaPersonas.validarPasword(jTextPasword.getText().trim(), jTextValPasword.getText().trim())){
                             String r = jComboRol.getSelectedItem().toString();
-                            Rol rol = new Rol(1, r);
+                            Rol rol = new Rol(r);
                             boolean estado;
                             if(jComboEstado.getSelectedItem().toString().equals("Activada"))estado=true;
                             else estado=false;
-                            Cuenta cuenta = new Cuenta(1, "CTA1", jTextPasword.getText(), estado);
+                            Cuenta cuenta = new Cuenta("CTA1", jTextPasword.getText(), estado);
                             String nombre = jTextNombre.getText().trim();
                             String apellido = jTexApellido.getText().trim();
                             String correo = jTextCorreo.getText().trim();
                             String telefono = jTextTelefono.getText().trim();
                             String direccion = jTextDireccion.getText().trim();
-                            listaPersonas.agregarPersona(1, "P01",nombre, apellido, correo, cedula, telefono, direccion, rol, cuenta);
+                            listaPersonas.agregarPersona("P01",nombre, apellido, correo, cedula, telefono, direccion, rol, cuenta);
                             limpiarJText();
                         }else{
                             ALERTA.setText("LAS CONTRASEÑAS NO COINCIDEN");
@@ -283,14 +283,14 @@ public class frmPersona extends javax.swing.JDialog {
             if(listaPersonas.validarCedula(cedula)){
                 if(!listaPersonas.cedulaRepetida(cedula)){
                     if(esNumerico(jTextTelefono.getText().trim())){
-                        Rol rol = new Rol(1, "Cliente");
-                        Cuenta cuenta = new Cuenta(1, "CTA1", "", true);//clientes sin contraseña
+                        Rol rol = new Rol("Cliente");
+                        Cuenta cuenta = new Cuenta("CTA1", "", true);//clientes sin contraseña
                         String nombre = jTextNombre.getText().trim();
                         String apellido = jTexApellido.getText().trim();
                         String correo = jTextCorreo.getText().trim();
                         String telefono = jTextTelefono.getText().trim();
                         String direccion = jTextDireccion.getText().trim();
-                        listaPersonas.agregarPersona(1, "P01",nombre, apellido, correo, cedula, telefono, direccion, rol, cuenta);
+                        listaPersonas.agregarPersona("P01",nombre, apellido, correo, cedula, telefono, direccion, rol, cuenta);
                         limpiarJText();
                     }else{
                         ALERTA.setText("TELEFONO NO VALIDO");

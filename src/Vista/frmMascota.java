@@ -350,18 +350,18 @@ public class frmMascota extends javax.swing.JDialog {
             listaMascotas.crearLista();
         }
         listPersonas = new ArrayList<>();
-        Rol r = new Rol(001, "Administrador");
-        Cuenta c = new Cuenta(1, "CTA1", "123", true);
-        Persona p1 = new Persona(001, "PSN01", "CARLOS", "ORDOÑES", "GMAIL", "01", "2572220", "Argelia", r, c);
-        Persona p2 = new Persona(001, "PSN01", "JORGE", "PEÑA", "GMAIL", "02", "2587220", "San pedro", r, c);
+        Rol r = new Rol("Administrador");
+        Cuenta c = new Cuenta("CTA1", "123", true);
+        Persona p1 = new Persona("PSN01", "CARLOS", "ORDOÑES", "GMAIL", "01", "2572220", "Argelia", r, c);
+        Persona p2 = new Persona("PSN01", "JORGE", "PEÑA", "GMAIL", "02", "2587220", "San pedro", r, c);
         listPersonas.add(p1);
         listPersonas.add(p2);
         listaMascotas.getListaMascota().clear();
-        listaMascotas.agregarMacota(001, "M01", "LILY", 5,"Labrador Retriever" ,"Perro", "Grande", "Hembra", "Gris", p2);
-        listaMascotas.agregarMacota(002, "M02", "CAYLIN", 2, "Doverman","Perro" , "Grande", "Hembra", "Gris", p2);
-        listaMascotas.agregarMacota(003, "M03", "DON GATO", 1, "Bombay","Gato" , "Pequeño", "Macho", "NEGRO", p2);
-        listaMascotas.agregarMacota(004, "M04", "Garfiel", 4, "Siames","Gato" , "Mediano", "Macho", "Gris", p1);
-        listaMascotas.agregarMacota(005, "M05", "TOBY", 4, "Perro", "Beagle", "Mediano", "Macho", "Gris", p1);
+        listaMascotas.agregarMacota("M01", "LILY", 5,"Labrador Retriever" ,"Perro", "Grande", "Hembra", "Gris", p2);
+        listaMascotas.agregarMacota("M02", "CAYLIN", 2, "Doverman","Perro" , "Grande", "Hembra", "Gris", p2);
+        listaMascotas.agregarMacota("M03", "DON GATO", 1, "Bombay","Gato" , "Pequeño", "Macho", "NEGRO", p2);
+        listaMascotas.agregarMacota("M04", "Garfiel", 4, "Siames","Gato" , "Mediano", "Macho", "Gris", p1);
+        listaMascotas.agregarMacota("M05", "TOBY", 4, "Perro", "Beagle", "Mediano", "Macho", "Gris", p1);
     }
     public void registrarMascota(){
         if(listaMascotas==null){
@@ -384,7 +384,7 @@ public class frmMascota extends javax.swing.JDialog {
                     }
                     int edad = Integer.parseInt(jTextEdad.getText().trim());
                     String nombreMascota = jTextNombreMascota.getText().trim();
-                    listaMascotas.agregarMacota(001, "MT01",nombreMascota , edad, jTextRaza.getText().trim(), jTextEspecie.getText().trim(), jComboBoxTamaño.getSelectedItem().toString(), 
+                    listaMascotas.agregarMacota("MT01",nombreMascota , edad, jTextRaza.getText().trim(), jTextEspecie.getText().trim(), jComboBoxTamaño.getSelectedItem().toString(), 
                                                jComboBoxSexo.getSelectedItem().toString(), jTextColorPelaje.getText().trim(), listPersonas.get(i-1));
                     limpiarTabla();
                     llenarTabla(listaMascotas.getListaMascota());
