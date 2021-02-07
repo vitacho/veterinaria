@@ -1,12 +1,12 @@
 
-package controlador;
+package Controlador;
 
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
-public class validaciones { 
+public class Validaciones { 
     
     public void valNum(KeyEvent num, JTextField txt, int tam) {
         try {

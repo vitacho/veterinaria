@@ -5,6 +5,13 @@
  */
 package Vista;
 
+import Controlador.CuentaDB;
+import Controlador.controladorPersona;
+import Modelo.Cuenta;
+import Controlador.Validaciones;
+import java.util.List;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Personal
@@ -14,6 +21,12 @@ public class frmInicioSesion extends javax.swing.JDialog {
     /**
      * Creates new form frmInicioSesion
      */
+    CuentaDB cueDB = new CuentaDB();
+    controladorPersona persoDB = new controladorPersona();
+    Validaciones val = new Validaciones();
+
+    String tipo = "";
+
     public frmInicioSesion(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -48,14 +61,30 @@ public class frmInicioSesion extends javax.swing.JDialog {
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel4.setText("Contraseña:");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 160, 120, 40));
+
+        txtUsuario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtUsuarioKeyTyped(evt);
+            }
+        });
         getContentPane().add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 100, 190, 30));
 
         btnIngresar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnIngresar.setText("Ingresar");
+        btnIngresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnIngresarActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnIngresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 240, 90, 30));
 
         jButton2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton2.setText("x");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 0, 80, 30));
 
         jLabel2.setBackground(new java.awt.Color(0, 0, 0));
@@ -74,6 +103,11 @@ public class frmInicioSesion extends javax.swing.JDialog {
 
         btnCancelar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 240, 90, 30));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/FONDOP1.jpg"))); // NOI18N
@@ -84,8 +118,60 @@ public class frmInicioSesion extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtcontraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtcontraActionPerformed
-        // TODO add your handling code here:
+     
     }//GEN-LAST:event_txtcontraActionPerformed
+
+    private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
+        /**
+         * Botón Ingresar
+         */
+
+        //necesito lo de cuenta y persona
+//        List<Cuenta> listCuenta = new java.util.ArrayList<>();
+//       
+//        Cuenta c = new Cuenta();
+//        listCuenta = cueDB.traeUsuarios("A", listCuenta);
+//      
+//        if (listCuenta.size() > 0) {
+//           
+//            c = cueDB.traeCuentaUsuario(txtUsuario.getText());
+//            
+//            if (txtUsuario.getText().equals("")||txtcontra.getText().equals("")) {
+//                JOptionPane.showMessageDialog(this, "ACCESO INCORRECTO", "Mensaje", JOptionPane.ERROR_MESSAGE);
+//                txtcontra.setText(null); txtUsuario.setText(null); txtUsuario.requestFocus();
+//            }
+//
+//            if (c.getPersona().getCed_per().equals(txtUsuario.getText())
+//                && c.getContra_usu().equals(txtcontra.getText())) {
+//                tipo = c.getPersona().getRol().getDes_rol();
+//                JOptionPane.showMessageDialog(this, "Acceso Tipo: " + tipo, "ACCESO AL SISTEMA", JOptionPane.INFORMATION_MESSAGE);
+//
+//                //AQUI ENVIAR EL FORMULARIO
+//
+//                frmPrincipal pricipal = new frmPrincipal(c.getPersona().getRol().getId_rol());
+//                pricipal.setTitle("Menú Principal");
+//                pricipal.setVisible(true);
+//           
+//                this.dispose();
+//            }
+//        } else {
+//            JOptionPane.showMessageDialog(null, "NO EXISTEN USUARIOS REGISTRADOS "
+//                + "EN EL SISTEMA ACTUALMENTE", "MENSAJE", JOptionPane.WARNING_MESSAGE);
+//        }
+
+    }//GEN-LAST:event_btnIngresarActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        txtUsuario.setText(null);
+        txtcontra.setText(null);
+        txtUsuario.requestFocus();
+    }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+  System.exit(0);    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void txtUsuarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUsuarioKeyTyped
+  val.EnterAJtexFiel(txtcontra, evt);    }//GEN-LAST:event_txtUsuarioKeyTyped
 
     /**
      * @param args the command line arguments
