@@ -7,7 +7,10 @@ package Vista;
 
 import Controlador.controladorConsulta;
 import Controlador.controladorMascota;
+import Modelo.Cuenta;
 import Modelo.Mascota;
+import Modelo.Persona;
+import Modelo.Rol;
 import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.JOptionPane;
@@ -18,21 +21,33 @@ import javax.swing.JOptionPane;
  */
 public class frmConsulta extends javax.swing.JDialog {
 
+    controladorMascota listaMascotas;
+    ArrayList<Persona> listPersonas;
+
     controladorConsulta cc = new controladorConsulta();
     controladorMascota cm = new controladorMascota();
 
     Mascota mascota = new Mascota();
 
-    ArrayList<Mascota> listMascota = new ArrayList<>();
-
+    //ArrayList<Mascota> listMascota = new ArrayList<>();
     /**
      * Creates new form frmConsulta
      */
     public frmConsulta(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        jTextField7.setEditable(false);
-        jTextField7.setEnabled(false);
+        jTextFieldCI.setEnabled(false);
+        jTextFieldNombreMascota.setEnabled(false);
+        jTextFieldSexMas.setEnabled(false);
+    }
+
+    private static boolean esNumerico(String cadena) {
+        try {
+            Integer.parseInt(cadena);
+            return true;
+        } catch (NumberFormatException nfe) {
+            return false;
+        }
     }
 
     /**
@@ -45,35 +60,35 @@ public class frmConsulta extends javax.swing.JDialog {
     private void initComponents() {
 
         jLabel6 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
+        jTextFieldDueno = new javax.swing.JTextField();
+        jTextFieldSexMas = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTextArea2 = new javax.swing.JTextArea();
+        jTextAreaMotivo = new javax.swing.JTextArea();
         jLabel15 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        jTextFieldTemp = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
+        jTextFieldPresion = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
-        jTextField8 = new javax.swing.JTextField();
+        jTextFieldPeso = new javax.swing.JTextField();
         jPanel5 = new javax.swing.JPanel();
         jScrollPane5 = new javax.swing.JScrollPane();
-        jTextArea4 = new javax.swing.JTextArea();
+        jTextAreaDiag = new javax.swing.JTextArea();
         jLabel14 = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        jButtonGuardar = new javax.swing.JButton();
+        jButtonCancel = new javax.swing.JButton();
+        jButtonRecetar = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        jTextFieldNombreMascota = new javax.swing.JTextField();
         jLabel18 = new javax.swing.JLabel();
-        jButton14 = new javax.swing.JButton();
-        jTextField9 = new javax.swing.JTextField();
+        jButtonbuscar = new javax.swing.JButton();
+        jTextFieldVeterinario = new javax.swing.JTextField();
         jLabel19 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        jTextField7 = new javax.swing.JTextField();
+        jTextFieldCI = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -83,22 +98,22 @@ public class frmConsulta extends javax.swing.JDialog {
         jLabel6.setText("REGISTRAR CONSULTA ");
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 20, -1, -1));
 
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+        jTextFieldDueno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
+                jTextFieldDuenoActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 100, 240, 30));
-        getContentPane().add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 160, 250, 30));
+        getContentPane().add(jTextFieldDueno, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 100, 240, 30));
+        getContentPane().add(jTextFieldSexMas, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 160, 250, 30));
 
         jPanel2.setOpaque(false);
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTextArea2.setColumns(20);
-        jTextArea2.setLineWrap(true);
-        jTextArea2.setRows(5);
-        jTextArea2.setWrapStyleWord(true);
-        jScrollPane3.setViewportView(jTextArea2);
+        jTextAreaMotivo.setColumns(20);
+        jTextAreaMotivo.setLineWrap(true);
+        jTextAreaMotivo.setRows(5);
+        jTextAreaMotivo.setWrapStyleWord(true);
+        jScrollPane3.setViewportView(jTextAreaMotivo);
 
         jPanel2.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 10, 850, 100));
 
@@ -127,15 +142,15 @@ public class frmConsulta extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTextFieldPresion, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(95, 95, 95)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTextFieldTemp, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 117, Short.MAX_VALUE)
                 .addComponent(jLabel10)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTextFieldPeso, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27))
         );
         jPanel3Layout.setVerticalGroup(
@@ -145,11 +160,11 @@ public class frmConsulta extends javax.swing.JDialog {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel7)
-                        .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jTextFieldPresion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextFieldTemp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel10)
-                        .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextFieldPeso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel5)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -158,11 +173,11 @@ public class frmConsulta extends javax.swing.JDialog {
 
         jPanel5.setOpaque(false);
 
-        jTextArea4.setColumns(20);
-        jTextArea4.setLineWrap(true);
-        jTextArea4.setRows(5);
-        jTextArea4.setWrapStyleWord(true);
-        jScrollPane5.setViewportView(jTextArea4);
+        jTextAreaDiag.setColumns(20);
+        jTextAreaDiag.setLineWrap(true);
+        jTextAreaDiag.setRows(5);
+        jTextAreaDiag.setWrapStyleWord(true);
+        jScrollPane5.setViewportView(jTextAreaDiag);
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel14.setText("Diagnóstico:");
@@ -192,41 +207,46 @@ public class frmConsulta extends javax.swing.JDialog {
 
         getContentPane().add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 450, 1020, -1));
 
-        jButton3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButton3.setText("Guardar");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        jButtonGuardar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButtonGuardar.setText("Guardar");
+        jButtonGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                jButtonGuardarActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 630, 98, -1));
+        getContentPane().add(jButtonGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 630, 98, -1));
 
-        jButton4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButton4.setText("Cancelar");
-        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 630, -1, -1));
+        jButtonCancel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButtonCancel.setText("Cancelar");
+        jButtonCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCancelActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButtonCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 630, -1, -1));
 
-        jButton5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButton5.setText("Recetar");
-        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 630, 98, -1));
+        jButtonRecetar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButtonRecetar.setText("Recetar");
+        getContentPane().add(jButtonRecetar, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 630, 98, -1));
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel8.setText("Veterinario:");
         getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 210, -1, 20));
-        getContentPane().add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 150, 240, 30));
+        getContentPane().add(jTextFieldNombreMascota, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 150, 240, 30));
 
         jLabel18.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel18.setText("Sexo de la mascota:");
         getContentPane().add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 170, -1, 20));
 
-        jButton14.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButton14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/search.png"))); // NOI18N
-        jButton14.addActionListener(new java.awt.event.ActionListener() {
+        jButtonbuscar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButtonbuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/search.png"))); // NOI18N
+        jButtonbuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton14ActionPerformed(evt);
+                jButtonbuscarActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton14, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 90, -1, -1));
-        getContentPane().add(jTextField9, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 200, 240, 30));
+        getContentPane().add(jButtonbuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 90, -1, -1));
+        getContentPane().add(jTextFieldVeterinario, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 200, 240, 30));
 
         jLabel19.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel19.setText("Dueño de la Mascota");
@@ -240,12 +260,12 @@ public class frmConsulta extends javax.swing.JDialog {
         jLabel11.setText("CI:");
         getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 110, 40, -1));
 
-        jTextField7.addActionListener(new java.awt.event.ActionListener() {
+        jTextFieldCI.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField7ActionPerformed(evt);
+                jTextFieldCIActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextField7, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 100, 250, 30));
+        getContentPane().add(jTextFieldCI, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 100, 250, 30));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/FONDOP1.jpg"))); // NOI18N
         jLabel1.setText("jLabel1");
@@ -254,42 +274,94 @@ public class frmConsulta extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
+    private void jButtonbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonbuscarActionPerformed
         // TODO add your handling code here:
-        listMascota = cm.buscarMascotas(jTextField3.getText());
-        String pre = "";
-        int op;
-
-        for (int i = 0; i < listMascota.size(); i++) {
-            pre += i + ". " + "Nombre: " + listMascota.get(i).getNombre() + " Raza: " + listMascota.get(i).getRaza();
+        if (listaMascotas == null) {
+            listaMascotas = new controladorMascota();
+            listaMascotas.crearLista();
         }
+        listPersonas = new ArrayList<>();
+        Rol r = new Rol(001, "Administrador");
+        Cuenta c = new Cuenta(1, "CTA1", "123", true);
+        Persona p1 = new Persona(001, "PSN01", "CARLOS", "ORDOÑES", "GMAIL", "01", "2572220", "MEXICO", r, c);
+        Persona p2 = new Persona(001, "PSN01", "LUIS", "PEÑA", "GMAIL", "02", "2572220", "MEXICO", r, c);
+        listPersonas.add(p1);
+        listPersonas.add(p2);
+        listaMascotas.getListaMascota().clear();
+        listaMascotas.agregarMacota(001, "m002", "lucy", 10, "perro", "doverman", "Mediano", "Macho", "Gris", p2);
+        listaMascotas.agregarMacota(002, "m002", "per", 10, "gato", "doverman", "Grande", "Hembra", "Gris", p2);
+        listaMascotas.agregarMacota(003, "m002", "lili", 10, "perro", "doverman", "Pequeño", "Macho", "Gris", p2);
+        listaMascotas.agregarMacota(004, "m002", "sesi", 10, "gato", "doverman", "Mediano", "Hembra", "Gris", p1);
+        listaMascotas.agregarMacota(005, "m002", "corvi", 10, "perro", "doverman", "Mediano", "Macho", "Gris", p1);
 
-        op = Integer.parseInt(JOptionPane.showInputDialog(null, pre));
-        try {
-            mascota = listMascota.get(op);
-            jTextField7.setText(mascota.getPersona().getCedula());
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Opcion no valida");
+        if (esNumerico(jTextFieldDueno.getText()) == true) {
+            int cont = 0;
+            ArrayList<Mascota> lista = new ArrayList<>();
+            String buscadaN = "";
+            for (int i = 0; i < listPersonas.size(); i++) {
+                if (listPersonas.get(i).getCedula().equals(jTextFieldDueno.getText())) {
+                    cont++;
+                    buscadaN = listPersonas.get(i).getNombre().toUpperCase() + " " + listPersonas.get(i).getApellido().toUpperCase();
+                }
+            }
+            if (cont != 0) {//si se encotro la cedula
+                jTextFieldCI.setText(jTextFieldDueno.getText());
+                lista = listaMascotas.buscarMascotas(jTextFieldDueno.getText());
+
+                String pre = "";
+                int op;
+                for (int i = 0; i < lista.size(); i++) {
+                    pre += (i + 1) + ". " + "Nombre: " + lista.get(i).getNombre() + "\n"
+                            + "Raza: " + lista.get(i).getRaza() + "\n"
+                            + "Sexo: " + lista.get(i).getSexo() + "\n\n";
+                }
+                op = Integer.parseInt(JOptionPane.showInputDialog(null, "****Mascotas****\n" + pre));
+                try {
+                    mascota = lista.get(op - 1);
+                    jTextFieldNombreMascota.setText(mascota.getNombre());
+                    jTextFieldSexMas.setText(mascota.getSexo());
+
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, "Opcion no valida");
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Persona no encontrada");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Ingrese solo numeros");
         }
+    }//GEN-LAST:event_jButtonbuscarActionPerformed
 
-    }//GEN-LAST:event_jButton14ActionPerformed
-
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+    private void jTextFieldDuenoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldDuenoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
+    }//GEN-LAST:event_jTextFieldDuenoActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void jButtonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGuardarActionPerformed
         // TODO add your handling code here:
-        java.util.Date fecha = new Date();
-        double peso = Double.parseDouble(jTextField8.getText());
-        cc.registrarConsulta(WIDTH, EXIT_ON_CLOSE, jTextField5.getText(), Integer.parseInt(jTextField2.getText()), peso, jTextArea2.getText(), jTextArea4.getText(), jTextField9.getText(), mascota, fecha);
-        JOptionPane.showMessageDialog(null, "Consulta Guardada");
-    }//GEN-LAST:event_jButton3ActionPerformed
+        if (!jTextFieldVeterinario.getText().equals("")) {
+            if (!jTextAreaMotivo.getText().equals("") && !jTextFieldPresion.getText().equals("") && !jTextFieldTemp.getText().equals("")
+                    && !jTextFieldPeso.getText().equals("") && !jTextAreaDiag.getText().equals("")) {
+                java.util.Date fecha = new Date();
+                double peso = Double.parseDouble(jTextFieldPeso.getText());
+                cc.registrarConsulta(WIDTH, EXIT_ON_CLOSE, jTextFieldPresion.getText(), Integer.parseInt(jTextFieldTemp.getText()), peso, jTextAreaMotivo.getText(), jTextAreaDiag.getText(), jTextFieldVeterinario.getText(), mascota, fecha);
+                JOptionPane.showMessageDialog(null, "Consulta Guardada");
+            } else {
+                JOptionPane.showMessageDialog(null, "Llene todos los datos");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "El nombre el veterinario es obligatorio");
+        }
+    }//GEN-LAST:event_jButtonGuardarActionPerformed
 
-    private void jTextField7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField7ActionPerformed
+    private void jTextFieldCIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldCIActionPerformed
         // TODO add your handling code here:
 
-    }//GEN-LAST:event_jTextField7ActionPerformed
+    }//GEN-LAST:event_jTextFieldCIActionPerformed
+
+    private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+    }//GEN-LAST:event_jButtonCancelActionPerformed
 
     /**
      * @param args the command line arguments
@@ -335,10 +407,10 @@ public class frmConsulta extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton14;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButtonCancel;
+    private javax.swing.JButton jButtonGuardar;
+    private javax.swing.JButton jButtonRecetar;
+    private javax.swing.JButton jButtonbuscar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -356,15 +428,15 @@ public class frmConsulta extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JTextArea jTextArea2;
-    private javax.swing.JTextArea jTextArea4;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
+    private javax.swing.JTextArea jTextAreaDiag;
+    private javax.swing.JTextArea jTextAreaMotivo;
+    private javax.swing.JTextField jTextFieldCI;
+    private javax.swing.JTextField jTextFieldDueno;
+    private javax.swing.JTextField jTextFieldNombreMascota;
+    private javax.swing.JTextField jTextFieldPeso;
+    private javax.swing.JTextField jTextFieldPresion;
+    private javax.swing.JTextField jTextFieldSexMas;
+    private javax.swing.JTextField jTextFieldTemp;
+    private javax.swing.JTextField jTextFieldVeterinario;
     // End of variables declaration//GEN-END:variables
 }
