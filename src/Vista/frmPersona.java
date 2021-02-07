@@ -16,9 +16,11 @@ import Modelo.Rol;
 public class frmPersona extends javax.swing.JDialog {
 
     controladorPersona listaPersonas;
-    public frmPersona(java.awt.Frame parent, boolean modal) {
+    boolean esCliente;
+    public frmPersona(java.awt.Frame parent, boolean modal,boolean vrf) {
         super(parent, modal);
         initComponents();
+        esCliente=vrf;
     }
 
     /**
@@ -209,7 +211,8 @@ public class frmPersona extends javax.swing.JDialog {
 
     private void jBGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardarActionPerformed
         // TODO add your handling code here:
-        registrarCuenta();
+        if(esCliente==true)registrarCliente();
+        else registrarCuenta();
     }//GEN-LAST:event_jBGuardarActionPerformed
 
     private void jBAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAtrasActionPerformed
@@ -332,6 +335,9 @@ public class frmPersona extends javax.swing.JDialog {
         jComboRol.disable();
         jComboEstado.disable();
     }
+    public void tipoderegistro(){
+        if(esCliente==true)bloquearCamposCuenta(); 
+    }
     /**
      * @param args the command line arguments
      */
@@ -363,7 +369,7 @@ public class frmPersona extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                frmPersona dialog = new frmPersona(new javax.swing.JFrame(), true);
+                frmPersona dialog = new frmPersona(new javax.swing.JFrame(), true,false);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

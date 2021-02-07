@@ -34,17 +34,17 @@ public class frmPrincipal extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu = new javax.swing.JMenu();
-        jCheckBoxMenuItem3 = new javax.swing.JCheckBoxMenuItem();
-        jCheckBoxMenuItem4 = new javax.swing.JCheckBoxMenuItem();
+        jCheckListaCuentas = new javax.swing.JCheckBoxMenuItem();
+        jCheckRegistrarCuenta = new javax.swing.JCheckBoxMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jCheckBoxMenuItem2 = new javax.swing.JCheckBoxMenuItem();
         jCheckBoxMenuItem9 = new javax.swing.JCheckBoxMenuItem();
         jCheckBoxMenuItem11 = new javax.swing.JCheckBoxMenuItem();
-        jCheckBoxMenuItem12 = new javax.swing.JCheckBoxMenuItem();
+        jCheckListaConsultas = new javax.swing.JCheckBoxMenuItem();
         jMenu4 = new javax.swing.JMenu();
-        jCheckBoxMenuItem7 = new javax.swing.JCheckBoxMenuItem();
-        jCheckBoxMenuItem8 = new javax.swing.JCheckBoxMenuItem();
-        jCheckBoxMenuItem14 = new javax.swing.JCheckBoxMenuItem();
+        jCheckRegistrarCliente = new javax.swing.JCheckBoxMenuItem();
+        jCheckListaClientes = new javax.swing.JCheckBoxMenuItem();
+        jCheckMascotas = new javax.swing.JCheckBoxMenuItem();
         jMenu6 = new javax.swing.JMenu();
         jCheckBoxMenuItem13 = new javax.swing.JCheckBoxMenuItem();
         jMenu1 = new javax.swing.JMenu();
@@ -94,25 +94,25 @@ public class frmPrincipal extends javax.swing.JFrame {
         jMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/administrarcuenta.png"))); // NOI18N
         jMenu.setText("Administrar Cuentas ");
 
-        jCheckBoxMenuItem3.setSelected(true);
-        jCheckBoxMenuItem3.setText("Lista de Cuentas");
-        jCheckBoxMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/listacuenta.png"))); // NOI18N
-        jCheckBoxMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+        jCheckListaCuentas.setSelected(true);
+        jCheckListaCuentas.setText("Lista de Cuentas");
+        jCheckListaCuentas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/listacuenta.png"))); // NOI18N
+        jCheckListaCuentas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBoxMenuItem3ActionPerformed(evt);
+                jCheckListaCuentasActionPerformed(evt);
             }
         });
-        jMenu.add(jCheckBoxMenuItem3);
+        jMenu.add(jCheckListaCuentas);
 
-        jCheckBoxMenuItem4.setSelected(true);
-        jCheckBoxMenuItem4.setText("Registrar Cuenta");
-        jCheckBoxMenuItem4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/cuenta.png"))); // NOI18N
-        jCheckBoxMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+        jCheckRegistrarCuenta.setSelected(true);
+        jCheckRegistrarCuenta.setText("Registrar Cuenta");
+        jCheckRegistrarCuenta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/cuenta.png"))); // NOI18N
+        jCheckRegistrarCuenta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBoxMenuItem4ActionPerformed(evt);
+                jCheckRegistrarCuentaActionPerformed(evt);
             }
         });
-        jMenu.add(jCheckBoxMenuItem4);
+        jMenu.add(jCheckRegistrarCuenta);
 
         jMenuBar1.add(jMenu);
 
@@ -149,50 +149,50 @@ public class frmPrincipal extends javax.swing.JFrame {
         });
         jMenu2.add(jCheckBoxMenuItem11);
 
-        jCheckBoxMenuItem12.setSelected(true);
-        jCheckBoxMenuItem12.setText("Lista de Consulta");
-        jCheckBoxMenuItem12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/listaconsulta.png"))); // NOI18N
-        jCheckBoxMenuItem12.addActionListener(new java.awt.event.ActionListener() {
+        jCheckListaConsultas.setSelected(true);
+        jCheckListaConsultas.setText("Lista de Consulta");
+        jCheckListaConsultas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/listaconsulta.png"))); // NOI18N
+        jCheckListaConsultas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBoxMenuItem12ActionPerformed(evt);
+                jCheckListaConsultasActionPerformed(evt);
             }
         });
-        jMenu2.add(jCheckBoxMenuItem12);
+        jMenu2.add(jCheckListaConsultas);
 
         jMenuBar1.add(jMenu2);
 
         jMenu4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/listacuenta.png"))); // NOI18N
         jMenu4.setText(" Clientes");
 
-        jCheckBoxMenuItem7.setSelected(true);
-        jCheckBoxMenuItem7.setText("Registrar Cliente");
-        jCheckBoxMenuItem7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/registrarcliente.png"))); // NOI18N
-        jCheckBoxMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+        jCheckRegistrarCliente.setSelected(true);
+        jCheckRegistrarCliente.setText("Registrar Cliente");
+        jCheckRegistrarCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/registrarcliente.png"))); // NOI18N
+        jCheckRegistrarCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBoxMenuItem7ActionPerformed(evt);
+                jCheckRegistrarClienteActionPerformed(evt);
             }
         });
-        jMenu4.add(jCheckBoxMenuItem7);
+        jMenu4.add(jCheckRegistrarCliente);
 
-        jCheckBoxMenuItem8.setSelected(true);
-        jCheckBoxMenuItem8.setText("Lista de Clientes");
-        jCheckBoxMenuItem8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/listaclientes.png"))); // NOI18N
-        jCheckBoxMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+        jCheckListaClientes.setSelected(true);
+        jCheckListaClientes.setText("Lista de Clientes");
+        jCheckListaClientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/listaclientes.png"))); // NOI18N
+        jCheckListaClientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBoxMenuItem8ActionPerformed(evt);
+                jCheckListaClientesActionPerformed(evt);
             }
         });
-        jMenu4.add(jCheckBoxMenuItem8);
+        jMenu4.add(jCheckListaClientes);
 
-        jCheckBoxMenuItem14.setSelected(true);
-        jCheckBoxMenuItem14.setText("Mascotas");
-        jCheckBoxMenuItem14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/listaclientes.png"))); // NOI18N
-        jCheckBoxMenuItem14.addActionListener(new java.awt.event.ActionListener() {
+        jCheckMascotas.setSelected(true);
+        jCheckMascotas.setText("Mascotas");
+        jCheckMascotas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/listaclientes.png"))); // NOI18N
+        jCheckMascotas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBoxMenuItem14ActionPerformed(evt);
+                jCheckMascotasActionPerformed(evt);
             }
         });
-        jMenu4.add(jCheckBoxMenuItem14);
+        jMenu4.add(jCheckMascotas);
 
         jMenuBar1.add(jMenu4);
 
@@ -244,13 +244,17 @@ public class frmPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jCheckBoxMenuItem2ActionPerformed
 
-    private void jCheckBoxMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuItem7ActionPerformed
+    private void jCheckRegistrarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckRegistrarClienteActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBoxMenuItem7ActionPerformed
+        frmPersona rp = new frmPersona(this, false,true);
+        rp.setVisible(true);
+    }//GEN-LAST:event_jCheckRegistrarClienteActionPerformed
 
-    private void jCheckBoxMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuItem8ActionPerformed
+    private void jCheckListaClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckListaClientesActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBoxMenuItem8ActionPerformed
+        frmListaConsulta fc = new frmListaConsulta(this, false);
+        fc.setVisible(true);
+    }//GEN-LAST:event_jCheckListaClientesActionPerformed
 
     private void jCheckBoxMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuItem9ActionPerformed
         // TODO add your handling code here:
@@ -264,17 +268,19 @@ public class frmPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jCheckBoxMenuItem11ActionPerformed
 
-    private void jCheckBoxMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuItem12ActionPerformed
+    private void jCheckListaConsultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckListaConsultasActionPerformed
         // TODO add your handling code here:
         
        frmListaConsulta fc = new frmListaConsulta(this, false);
        fc.setVisible(true);
         
-    }//GEN-LAST:event_jCheckBoxMenuItem12ActionPerformed
+    }//GEN-LAST:event_jCheckListaConsultasActionPerformed
 
-    private void jCheckBoxMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuItem3ActionPerformed
+    private void jCheckListaCuentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckListaCuentasActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBoxMenuItem3ActionPerformed
+        frmListaPersonas lp = new frmListaPersonas(this, false);
+        lp.setVisible(true);
+    }//GEN-LAST:event_jCheckListaCuentasActionPerformed
 
     private void jCheckBoxMenuItem13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuItem13ActionPerformed
         // TODO add your handling code here:
@@ -288,13 +294,17 @@ public class frmPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jCheckBoxMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuItem4ActionPerformed
+    private void jCheckRegistrarCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckRegistrarCuentaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBoxMenuItem4ActionPerformed
+        frmPersona rp = new frmPersona(this, false,false);
+        rp.setVisible(true);
+    }//GEN-LAST:event_jCheckRegistrarCuentaActionPerformed
 
-    private void jCheckBoxMenuItem14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuItem14ActionPerformed
+    private void jCheckMascotasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckMascotasActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBoxMenuItem14ActionPerformed
+        frmMascota m = new frmMascota(this, false);
+        m.setVisible(true);
+    }//GEN-LAST:event_jCheckMascotasActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
@@ -345,15 +355,15 @@ public class frmPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem10;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem11;
-    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem12;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem13;
-    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem14;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem2;
-    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem3;
-    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem4;
-    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem7;
-    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem8;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem9;
+    private javax.swing.JCheckBoxMenuItem jCheckListaClientes;
+    private javax.swing.JCheckBoxMenuItem jCheckListaConsultas;
+    private javax.swing.JCheckBoxMenuItem jCheckListaCuentas;
+    private javax.swing.JCheckBoxMenuItem jCheckMascotas;
+    private javax.swing.JCheckBoxMenuItem jCheckRegistrarCliente;
+    private javax.swing.JCheckBoxMenuItem jCheckRegistrarCuenta;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu;
     private javax.swing.JMenu jMenu1;
