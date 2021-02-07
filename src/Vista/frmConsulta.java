@@ -5,11 +5,25 @@
  */
 package Vista;
 
+import Controlador.controladorConsulta;
+import Controlador.controladorMascota;
+import Modelo.Mascota;
+import java.util.ArrayList;
+import java.util.Date;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Personal
  */
 public class frmConsulta extends javax.swing.JDialog {
+
+    controladorConsulta cc = new controladorConsulta();
+    controladorMascota cm = new controladorMascota();
+
+    Mascota mascota = new Mascota();
+
+    ArrayList<Mascota> listMascota = new ArrayList<>();
 
     /**
      * Creates new form frmConsulta
@@ -17,6 +31,8 @@ public class frmConsulta extends javax.swing.JDialog {
     public frmConsulta(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        jTextField7.setEditable(false);
+        jTextField7.setEnabled(false);
     }
 
     /**
@@ -66,8 +82,14 @@ public class frmConsulta extends javax.swing.JDialog {
         jLabel6.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
         jLabel6.setText("REGISTRAR CONSULTA ");
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 20, -1, -1));
+
+        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField3ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 100, 240, 30));
-        getContentPane().add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 170, 190, -1));
+        getContentPane().add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 160, 250, 30));
 
         jPanel2.setOpaque(false);
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -84,7 +106,7 @@ public class frmConsulta extends javax.swing.JDialog {
         jLabel15.setText("Motivo de la consulta");
         jPanel2.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, -1));
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 260, 1010, -1));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 250, 1010, -1));
 
         jPanel3.setOpaque(false);
 
@@ -104,17 +126,17 @@ public class frmConsulta extends javax.swing.JDialog {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel7)
-                .addGap(59, 59, 59)
-                .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(47, 47, 47)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(95, 95, 95)
                 .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
-                .addGap(37, 37, 37)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 117, Short.MAX_VALUE)
                 .addComponent(jLabel10)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextField8, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
-                .addGap(32, 32, 32))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -132,7 +154,7 @@ public class frmConsulta extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 380, -1, 50));
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 380, 1020, 50));
 
         jPanel5.setOpaque(false);
 
@@ -153,8 +175,8 @@ public class frmConsulta extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(jLabel14)
                 .addGap(58, 58, 58)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 738, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 853, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(23, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -168,27 +190,32 @@ public class frmConsulta extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
-        getContentPane().add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 450, 990, -1));
+        getContentPane().add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 450, 1020, -1));
 
         jButton3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton3.setText("Guardar");
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 640, 98, -1));
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 630, 98, -1));
 
         jButton4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton4.setText("Cancelar");
-        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 640, -1, -1));
+        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 630, -1, -1));
 
         jButton5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton5.setText("Recetar");
-        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 640, 98, -1));
+        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 630, 98, -1));
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel8.setText("Veterinario ");
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 220, -1, 20));
-        getContentPane().add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 170, 240, -1));
+        jLabel8.setText("Veterinario:");
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 210, -1, 20));
+        getContentPane().add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 150, 240, 30));
 
         jLabel18.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel18.setText("Sexo de la mascota");
+        jLabel18.setText("Sexo de la mascota:");
         getContentPane().add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 170, -1, 20));
 
         jButton14.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -199,7 +226,7 @@ public class frmConsulta extends javax.swing.JDialog {
             }
         });
         getContentPane().add(jButton14, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 90, -1, -1));
-        getContentPane().add(jTextField9, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 220, 240, -1));
+        getContentPane().add(jTextField9, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 200, 240, 30));
 
         jLabel19.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel19.setText("Dueño de la Mascota");
@@ -207,12 +234,18 @@ public class frmConsulta extends javax.swing.JDialog {
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel12.setText("Nombre mascota:");
-        getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 180, 130, -1));
+        getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, 130, -1));
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel11.setText("CI");
-        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 110, 40, -1));
-        getContentPane().add(jTextField7, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 110, 190, -1));
+        jLabel11.setText("CI:");
+        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 110, 40, -1));
+
+        jTextField7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField7ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jTextField7, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 100, 250, 30));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/FONDOP1.jpg"))); // NOI18N
         jLabel1.setText("jLabel1");
@@ -223,7 +256,40 @@ public class frmConsulta extends javax.swing.JDialog {
 
     private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
         // TODO add your handling code here:
+        listMascota = cm.buscarMascotas(jTextField3.getText());
+        String pre = "";
+        int op;
+
+        for (int i = 0; i < listMascota.size(); i++) {
+            pre += i + ". " + "Nombre: " + listMascota.get(i).getNombre() + " Raza: " + listMascota.get(i).getRaza();
+        }
+
+        op = Integer.parseInt(JOptionPane.showInputDialog(null, pre));
+        try {
+            mascota = listMascota.get(op);
+            jTextField7.setText(mascota.getPersona().getCedula());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Opcion no valida");
+        }
+
     }//GEN-LAST:event_jButton14ActionPerformed
+
+    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField3ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        java.util.Date fecha = new Date();
+        double peso = Double.parseDouble(jTextField8.getText());
+        cc.registrarConsulta(WIDTH, EXIT_ON_CLOSE, jTextField5.getText(), Integer.parseInt(jTextField2.getText()), peso, jTextArea2.getText(), jTextArea4.getText(), jTextField9.getText(), mascota, fecha);
+        JOptionPane.showMessageDialog(null, "Consulta Guardada");
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jTextField7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField7ActionPerformed
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_jTextField7ActionPerformed
 
     /**
      * @param args the command line arguments

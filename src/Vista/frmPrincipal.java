@@ -10,7 +10,7 @@ package Vista;
  * @author Personal
  */
 public class frmPrincipal extends javax.swing.JFrame {
-
+   
     /**
      * Creates new form frmPrincipal
      */
@@ -68,6 +68,11 @@ public class frmPrincipal extends javax.swing.JFrame {
         jButton3.setFont(new java.awt.Font("Constantia", 1, 24)); // NOI18N
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Consulta.jpg"))); // NOI18N
         jButton3.setText("CONSULTA");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 60, 430, 240));
 
         jButton1.setFont(new java.awt.Font("Constantia", 1, 24)); // NOI18N
@@ -261,6 +266,10 @@ public class frmPrincipal extends javax.swing.JFrame {
 
     private void jCheckBoxMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuItem12ActionPerformed
         // TODO add your handling code here:
+        
+       frmListaConsulta fc = new frmListaConsulta(this, false);
+       fc.setVisible(true);
+        
     }//GEN-LAST:event_jCheckBoxMenuItem12ActionPerformed
 
     private void jCheckBoxMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuItem3ActionPerformed
@@ -286,6 +295,13 @@ public class frmPrincipal extends javax.swing.JFrame {
     private void jCheckBoxMenuItem14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuItem14ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jCheckBoxMenuItem14ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        frmConsulta vc = new frmConsulta(this, false);
+        vc.setVisible(true);
+        //this.setVisible(false);
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments

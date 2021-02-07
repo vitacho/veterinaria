@@ -6,16 +6,34 @@
 package Controlador;
 
 import Modelo.Consulta;
+import Modelo.Mascota;
 import java.util.ArrayList;
-
+import java.util.Date;
 
 /**
  *
  * @author Darley
  */
 public class controladorConsulta {
+
+    ArrayList<Consulta> listaConsulta = new ArrayList<>();
+
+    public void registrarConsulta(int id, int external_consulta, String presion, int temp, double peso, String motivo, String diagnostico, String veterinario, Mascota mascota, Date fecha) {
+        listaConsulta.add(new Consulta(id, external_consulta, presion, temp, peso, motivo, diagnostico, veterinario, mascota, fecha));
+    }
     
-    ArrayList<Consulta> listaPersona = new ArrayList<>();
+    public void buscarConsulta(){
+        
+    }
     
-    
+    public ArrayList<Consulta> buscarMascotas(String cedula){
+        ArrayList<Consulta> listaConsulta = new ArrayList<>();
+        for (Consulta con : listaConsulta) {
+            if(con.getMascota().getPersona().getCedula().equals(cedula)){
+                listaConsulta.add(con);
+            }
+        }
+        return listaConsulta;
+    }
+
 }
