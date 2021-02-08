@@ -22,8 +22,8 @@ public class controladorPersona {
         listaPersona= new ArrayList<>();
     }
     
-    public void agregarPersona(int id, String external_persona, String nombre, String apellido, String correo, String cedula, String telefono, String direccion,Rol rol,Cuenta cuenta){
-        listaPersona.add(new Persona(id, external_persona, nombre, apellido, telefono, cedula, telefono, direccion, rol, cuenta));
+    public void agregarPersona(String external_persona, String nombre, String apellido, String correo, String cedula, String telefono, String direccion,Rol rol,Cuenta cuenta){
+        listaPersona.add(new Persona(external_persona, nombre, apellido, telefono, cedula, telefono, direccion, rol, cuenta));
     }
     
     public ArrayList<Persona> buscarPersonaPorNombre(String nombre){

@@ -28,9 +28,10 @@ public class frmMascota extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         bloquearJtext();
+        quemarDatosPrueba();//datos quemados para pruebas sin BD
+        Tips();
         jButtonGuardar.setVisible(false);
         jButtonGuardar.disable();
-        
     }
 
     /**
@@ -112,12 +113,12 @@ public class frmMascota extends javax.swing.JDialog {
 
         jPanel1.setOpaque(false);
         jPanel1.addAncestorListener(new javax.swing.event.AncestorListener() {
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
-            }
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
                 jPanel1AncestorAdded(evt);
             }
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
             }
         });
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -295,43 +296,7 @@ public class frmMascota extends javax.swing.JDialog {
 
     private void jButtonModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarActionPerformed
         // TODO add your handling code here:
-        System.out.println(jTableMascotas.getSelectedRow());
-        if(jTableMascotas.getSelectedRow()>=0){
-            bloquearJtext();
-            int nFila = jTableMascotas.getSelectedRow();
-            DefaultTableModel modelo = (DefaultTableModel) jTableMascotas.getModel();
-            String nombreM = (String) modelo.getValueAt(jTableMascotas.getSelectedRow(), 0);
-            String cedula = jTextPresentarCedulaPersona.getText().trim();
-            jButtonRegistrar.disable();
-            Mascota m;
-            for (int i = 0; i < listaMascotas.getListaMascota().size(); i++) {
-                if(listaMascotas.getListaMascota().get(i).getNombre().equals(nombreM)&&
-                   listaMascotas.getListaMascota().get(i).getPersona().getCedula().equals(cedula)){
-                    jTextNombreMascota.setText(listaMascotas.getListaMascota().get(i).getNombre());
-                    String s = listaMascotas.getListaMascota().get(i).getTamanio();
-                    int index;
-                    if(s.equals("Grande"))index=0;
-                    else if(s.equals("Mediano"))index=1;
-                    else index=2;
-                    jComboBoxTamaño.setSelectedIndex(index);
-                    jComboBoxTamaño.enable();
-                    jTextColorPelaje.setText(listaMascotas.getListaMascota().get(i).getColorPelaje());
-                    jTextEdad.setText(listaMascotas.getListaMascota().get(i).getEdad()+"");
-                    jTextEdad.enable();
-                    jTextRaza.setText(listaMascotas.getListaMascota().get(i).getRaza());
-                    String s1 = listaMascotas.getListaMascota().get(i).getSexo();
-                    int index1;
-                    if(s1.equals("Macho"))index1=0;
-                    else index1=1;
-                    jComboBoxSexo.setSelectedIndex(index1);
-                    jTextEspecie.setText(listaMascotas.getListaMascota().get(i).getEspecie());
-                    jButtonGuardar.setVisible(true);
-                    jButtonGuardar.enable();
-                }
-            }
-        }else{
-            Alertas.setText("SELECCIONE UNA FILA");
-        }
+            modificarMascota();
     }//GEN-LAST:event_jButtonModificarActionPerformed
 
     private void jButtonRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegistrarActionPerformed
@@ -340,6 +305,64 @@ public class frmMascota extends javax.swing.JDialog {
         
     }//GEN-LAST:event_jButtonRegistrarActionPerformed
     
+    private void jButtonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGuardarActionPerformed
+        // TODO add your handling code here:
+        guardarModificacion();
+        
+    }//GEN-LAST:event_jButtonGuardarActionPerformed
+
+    private void jPanel1AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jPanel1AncestorAdded
+
+    }//GEN-LAST:event_jPanel1AncestorAdded
+
+    private void jTextRazaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextRazaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextRazaActionPerformed
+
+    private void jTextEdadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextEdadActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextEdadActionPerformed
+
+    private void jTextEspecieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextEspecieActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextEspecieActionPerformed
+
+    private void jTextBuscarCedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextBuscarCedulaActionPerformed
+        // TODO add your handling code here:
+       
+    }//GEN-LAST:event_jTextBuscarCedulaActionPerformed
+
+    private void jButtonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarActionPerformed
+        // TODO add your handling code here:
+        buscarMascota();
+    }//GEN-LAST:event_jButtonBuscarActionPerformed
+    
+    
+    
+    private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+    }//GEN-LAST:event_jButtonCancelarActionPerformed
+   
+    public void quemarDatosPrueba(){
+        if(listaMascotas==null){
+            listaMascotas=new controladorMascota();
+            listaMascotas.crearLista();
+        }
+        listPersonas = new ArrayList<>();
+        Rol r = new Rol("Administrador");
+        Cuenta c = new Cuenta("CTA1", "123", true);
+        Persona p1 = new Persona("PSN01", "CARLOS", "ORDOÑES", "GMAIL", "01", "2572220", "Argelia", r, c);
+        Persona p2 = new Persona("PSN01", "JORGE", "PEÑA", "GMAIL", "02", "2587220", "San pedro", r, c);
+        listPersonas.add(p1);
+        listPersonas.add(p2);
+        listaMascotas.getListaMascota().clear();
+        listaMascotas.agregarMacota("M01", "LILY", 5,"Labrador Retriever" ,"Perro", "Grande", "Hembra", "Gris", p2);
+        listaMascotas.agregarMacota("M02", "CAYLIN", 2, "Doverman","Perro" , "Grande", "Hembra", "Gris", p2);
+        listaMascotas.agregarMacota("M03", "DON GATO", 1, "Bombay","Gato" , "Pequeño", "Macho", "NEGRO", p2);
+        listaMascotas.agregarMacota("M04", "Garfiel", 4, "Siames","Gato" , "Mediano", "Macho", "Gris", p1);
+        listaMascotas.agregarMacota("M05", "TOBY", 4, "Perro", "Beagle", "Mediano", "Macho", "Gris", p1);
+    }
     public void registrarMascota(){
         if(listaMascotas==null){
             listaMascotas=new controladorMascota();
@@ -361,7 +384,7 @@ public class frmMascota extends javax.swing.JDialog {
                     }
                     int edad = Integer.parseInt(jTextEdad.getText().trim());
                     String nombreMascota = jTextNombreMascota.getText().trim();
-                    listaMascotas.agregarMacota(001, "MT01",nombreMascota , edad, jTextRaza.getText().trim(), jTextEspecie.getText().trim(), jComboBoxTamaño.getSelectedItem().toString(), 
+                    listaMascotas.agregarMacota("MT01",nombreMascota , edad, jTextRaza.getText().trim(), jTextEspecie.getText().trim(), jComboBoxTamaño.getSelectedItem().toString(), 
                                                jComboBoxSexo.getSelectedItem().toString(), jTextColorPelaje.getText().trim(), listPersonas.get(i-1));
                     limpiarTabla();
                     llenarTabla(listaMascotas.getListaMascota());
@@ -380,7 +403,110 @@ public class frmMascota extends javax.swing.JDialog {
             Alertas.setText("BUSQUE AL DUEÑO DE LA MASCOTA");
         }
     }
-    
+    public void modificarMascota(){
+        if(!jTextPresentarCedulaPersona.getText().equals("")){
+            if(jTableMascotas.getSelectedRow()>=0){
+                bloquearJtext();
+                DefaultTableModel modelo = (DefaultTableModel) jTableMascotas.getModel();
+                String nombreM = (String) modelo.getValueAt(jTableMascotas.getSelectedRow(), 0);
+                String cedula = jTextPresentarCedulaPersona.getText().trim();
+                boolean encontrado=false;
+                for (int i = 0; i < listaMascotas.getListaMascota().size(); i++) {
+                    if(listaMascotas.getListaMascota().get(i).getNombre().equals(nombreM)&&
+                       listaMascotas.getListaMascota().get(i).getPersona().getCedula().equals(cedula)){
+                        jTextNombreMascota.setText(listaMascotas.getListaMascota().get(i).getNombre());
+                        String s = listaMascotas.getListaMascota().get(i).getTamanio();
+                        int index;
+                        if(s.equals("Grande"))index=0;
+                        else if(s.equals("Mediano"))index=1;
+                        else index=2;
+                        jComboBoxTamaño.setSelectedIndex(index);
+                        jComboBoxTamaño.enable();
+                        jTextColorPelaje.setText(listaMascotas.getListaMascota().get(i).getColorPelaje());
+                        jTextEdad.setText(listaMascotas.getListaMascota().get(i).getEdad()+"");
+                        jTextEdad.enable();
+                        jTextRaza.setText(listaMascotas.getListaMascota().get(i).getRaza());
+                        String s1 = listaMascotas.getListaMascota().get(i).getSexo();
+                        int index1;
+                        if(s1.equals("Macho"))index1=0;
+                        else index1=1;
+                        jComboBoxSexo.setSelectedIndex(index1);
+                        jTextEspecie.setText(listaMascotas.getListaMascota().get(i).getEspecie());
+                        encontrado=true;
+                    }
+                }
+                if(encontrado==true){
+                    jButtonGuardar.setVisible(true);
+                    jButtonGuardar.enable();
+                    jButtonRegistrar.disable();
+                    jButtonRegistrar.setVisible(false);
+                }
+            }else{
+                Alertas.setText("SELECCIONE UNA FILA");
+            }
+        }else{
+             Alertas.setText("BUSQUE AL DUEÑO DE LA MASCOTA");
+             limpiarTabla();
+        }
+    }
+    public void buscarMascota(){
+        if(esNumerico(jTextBuscarCedula.getText())==true){
+            int cont =0;
+            ArrayList<Mascota> lista;
+            String buscadaN="";
+            for (int i = 0; i < listPersonas.size(); i++) {
+                if(listPersonas.get(i).getCedula().equals(jTextBuscarCedula.getText())){
+                    cont++;
+                    buscadaN=listPersonas.get(i).getNombre().toUpperCase()+" "+listPersonas.get(i).getApellido().toUpperCase();
+                }
+            }
+            if(cont!=0){//si se encotro la cedula
+                jTextPresentarNombrePersona.setText(buscadaN);
+                jTextPresentarCedulaPersona.setText(jTextBuscarCedula.getText());
+                lista=listaMascotas.buscarMascotas(jTextBuscarCedula.getText());
+                llenarTabla(lista);
+                habititalJtext();
+                actualizarJtext();
+                jTextBuscarCedula.setText("");
+                AlertaBuscar.setText("");
+            }else{
+                AlertaBuscar.setText("PERSONA NO ENCONTRADA");
+                limpiarTabla();
+                jTextBuscarCedula.setText("");
+                jTextPresentarNombrePersona.setText("");
+                jTextPresentarCedulaPersona.setText("");
+            }
+        }else{
+            AlertaBuscar.setText("INGRESE SOLO NUMEROS");
+            jTextBuscarCedula.setText("");
+            jTextPresentarNombrePersona.setText("");
+            jTextPresentarCedulaPersona.setText("");
+            limpiarTabla();
+        }
+    }
+    public void guardarModificacion(){
+        if(esNumerico(jTextEdad.getText().trim())==true){
+            int edad = Integer.parseInt(jTextEdad.getText());
+            for (int i = 0; i < listaMascotas.getListaMascota().size(); i++) {
+                if(jTextNombreMascota.getText().equals(listaMascotas.getListaMascota().get(i).getNombre())
+                &&jTextEspecie.getText().equals(listaMascotas.getListaMascota().get(i).getEspecie())
+                &&jTextPresentarCedulaPersona.getText().equals(listaMascotas.getListaMascota().get(i).getPersona().getCedula())){
+                    listaMascotas.getListaMascota().get(i).setEdad(edad);
+                    listaMascotas.getListaMascota().get(i).setTamanio(jComboBoxTamaño.getSelectedItem().toString());
+                }
+            }
+            jTextPresentarCedulaPersona.setText("");
+            jTextPresentarNombrePersona.setText("");
+            limpiarJtext();
+            limpiarTabla();
+            jButtonGuardar.setVisible(false);
+            jButtonRegistrar.enable();
+            jButtonRegistrar.setVisible(true);
+            llenarTabla(listaMascotas.getListaMascota());
+        }else{
+            Alertas.setText("INGRESE LA EDAD EN NUMEROS");
+        }
+    }
     public void llenarTabla(ArrayList<Mascota> lista){
         DefaultTableModel modelo = new DefaultTableModel(new String[]{"NOMBRE","ESPECIE","RAZA","SEXO","TAMAÑO","DUEÑO"},lista.size());
         jTableMascotas.setModel(modelo);
@@ -396,13 +522,11 @@ public class frmMascota extends javax.swing.JDialog {
             modeloDatos.setValueAt(dueño, i, 5);
         }
     }
-    
     private void limpiarTabla(){
         DefaultTableModel modelo = new DefaultTableModel(new String[]{"NOMBRE","ESPECIE","RAZA","SEXO","TAMAÑO","DUEÑO"},0);
         jTableMascotas.setModel(modelo);
         jTableMascotas.updateUI();
     }
-    
     private static boolean esNumerico(String cadena){
 	try {
 		Integer.parseInt(cadena);
@@ -445,110 +569,12 @@ public class frmMascota extends javax.swing.JDialog {
         jComboBoxSexo.updateUI();
         jTextEspecie.updateUI();
     }
-    private void jButtonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGuardarActionPerformed
-        // TODO add your handling code here:
-        if(esNumerico(jTextEdad.getText().trim())==true){
-            int edad = Integer.parseInt(jTextEdad.getText());
-            for (int i = 0; i < listaMascotas.getListaMascota().size(); i++) {
-                if(jTextNombreMascota.getText().equals(listaMascotas.getListaMascota().get(i).getNombre())
-                &&jTextEspecie.getText().equals(listaMascotas.getListaMascota().get(i).getEspecie())
-                &&jTextPresentarCedulaPersona.getText().equals(listaMascotas.getListaMascota().get(i).getPersona().getCedula())){
-                    listaMascotas.getListaMascota().get(i).setEdad(edad);
-                    listaMascotas.getListaMascota().get(i).setTamanio(jComboBoxTamaño.getSelectedItem().toString());
-                }
-            }
-            jTextPresentarCedulaPersona.setText("");
-            jTextPresentarNombrePersona.setText("");
-            limpiarJtext();
-            limpiarTabla();
-            jButtonGuardar.setVisible(false);
-        }else{
-            Alertas.setText("INGRESE LA EDAD EN NUMEROS");
-        }
-        
-    }//GEN-LAST:event_jButtonGuardarActionPerformed
-
-    private void jPanel1AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jPanel1AncestorAdded
-
-    }//GEN-LAST:event_jPanel1AncestorAdded
-
-    private void jTextRazaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextRazaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextRazaActionPerformed
-
-    private void jTextEdadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextEdadActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextEdadActionPerformed
-
-    private void jTextEspecieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextEspecieActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextEspecieActionPerformed
-
-    private void jTextBuscarCedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextBuscarCedulaActionPerformed
-        // TODO add your handling code here:
-        
-        
-    }//GEN-LAST:event_jTextBuscarCedulaActionPerformed
-
-    private void jButtonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarActionPerformed
-        // TODO add your handling code here:
-        if(listaMascotas==null){
-            listaMascotas=new controladorMascota();
-            listaMascotas.crearLista();
-        }
-        listPersonas = new ArrayList<>();
-        Rol r = new Rol(001, "Administrador");
-        Cuenta c = new Cuenta(1, "CTA1", "123", true);
-        Persona p1 = new Persona(001, "PSN01", "CARLOS", "ORDOÑES", "GMAIL", "01", "2572220", "MEXICO", r, c);
-        Persona p2 = new Persona(001, "PSN01", "LUIS", "PEÑA", "GMAIL", "02", "2572220", "MEXICO", r, c);
-        listPersonas.add(p1);
-        listPersonas.add(p2);
-        listaMascotas.getListaMascota().clear();
-        listaMascotas.agregarMacota(001, "m002", "lucy", 10, "perro", "doverman", "Mediano", "Macho", "Gris", p2);
-        listaMascotas.agregarMacota(002, "m002", "per", 10, "gato", "doverman", "Grande", "Hembra", "Gris", p2);
-        listaMascotas.agregarMacota(003, "m002", "lili", 10, "perro", "doverman", "Pequeño", "Macho", "Gris", p2);
-        listaMascotas.agregarMacota(004, "m002", "sesi", 10, "gato", "doverman", "Mediano", "Hembra", "Gris", p1);
-        listaMascotas.agregarMacota(005, "m002", "corvi", 10, "perro", "doverman", "Mediano", "Macho", "Gris", p1);
-        if(esNumerico(jTextBuscarCedula.getText())==true){
-            int cont =0;
-            ArrayList<Mascota> lista = new ArrayList<>();
-            String buscadaN="";
-            for (int i = 0; i < listPersonas.size(); i++) {
-                if(listPersonas.get(i).getCedula().equals(jTextBuscarCedula.getText())){
-                    cont++;
-                    buscadaN=listPersonas.get(i).getNombre().toUpperCase()+" "+listPersonas.get(i).getApellido().toUpperCase();
-                }
-            }
-            if(cont!=0){//si se encotro la cedula
-                jTextPresentarNombrePersona.setText(buscadaN);
-                jTextPresentarCedulaPersona.setText(jTextBuscarCedula.getText());
-                lista=listaMascotas.buscarMascotas(jTextBuscarCedula.getText());
-                llenarTabla(lista);
-                habititalJtext();
-                actualizarJtext();
-                jTextBuscarCedula.setText("");
-            }else{
-                AlertaBuscar.setText("PERSONA NO ENCONTRADA");
-                limpiarTabla();
-                jTextBuscarCedula.setText("");
-                jTextPresentarNombrePersona.setText("");
-                jTextPresentarCedulaPersona.setText("");
-            }
-        }else{
-            AlertaBuscar.setText("INGRESE SOLO NUMEROS");
-            jTextBuscarCedula.setText("");
-            jTextPresentarNombrePersona.setText("");
-            jTextPresentarCedulaPersona.setText("");
-            limpiarTabla();
-        }
-        //jTextBuscarCedula.setText("");
-    }//GEN-LAST:event_jButtonBuscarActionPerformed
-
-    private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
-        // TODO add your handling code here:
-        this.setVisible(false);
-    }//GEN-LAST:event_jButtonCancelarActionPerformed
-
+    public void Tips(){
+       jTextBuscarCedula.setToolTipText("Ingrese la cedula del dueño de la mascota. ");
+       jButtonModificar.setToolTipText("Seleccione la mascota de la tabla antes de modificar.");
+       jTextEdad.setToolTipText("Ingrese la edad en años.");
+    }
+    
     /**
      * @param args the command line arguments
      */

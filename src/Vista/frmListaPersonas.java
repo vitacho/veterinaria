@@ -26,6 +26,9 @@ public class frmListaPersonas extends javax.swing.JDialog {
     public frmListaPersonas(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        quemarDatosPrueba();//datos para pruebas sin bd
+        jRBuscarCedula.setToolTipText("Seleccione para buscar por cedula");
+        jRBuscarNombre.setToolTipText("Seleccione para buscar por nombre");
     }
 
     /**
@@ -158,20 +161,8 @@ public class frmListaPersonas extends javax.swing.JDialog {
     }//GEN-LAST:event_jButtonBuscarActionPerformed
     
     public void buscarPersona(){
-        if(listaPersonas==null){
-            listaPersonas = new controladorPersona();
-            listaPersonas.crearLista();
-        }
-        Rol rol = new Rol(1, "Cliente");
-        Cuenta cuenta = new Cuenta(1, "CTA1", "", true);
-        String nombre = "Carlos";
-        String apellido = "Lopez";
-        String correo = "@";
-        String telefono = "1324242";
-        String direccion = "loja";
-        listaPersonas.agregarPersona(1, "P01",nombre, apellido, correo, "01", telefono, direccion, rol, cuenta);
-        listaPersonas.agregarPersona(1, "P02","Carlos", apellido, correo, "02", telefono, direccion, rol, cuenta);
-        listaPersonas.agregarPersona(1, "P01",nombre, apellido, correo, "03", telefono, direccion, rol, cuenta);
+       
+        
         limpiarTabla();
          Alerta.setText("");
         if(!jTextIngresarBusqueda.getText().equals("")){
@@ -226,6 +217,23 @@ public class frmListaPersonas extends javax.swing.JDialog {
         DefaultTableModel modelo = new DefaultTableModel(new String[]{"CEDULA","NOMBRE","APELLIDO","DIRECCION","TELEFONO"},0);
         jTablePersonas.setModel(modelo);
         jTablePersonas.updateUI();
+    }
+    
+    public void quemarDatosPrueba(){
+         if(listaPersonas==null){
+            listaPersonas = new controladorPersona();
+            listaPersonas.crearLista();
+        }
+        Rol rol = new Rol("Cliente");
+        Cuenta cuenta = new Cuenta("CTA1", "", true);
+        String nombre = "Carlos";
+        String apellido = "Lopez";
+        String correo = "@";
+        String telefono = "1324242";
+        String direccion = "loja";
+        listaPersonas.agregarPersona("P01",nombre, "Perez", correo, "01", telefono, direccion, rol, cuenta);
+        listaPersonas.agregarPersona("P02","Carlos", apellido, correo, "02", telefono, direccion, rol, cuenta);
+        listaPersonas.agregarPersona("P01",nombre, apellido, correo, "03", telefono, direccion, rol, cuenta);
     }
     /**
      * @param args the command line arguments

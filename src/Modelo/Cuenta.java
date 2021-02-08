@@ -5,6 +5,10 @@
  */
 package Modelo;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 /**
  *
  * @author DELL
@@ -18,13 +22,14 @@ public class Cuenta {
     public Cuenta() {
     }
 
-    public Cuenta(int id, String external_cuenta, String clave, boolean estado) {
-        this.id = id;
+    public Cuenta( String external_cuenta, String clave, boolean estado) {
         this.external_cuenta = external_cuenta;
         this.clave = clave;
         this.estado = estado;
     }
-
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int getId() {
         return id;
     }
