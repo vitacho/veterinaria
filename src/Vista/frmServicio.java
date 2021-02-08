@@ -6,11 +6,14 @@
 package Vista;
 
 import Controlador.ServicioDB;
+import Controlador.Validaciones;
 import Modelo.Servicio;
 //import controlador.validaciones;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import org.hibernate.Query;
+import org.hibernate.Session;
 
 /**
  *
@@ -19,7 +22,7 @@ import javax.swing.table.DefaultTableModel;
 public class frmServicio extends javax.swing.JDialog {
     ServicioDB servicioDB  = new ServicioDB();
       DefaultTableModel model = new DefaultTableModel();
-   // validaciones val = new validaciones();
+    Validaciones val = new Validaciones();
     
     /**
      * Creates new form ListaServicio

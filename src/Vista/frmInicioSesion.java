@@ -126,38 +126,39 @@ public class frmInicioSesion extends javax.swing.JDialog {
          * Botón Ingresar
          */
 
-        //necesito lo de cuenta y persona
-//        List<Cuenta> listCuenta = new java.util.ArrayList<>();
-//       
-//        Cuenta c = new Cuenta();
+       // necesito lo de cuenta y persona
+       
+        List<Cuenta> listCuenta = new java.util.ArrayList<>();
+       
+        Cuenta c = new Cuenta();
 //        listCuenta = cueDB.traeUsuarios("A", listCuenta);
-//      
-//        if (listCuenta.size() > 0) {
-//           
+      
+        if (listCuenta.size() > 0) {
+           
 //            c = cueDB.traeCuentaUsuario(txtUsuario.getText());
-//            
-//            if (txtUsuario.getText().equals("")||txtcontra.getText().equals("")) {
-//                JOptionPane.showMessageDialog(this, "ACCESO INCORRECTO", "Mensaje", JOptionPane.ERROR_MESSAGE);
-//                txtcontra.setText(null); txtUsuario.setText(null); txtUsuario.requestFocus();
-//            }
-//
-//            if (c.getPersona().getCed_per().equals(txtUsuario.getText())
-//                && c.getContra_usu().equals(txtcontra.getText())) {
-//                tipo = c.getPersona().getRol().getDes_rol();
-//                JOptionPane.showMessageDialog(this, "Acceso Tipo: " + tipo, "ACCESO AL SISTEMA", JOptionPane.INFORMATION_MESSAGE);
-//
-//                //AQUI ENVIAR EL FORMULARIO
-//
-//                frmPrincipal pricipal = new frmPrincipal(c.getPersona().getRol().getId_rol());
-//                pricipal.setTitle("Menú Principal");
-//                pricipal.setVisible(true);
-//           
-//                this.dispose();
-//            }
-//        } else {
-//            JOptionPane.showMessageDialog(null, "NO EXISTEN USUARIOS REGISTRADOS "
-//                + "EN EL SISTEMA ACTUALMENTE", "MENSAJE", JOptionPane.WARNING_MESSAGE);
-//        }
+            
+            if (txtUsuario.getText().equals("")||txtcontra.getText().equals("")) {
+                JOptionPane.showMessageDialog(this, "ACCESO INCORRECTO", "Mensaje", JOptionPane.ERROR_MESSAGE);
+                txtcontra.setText(null); txtUsuario.setText(null); txtUsuario.requestFocus();
+            }
+
+            if (c.getPersona().getCed_per().equals(txtUsuario.getText())
+                && c.getContra_usu().equals(txtcontra.getText())) {
+                tipo = c.getPersona().getRol().getDes_rol();
+                JOptionPane.showMessageDialog(this, "Acceso Tipo: " + tipo, "ACCESO AL SISTEMA", JOptionPane.INFORMATION_MESSAGE);
+
+                //AQUI ENVIAR EL FORMULARIO
+
+                frmPrincipal pricipal = new frmPrincipal(c.getPersona().getRol().getId_rol());
+                pricipal.setTitle("Menú Principal");
+                pricipal.setVisible(true);
+           
+                this.dispose();
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "NO EXISTEN USUARIOS REGISTRADOS "
+                + "EN EL SISTEMA ACTUALMENTE", "MENSAJE", JOptionPane.WARNING_MESSAGE);
+        }
 
     }//GEN-LAST:event_btnIngresarActionPerformed
 
