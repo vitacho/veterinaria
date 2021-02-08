@@ -5,6 +5,10 @@
  */
 package Modelo;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 /**
  *
  * @author DELL
@@ -25,8 +29,7 @@ public class Persona {
     public Persona() {
     }
 
-    public Persona(int id, String external_persona, String nombre, String apellido, String correoElectronico, String cedula, String telefono, String direccion, Rol rol, Cuenta cuenta) {
-        this.id = id;
+    public Persona(String external_persona, String nombre, String apellido, String correoElectronico, String cedula, String telefono, String direccion, Rol rol, Cuenta cuenta) {
         this.external_persona = external_persona;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -45,9 +48,7 @@ public class Persona {
     public void setCuenta(Cuenta cuenta) {
         this.cuenta = cuenta;
     }
-
     
-
     public Rol getRol() {
         return rol;
     }
@@ -55,9 +56,9 @@ public class Persona {
     public void setRol(Rol rol) {
         this.rol = rol;
     }
-
     
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int getId() {
         return id;
     }

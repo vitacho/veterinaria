@@ -283,18 +283,18 @@ public class frmConsulta extends javax.swing.JDialog {
             listaMascotas.crearLista();
         }
         listPersonas = new ArrayList<>();
-        Rol r = new Rol(001, "Administrador");
-        Cuenta c = new Cuenta(1, "CTA1", "123", true);
-        Persona p1 = new Persona(001, "PSN01", "CARLOS", "ORDOÑES", "GMAIL", "01", "2572220", "MEXICO", r, c);
-        Persona p2 = new Persona(001, "PSN01", "LUIS", "PEÑA", "GMAIL", "02", "2572220", "MEXICO", r, c);
+        Rol r = new Rol("Administrador");
+        Cuenta c = new Cuenta("CTA1", "123", true);
+        Persona p1 = new Persona("PSN01", "CARLOS", "ORDOÑES", "GMAIL", "01", "2572220", "MEXICO", r, c);
+        Persona p2 = new Persona("PSN01", "LUIS", "PEÑA", "GMAIL", "02", "2572220", "MEXICO", r, c);
         listPersonas.add(p1);
         listPersonas.add(p2);
         listaMascotas.getListaMascota().clear();
-        listaMascotas.agregarMacota(001, "m002", "lucy", 10, "perro", "doverman", "Mediano", "Macho", "Gris", p2);
-        listaMascotas.agregarMacota(002, "m002", "per", 10, "gato", "doverman", "Grande", "Hembra", "Gris", p2);
-        listaMascotas.agregarMacota(003, "m002", "lili", 10, "perro", "doverman", "Pequeño", "Macho", "Gris", p2);
-        listaMascotas.agregarMacota(004, "m002", "sesi", 10, "gato", "doverman", "Mediano", "Hembra", "Gris", p1);
-        listaMascotas.agregarMacota(005, "m002", "corvi", 10, "perro", "doverman", "Mediano", "Macho", "Gris", p1);
+        listaMascotas.agregarMacota("m002", "lucy", 10, "perro", "doverman", "Mediano", "Macho", "Gris", p2);
+        listaMascotas.agregarMacota("m002", "per", 10, "gato", "doverman", "Grande", "Hembra", "Gris", p2);
+        listaMascotas.agregarMacota("m002", "lili", 10, "perro", "doverman", "Pequeño", "Macho", "Gris", p2);
+        listaMascotas.agregarMacota("m002", "sesi", 10, "gato", "doverman", "Mediano", "Hembra", "Gris", p1);
+        listaMascotas.agregarMacota("m002", "corvi", 10, "perro", "doverman", "Mediano", "Macho", "Gris", p1);
 
         if (esNumerico(jTextFieldDueno.getText()) == true) {
             int cont = 0;

@@ -16,9 +16,11 @@ import Modelo.Rol;
 public class frmPersona extends javax.swing.JDialog {
 
     controladorPersona listaPersonas;
-    public frmPersona(java.awt.Frame parent, boolean modal) {
+    boolean esCliente;
+    public frmPersona(java.awt.Frame parent, boolean modal,boolean vrf) {
         super(parent, modal);
         initComponents();
+        esCliente=vrf;
     }
 
     /**
@@ -209,7 +211,8 @@ public class frmPersona extends javax.swing.JDialog {
 
     private void jBGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardarActionPerformed
         // TODO add your handling code here:
-        registrarCuenta();
+        if(esCliente==true)registrarCliente();
+        else registrarCuenta();
     }//GEN-LAST:event_jBGuardarActionPerformed
 
     private void jBAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAtrasActionPerformed
@@ -232,17 +235,17 @@ public class frmPersona extends javax.swing.JDialog {
                     if(esNumerico(jTextTelefono.getText().trim())){
                         if(listaPersonas.validarPasword(jTextPasword.getText().trim(), jTextValPasword.getText().trim())){
                             String r = jComboRol.getSelectedItem().toString();
-                            Rol rol = new Rol(1, r);
+                            Rol rol = new Rol(r);
                             boolean estado;
                             if(jComboEstado.getSelectedItem().toString().equals("Activada"))estado=true;
                             else estado=false;
-                            Cuenta cuenta = new Cuenta(1, "CTA1", jTextPasword.getText(), estado);
+                            Cuenta cuenta = new Cuenta("CTA1", jTextPasword.getText(), estado);
                             String nombre = jTextNombre.getText().trim();
                             String apellido = jTexApellido.getText().trim();
                             String correo = jTextCorreo.getText().trim();
                             String telefono = jTextTelefono.getText().trim();
                             String direccion = jTextDireccion.getText().trim();
-                            listaPersonas.agregarPersona(1, "P01",nombre, apellido, correo, cedula, telefono, direccion, rol, cuenta);
+                            listaPersonas.agregarPersona("P01",nombre, apellido, correo, cedula, telefono, direccion, rol, cuenta);
                             limpiarJText();
                         }else{
                             ALERTA.setText("LAS CONTRASEÑAS NO COINCIDEN");
@@ -280,14 +283,14 @@ public class frmPersona extends javax.swing.JDialog {
             if(listaPersonas.validarCedula(cedula)){
                 if(!listaPersonas.cedulaRepetida(cedula)){
                     if(esNumerico(jTextTelefono.getText().trim())){
-                        Rol rol = new Rol(1, "Cliente");
-                        Cuenta cuenta = new Cuenta(1, "CTA1", "", true);//clientes sin contraseña
+                        Rol rol = new Rol("Cliente");
+                        Cuenta cuenta = new Cuenta("CTA1", "", true);//clientes sin contraseña
                         String nombre = jTextNombre.getText().trim();
                         String apellido = jTexApellido.getText().trim();
                         String correo = jTextCorreo.getText().trim();
                         String telefono = jTextTelefono.getText().trim();
                         String direccion = jTextDireccion.getText().trim();
-                        listaPersonas.agregarPersona(1, "P01",nombre, apellido, correo, cedula, telefono, direccion, rol, cuenta);
+                        listaPersonas.agregarPersona("P01",nombre, apellido, correo, cedula, telefono, direccion, rol, cuenta);
                         limpiarJText();
                     }else{
                         ALERTA.setText("TELEFONO NO VALIDO");
@@ -332,6 +335,9 @@ public class frmPersona extends javax.swing.JDialog {
         jComboRol.disable();
         jComboEstado.disable();
     }
+    public void tipoderegistro(){
+        if(esCliente==true)bloquearCamposCuenta(); 
+    }
     /**
      * @param args the command line arguments
      */
@@ -363,7 +369,7 @@ public class frmPersona extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                frmPersona dialog = new frmPersona(new javax.swing.JFrame(), true);
+                frmPersona dialog = new frmPersona(new javax.swing.JFrame(), true,false);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

@@ -22,7 +22,7 @@
             <Property name="text" type="java.lang.String" value="Administrar Cuentas "/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JCheckBoxMenuItem" name="jCheckBoxMenuItem3">
+            <MenuItem class="javax.swing.JCheckBoxMenuItem" name="jCheckListaCuentas">
               <Properties>
                 <Property name="selected" type="boolean" value="true"/>
                 <Property name="text" type="java.lang.String" value="Lista de Cuentas"/>
@@ -31,10 +31,10 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCheckBoxMenuItem3ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCheckListaCuentasActionPerformed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JCheckBoxMenuItem" name="jCheckBoxMenuItem4">
+            <MenuItem class="javax.swing.JCheckBoxMenuItem" name="jCheckRegistrarCuenta">
               <Properties>
                 <Property name="selected" type="boolean" value="true"/>
                 <Property name="text" type="java.lang.String" value="Registrar Cuenta"/>
@@ -43,7 +43,7 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCheckBoxMenuItem4ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCheckRegistrarCuentaActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>
@@ -92,7 +92,7 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCheckBoxMenuItem11ActionPerformed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JCheckBoxMenuItem" name="jCheckBoxMenuItem12">
+            <MenuItem class="javax.swing.JCheckBoxMenuItem" name="jCheckListaConsultas">
               <Properties>
                 <Property name="selected" type="boolean" value="true"/>
                 <Property name="text" type="java.lang.String" value="Lista de Consulta"/>
@@ -101,7 +101,7 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCheckBoxMenuItem12ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCheckListaConsultasActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>
@@ -114,7 +114,7 @@
             <Property name="text" type="java.lang.String" value=" Clientes"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JCheckBoxMenuItem" name="jCheckBoxMenuItem7">
+            <MenuItem class="javax.swing.JCheckBoxMenuItem" name="jCheckRegistrarCliente">
               <Properties>
                 <Property name="selected" type="boolean" value="true"/>
                 <Property name="text" type="java.lang.String" value="Registrar Cliente"/>
@@ -123,10 +123,10 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCheckBoxMenuItem7ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCheckRegistrarClienteActionPerformed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JCheckBoxMenuItem" name="jCheckBoxMenuItem8">
+            <MenuItem class="javax.swing.JCheckBoxMenuItem" name="jCheckListaClientes">
               <Properties>
                 <Property name="selected" type="boolean" value="true"/>
                 <Property name="text" type="java.lang.String" value="Lista de Clientes"/>
@@ -135,10 +135,10 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCheckBoxMenuItem8ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCheckListaClientesActionPerformed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JCheckBoxMenuItem" name="jCheckBoxMenuItem14">
+            <MenuItem class="javax.swing.JCheckBoxMenuItem" name="jCheckMascotas">
               <Properties>
                 <Property name="selected" type="boolean" value="true"/>
                 <Property name="text" type="java.lang.String" value="Mascotas"/>
@@ -147,7 +147,7 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCheckBoxMenuItem14ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCheckMascotasActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>

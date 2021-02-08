@@ -5,6 +5,10 @@
  */
 package Modelo;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 /**
  *
  * @author DELL
@@ -21,8 +25,7 @@ public class Mascota {
     private String colorPelaje;
     private Persona persona;
 
-    public Mascota(int id, String external_mascota, String nombre, int edad, String raza, String especie, String tamanio, String sexo, String colorPelaje, Persona persona) {
-        this.id = id;
+    public Mascota(String external_mascota, String nombre, int edad, String raza, String especie, String tamanio, String sexo, String colorPelaje, Persona persona) {
         this.external_mascota = external_mascota;
         this.nombre = nombre;
         this.edad = edad;
@@ -45,7 +48,8 @@ public class Mascota {
         this.persona = persona;
     }
     
-    
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int getId() {
         return id;
     }

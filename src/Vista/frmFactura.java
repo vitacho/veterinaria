@@ -5,7 +5,12 @@
  */
 package Vista;
 
+import java.text.SimpleDateFormat;
+
+import java.util.Date;
+
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -13,12 +18,25 @@ import javax.swing.JOptionPane;
  */
 public class frmFactura extends javax.swing.JDialog {
 
+    DefaultTableModel model = new DefaultTableModel();
+
     /**
      * Creates new form frmDetalleListaHospitalizacion
      */
     public frmFactura(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        fecha.setText(fechaactual());
+        jTextDecuento.setText("0.0");
+
+    }
+
+    public static String fechaactual() {
+        Date fecha = new Date();
+        SimpleDateFormat formatofecha = new SimpleDateFormat("dd/MM/yyyy");
+        
+        return formatofecha.format(fecha);
+
     }
 
     /**
@@ -56,7 +74,7 @@ public class frmFactura extends javax.swing.JDialog {
         jLabelcedula = new javax.swing.JLabel();
         jTextcedula = new javax.swing.JTextField();
         jLabel26 = new javax.swing.JLabel();
-        jTextField22 = new javax.swing.JTextField();
+        fecha = new javax.swing.JTextField();
         jButtonbuscar = new javax.swing.JButton();
         jComboBox2 = new javax.swing.JComboBox<>();
         jLabel28 = new javax.swing.JLabel();
@@ -69,10 +87,10 @@ public class frmFactura extends javax.swing.JDialog {
         jTextField12 = new javax.swing.JTextField();
         jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
-        jTextField17 = new javax.swing.JTextField();
+        jTextDecuento = new javax.swing.JTextField();
         jLabel29 = new javax.swing.JLabel();
         jTextField14 = new javax.swing.JTextField();
-        jTextField13 = new javax.swing.JTextField();
+        jTexttotal = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -113,6 +131,11 @@ public class frmFactura extends javax.swing.JDialog {
         });
 
         jButtonagregar.setText("Agregar");
+        jButtonagregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonagregarActionPerformed(evt);
+            }
+        });
 
         jButtoneliminar.setText("Eliminar");
 
@@ -192,6 +215,11 @@ public class frmFactura extends javax.swing.JDialog {
 
         jButtonimprimir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/print.png"))); // NOI18N
         jButtonimprimir.setText("Imprimir");
+        jButtonimprimir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonimprimirActionPerformed(evt);
+            }
+        });
 
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
         jPanel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -223,12 +251,17 @@ public class frmFactura extends javax.swing.JDialog {
         jLabel26.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel26.setText("Fecha ");
 
-        jTextField22.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField22.setText("mm-dd-aa");
+        fecha.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        fecha.setText("mm-dd-aa");
 
         jButtonbuscar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButtonbuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/search.png"))); // NOI18N
         jButtonbuscar.setText(" Cliente");
+        jButtonbuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonbuscarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -256,7 +289,7 @@ public class frmFactura extends javax.swing.JDialog {
                 .addGap(30, 30, 30)
                 .addComponent(jLabel26)
                 .addGap(18, 18, 18)
-                .addComponent(jTextField22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(fecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
@@ -282,7 +315,7 @@ public class frmFactura extends javax.swing.JDialog {
                         .addGap(7, 7, 7))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(fecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel26))
                         .addGap(58, 58, 58)))
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -316,12 +349,23 @@ public class frmFactura extends javax.swing.JDialog {
 
         jLabel18.setText("Total $");
 
+        jTextDecuento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextDecuentoActionPerformed(evt);
+            }
+        });
+        jTextDecuento.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextDecuentoKeyTyped(evt);
+            }
+        });
+
         jLabel29.setText("Iva");
 
-        jTextField13.setText(" ");
-        jTextField13.addActionListener(new java.awt.event.ActionListener() {
+        jTexttotal.setText(" ");
+        jTexttotal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField13ActionPerformed(evt);
+                jTexttotalActionPerformed(evt);
             }
         });
 
@@ -346,8 +390,8 @@ public class frmFactura extends javax.swing.JDialog {
                             .addComponent(jLabel18))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField17)
-                            .addComponent(jTextField13))))
+                            .addComponent(jTextDecuento)
+                            .addComponent(jTexttotal))))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -364,11 +408,11 @@ public class frmFactura extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel17)
-                    .addComponent(jTextField17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextDecuento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel18)
-                    .addComponent(jTextField13, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTexttotal, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(26, Short.MAX_VALUE))
         );
 
@@ -445,9 +489,9 @@ public class frmFactura extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextcedulaActionPerformed
 
-    private void jTextField13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField13ActionPerformed
+    private void jTexttotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTexttotalActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField13ActionPerformed
+    }//GEN-LAST:event_jTexttotalActionPerformed
 
     private void jtextnombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtextnombreActionPerformed
         // TODO add your handling code here:
@@ -458,14 +502,68 @@ public class frmFactura extends javax.swing.JDialog {
     }//GEN-LAST:event_jTextcantidadActionPerformed
 
     private void jTextcantidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextcantidadKeyTyped
-       char validar= evt.getKeyChar();
-       
-       if(Character.isLetter(validar)){
-               getToolkit().beep();
-               evt.consume();
-               JOptionPane.showMessageDialog(rootPane,"Ingrese solo números");
-       }
+        char validar = evt.getKeyChar();
+
+        if (Character.isLetter(validar)) {
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(rootPane, "Ingrese solo números");
+        }
     }//GEN-LAST:event_jTextcantidadKeyTyped
+
+    private void jButtonbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonbuscarActionPerformed
+        // abrir la ventana de busqueda
+        
+    }//GEN-LAST:event_jButtonbuscarActionPerformed
+
+    private void jButtonimprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonimprimirActionPerformed
+        //buscar
+//        if (Integer.parseInt(jTextDecuento.getText()) <= 100) {
+//            //
+//
+//            //guardamos
+//            //mandanos a imprimir
+//        } else {
+//
+//            //como se sab que el decuento es mayor a 100 se lo define a 100 por le que sa a comprender;
+//            jTextDecuento.setText("100");
+//
+//            //guardamos
+//            //mandanos a imprimir
+//        }
+    
+        frmVuelto vuelto = new frmVuelto(new javax.swing.JDialog(), true);
+        vuelto.setTotal(jTexttotal.getText());
+        vuelto.setVisible(true);
+        System.out.println("hola");
+        frmimrprimirFactura facturaimprimir = new frmimrprimirFactura();
+        //neviamos los datos de la factura a jpanel para imprimirlo
+        facturaimprimir.setVisible(true);
+        
+;
+    }//GEN-LAST:event_jButtonimprimirActionPerformed
+
+    private void jTextDecuentoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextDecuentoKeyTyped
+
+        if (jTextDecuento.getText().length() >= 5) {
+            evt.consume();
+        }
+        if (!Character.isDigit(evt.getKeyChar()) && evt.getKeyChar() != '.') {
+            evt.consume();
+        }
+        if (evt.getKeyChar() == '.' && jTextDecuento.getText().contains(".")) {
+            evt.consume();
+        }
+
+    }//GEN-LAST:event_jTextDecuentoKeyTyped
+
+    private void jTextDecuentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextDecuentoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextDecuentoActionPerformed
+
+    private void jButtonagregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonagregarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonagregarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -513,6 +611,7 @@ public class frmFactura extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField fecha;
     private javax.swing.JButton jButtonagregar;
     private javax.swing.JButton jButtonatras;
     private javax.swing.JButton jButtonbuscar;
@@ -542,11 +641,9 @@ public class frmFactura extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTabledescribcion;
+    private javax.swing.JTextField jTextDecuento;
     private javax.swing.JTextField jTextField12;
-    private javax.swing.JTextField jTextField13;
     private javax.swing.JTextField jTextField14;
-    private javax.swing.JTextField jTextField17;
-    private javax.swing.JTextField jTextField22;
     private javax.swing.JTextField jTextcantidad;
     private javax.swing.JTextField jTextcedula;
     private javax.swing.JTextField jTextcodigo;
@@ -554,6 +651,7 @@ public class frmFactura extends javax.swing.JDialog {
     private javax.swing.JTextField jTextdescribcion;
     private javax.swing.JTextField jTextdireccion;
     private javax.swing.JTextField jTextprecio;
+    private javax.swing.JTextField jTexttotal;
     private javax.swing.JLabel jlabeldireccion;
     private javax.swing.JTextField jtextnombre;
     // End of variables declaration//GEN-END:variables

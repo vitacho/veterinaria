@@ -22,18 +22,27 @@ public class controladorPersona {
         listaPersona= new ArrayList<>();
     }
     
-    public void agregarPersona(int id, String external_persona, String nombre, String apellido, String correo, String cedula, String telefono, String direccion,Rol rol,Cuenta cuenta){
-        listaPersona.add(new Persona(id, external_persona, nombre, apellido, telefono, cedula, telefono, direccion, rol, cuenta));
+    public void agregarPersona(String external_persona, String nombre, String apellido, String correo, String cedula, String telefono, String direccion,Rol rol,Cuenta cuenta){
+        listaPersona.add(new Persona(external_persona, nombre, apellido, telefono, cedula, telefono, direccion, rol, cuenta));
     }
     
-    public Persona buscarPersonaPorNombre(String nombre){
-        Persona persona = new Persona();
-        for (Persona personas : listaPersona) {
-            if((personas.getNombre()+" "+personas.getApellido()).equalsIgnoreCase(nombre)){
-                persona=personas;
+    public ArrayList<Persona> buscarPersonaPorNombre(String nombre){
+        ArrayList<Persona> personas = new ArrayList<>();
+        for (Persona persona : listaPersona) {
+            if((persona.getNombre()+" "+persona.getApellido()).equalsIgnoreCase(nombre)){
+                personas.add(persona);
             }
         }
-        return persona;
+        return personas;
+    }
+    
+     public boolean validarBusquedaPorNombre(String nombre){
+        for (Persona persona : listaPersona) {
+            if((persona.getNombre()+" "+persona.getApellido()).equalsIgnoreCase(nombre)){
+                return true;
+            }
+        }
+        return false;
     }
     
     public Persona buscarPersonaPorCedula (String cedula){
@@ -44,6 +53,15 @@ public class controladorPersona {
             }
         }
         return persona;
+    }
+    
+    public boolean validarBusquedaPorCedula (String cedula){
+        for (Persona personas : listaPersona) {
+            if(personas.getCedula().equalsIgnoreCase(cedula)){
+                return true;
+            }
+        }
+        return false;
     }
     
     public boolean validarPasword(String pass1,String pass2){

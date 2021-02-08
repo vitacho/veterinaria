@@ -23,8 +23,8 @@ public class controladorMascota {
         listaMascotas=new ArrayList<>();
     }
     
-    public void agregarMacota(int id, String external_mascota, String nombre, int edad, String raza, String especie, String tamanio, String sexo, String colorPelaje, Persona persona){
-        listaMascotas.add(new Mascota(id, external_mascota, nombre, edad, raza, especie, tamanio, sexo, colorPelaje, persona));
+    public void agregarMacota(String external_mascota, String nombre, int edad, String raza, String especie, String tamanio, String sexo, String colorPelaje, Persona persona){
+        listaMascotas.add(new Mascota(external_mascota, nombre, edad, raza, especie, tamanio, sexo, colorPelaje, persona));
     }
     
     public ArrayList<Mascota> buscarMascotas(String cedula){
