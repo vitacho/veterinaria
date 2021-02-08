@@ -382,6 +382,7 @@ public class frmMascota extends javax.swing.JDialog {
     }
     
     public void llenarTabla(ArrayList<Mascota> lista){
+        
         DefaultTableModel modelo = new DefaultTableModel(new String[]{"NOMBRE","ESPECIE","RAZA","SEXO","TAMAÑO","DUEÑO"},lista.size());
         jTableMascotas.setModel(modelo);
         TableModel modeloDatos = jTableMascotas.getModel();
@@ -411,6 +412,7 @@ public class frmMascota extends javax.swing.JDialog {
 		return false;
 	}
     }
+    
     public void limpiarJtext(){
         jTextNombreMascota.setText("");
         jTextColorPelaje.setText("");
