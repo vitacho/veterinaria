@@ -18,8 +18,8 @@ public class controladorHospitalizacion {
 
     ArrayList<Hospitalizacion> listaHos = new ArrayList<Hospitalizacion>();
 
-    public void registrarHospitalizacion(int id, int external_hosp, String diagnostico, String motivo, int temp, boolean sangrado, boolean conbulcion, boolean intoxicacion, boolean probleResp, boolean inchazon, Date ingreso, Date salida, int dias, String vereterinario, String estado, Mascota mascota) {
-        listaHos.add(new Hospitalizacion(id, external_hosp, diagnostico, motivo, temp, sangrado, conbulcion, intoxicacion, probleResp, inchazon, ingreso, salida, dias, vereterinario, estado, mascota));
+    public void registrarHospitalizacion(int id, int external_hosp, String diagnostico, String motivo, int temp, String sangrado, String conbulcion, String intoxicacion, String probleResp, String inchazon, Date ingreso, Date salida, String vereterinario, String estado, Mascota mascota) {
+        listaHos.add(new Hospitalizacion(id, external_hosp, diagnostico, motivo, temp, sangrado, conbulcion, intoxicacion, probleResp, inchazon, ingreso, salida, vereterinario, estado, mascota));
     }
 
     public ArrayList<Hospitalizacion> buscarConsulta(String cedula) {

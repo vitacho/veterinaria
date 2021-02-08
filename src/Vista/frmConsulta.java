@@ -22,12 +22,12 @@ import javax.swing.JOptionPane;
 public class frmConsulta extends javax.swing.JDialog {
 
     controladorMascota listaMascotas;
-    public static ArrayList<Persona> listPersonas;
+    ArrayList<Persona> listPersonas;
     ArrayList<Mascota> lista = new ArrayList<>();
     int op;
 
     public static controladorConsulta cc = new controladorConsulta();
-    public static controladorMascota cm = new controladorMascota();
+    controladorMascota cm = new controladorMascota();
 
     Mascota mascota = new Mascota();
 
@@ -38,9 +38,9 @@ public class frmConsulta extends javax.swing.JDialog {
     public frmConsulta(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        jTextFieldCI.setEnabled(false);
-        jTextFieldNombreMascota.setEnabled(false);
-        jTextFieldSexMas.setEnabled(false);
+        jTextFieldCI.setEditable(false);
+        jTextFieldNombreMascota.setEditable(false);
+        jTextFieldSexMas.setEditable(false);
     }
 
     private static boolean esNumerico(String cadena) {

@@ -5,11 +5,22 @@
  */
 package Vista;
 
+import Modelo.Hospitalizacion;
+import Modelo.Persona;
+import static Vista.frmHospitalizacion.ch;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+
 /**
  *
  * @author Personal
  */
 public class frmListaHospitalización extends javax.swing.JDialog {
+
+    ArrayList<Hospitalizacion> listaHosp;
+    ArrayList<Persona> listPersonas;
 
     /**
      * Creates new form frmListaHospitalización
@@ -17,6 +28,35 @@ public class frmListaHospitalización extends javax.swing.JDialog {
     public frmListaHospitalización(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        listaHosp = ch.getListaConsulta();
+        llenarTabla(listaHosp);
+    }
+
+    public void llenarTabla(ArrayList<Hospitalizacion> lista) {
+
+        DefaultTableModel tabla = new DefaultTableModel(new String[]{"MASCOTA", "SEXO", "CEDULA", "DUEÑO", "VETERINARIO", "FECHA DE INGRESO", "STADO"}, lista.size());
+        jTableHospi.setModel(tabla);
+        TableModel datosTabla = jTableHospi.getModel();
+
+        for (int i = 0; i < lista.size(); i++) {
+            datosTabla.setValueAt(lista.get(i).getMascota().getNombre(), i, 0);
+            datosTabla.setValueAt(lista.get(i).getMascota().getSexo(), i, 1);
+            datosTabla.setValueAt(lista.get(i).getMascota().getPersona().getCedula(), i, 2);
+            String nombres = lista.get(i).getMascota().getPersona().getNombre() + " " + lista.get(i).getMascota().getPersona().getApellido();
+            datosTabla.setValueAt(nombres, i, 3);
+            datosTabla.setValueAt(lista.get(i).getVereterinario(), i, 4);
+            datosTabla.setValueAt(lista.get(i).getIngreso(), i, 5);
+            datosTabla.setValueAt(lista.get(i).getEstado(), i, 6);
+        }
+    }
+
+    private static boolean esNumerico(String cadena) {
+        try {
+            Integer.parseInt(cadena);
+            return true;
+        } catch (NumberFormatException nfe) {
+            return false;
+        }
     }
 
     /**
@@ -29,7 +69,7 @@ public class frmListaHospitalización extends javax.swing.JDialog {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTableHospi = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jButton3 = new javax.swing.JButton();
@@ -42,58 +82,57 @@ public class frmListaHospitalización extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTableHospi.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+
             },
             new String [] {
                 "NOMBRE DE LA MASCOTA", "SEXO", "CEDULA DEL DUEÑO", "DUEÑO", "VETERINARIO", "FECHA DE INGRESO", "ESTADO"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jTableHospi);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 130, 1260, 230));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 160, 1260, 450));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel3.setText("Número de Cédula");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 60, -1, 30));
+        jLabel3.setText("Número de Cédula:");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 80, -1, 30));
 
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 60, 310, 30));
+        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 80, 310, 30));
 
         jButton3.setText("Buscar");
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 60, -1, -1));
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 80, -1, 30));
 
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton1.setText("Finalizar Hospitalización");
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 570, 190, 30));
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 690, 190, 30));
 
         jButton2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton2.setText("Ver hospitalización ");
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 570, 180, 30));
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 690, 180, 30));
 
         jButton4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton4.setText("Atrás");
-        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 570, 70, 30));
+        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 690, 190, 30));
 
         jLabel2.setFont(new java.awt.Font("Constantia", 1, 36)); // NOI18N
         jLabel2.setText("LISTA HOSPITALIZACIONES");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 10, 660, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 10, 660, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/FONDOP1.jpg"))); // NOI18N
         jLabel1.setText("jLabel1");
@@ -105,6 +144,48 @@ public class frmListaHospitalización extends javax.swing.JDialog {
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        if (esNumerico(jTextField1.getText()) == true) {
+            int cont = 0;
+            for (int i = 0; i < listPersonas.size(); i++) {
+                if (listPersonas.get(i).getCedula().equals(jTextField1.getText())) {
+                    cont++;
+                }
+            }
+            if (cont != 0) {
+                ArrayList<Hospitalizacion> listaCon;
+                listaCon = ch.buscarConsulta(jTextField1.getText());
+                llenarTabla(listaCon);
+            } else {
+                JOptionPane.showMessageDialog(null, "Persona no encontrada");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Ingrese solo numeros");
+        }
+
+
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        if (jTableHospi.getSelectedRow() >= 0) {
+            DefaultTableModel table = (DefaultTableModel) jTableHospi.getModel();
+            String nombreM = (String) table.getValueAt(jTableHospi.getSelectedRow(), 0);
+            String cedula = (String) table.getValueAt(jTableHospi.getSelectedRow(), 2);
+            for (int i = 0; i < listaHosp.size(); i++) {
+                if (listaHosp.get(i).getMascota().getNombre().equals(nombreM)
+                        && listaHosp.get(i).getMascota().getPersona().getCedula().equals(cedula)) {
+                    table.setValueAt("Dado de Alta", jTableHospi.getSelectedRow(), 6);
+                    listaHosp.get(i).setEstado("Dado de Alta");
+                    JOptionPane.showMessageDialog(null, "Hospitalizacion Finalizada");
+                }
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Seleccione una fila");
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -158,7 +239,7 @@ public class frmListaHospitalización extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTableHospi;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }

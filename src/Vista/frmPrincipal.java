@@ -266,6 +266,8 @@ public class frmPrincipal extends javax.swing.JFrame {
 
     private void jCheckBoxMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuItem11ActionPerformed
         // TODO add your handling code here:
+        frmListaHospitalización flh = new frmListaHospitalización(this, false);
+        flh.setVisible(true);
     }//GEN-LAST:event_jCheckBoxMenuItem11ActionPerformed
 
     private void jCheckListaConsultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckListaConsultasActionPerformed
@@ -288,6 +290,8 @@ public class frmPrincipal extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        frmHospitalizacion fh = new frmHospitalizacion(this, false);
+        fh.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

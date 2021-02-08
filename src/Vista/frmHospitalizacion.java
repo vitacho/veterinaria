@@ -5,11 +5,31 @@
  */
 package Vista;
 
+import Controlador.controladorConsulta;
+import Controlador.controladorHospitalizacion;
+import Controlador.controladorMascota;
+import Modelo.Cuenta;
+import Modelo.Mascota;
+import Modelo.Persona;
+import Modelo.Rol;
+import java.util.ArrayList;
+import java.util.Date;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Personal
  */
 public class frmHospitalizacion extends javax.swing.JDialog {
+
+    controladorMascota listaMascotas;
+    ArrayList<Persona> listPersonas;
+    ArrayList<Mascota> lista = new ArrayList<>();
+    int op;
+    
+    public static controladorHospitalizacion ch = new controladorHospitalizacion();
+
+    Mascota mascota = new Mascota();
 
     /**
      * Creates new form frmDetalleListaHospitalizacion
@@ -17,6 +37,18 @@ public class frmHospitalizacion extends javax.swing.JDialog {
     public frmHospitalizacion(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        jTextFieldCI.setEditable(false);
+        jTextFieldNombreM.setEditable(false);
+        jTextFieldSexM.setEditable(false);
+    }
+
+    private static boolean esNumerico(String cadena) {
+        try {
+            Integer.parseInt(cadena);
+            return true;
+        } catch (NumberFormatException nfe) {
+            return false;
+        }
     }
 
     /**
@@ -30,7 +62,7 @@ public class frmHospitalizacion extends javax.swing.JDialog {
 
         jPanel2 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTextArea2 = new javax.swing.JTextArea();
+        jTextAreaMotivo = new javax.swing.JTextArea();
         jLabel15 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
@@ -41,29 +73,30 @@ public class frmHospitalizacion extends javax.swing.JDialog {
         jLabel14 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
-        jTextField17 = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        jComboBox3 = new javax.swing.JComboBox<>();
-        jComboBox4 = new javax.swing.JComboBox<>();
-        jComboBox5 = new javax.swing.JComboBox<>();
+        jTextFieldTem = new javax.swing.JTextField();
+        jComboBoxHincha = new javax.swing.JComboBox<>();
+        jComboBoxHinchazon = new javax.swing.JComboBox<>();
+        jComboBoxRespira = new javax.swing.JComboBox<>();
+        jComboBoxSangrado = new javax.swing.JComboBox<>();
+        jComboBoxConvulcion = new javax.swing.JComboBox<>();
         jPanel6 = new javax.swing.JPanel();
         jLabel23 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        jTextAreaDiagnos = new javax.swing.JTextArea();
         jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
-        jTextField8 = new javax.swing.JTextField();
+        jTextFieldVeterinario = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        jTextField9 = new javax.swing.JTextField();
-        jTextField14 = new javax.swing.JTextField();
+        jTextFieldNombreM = new javax.swing.JTextField();
+        jTextFieldCedu = new javax.swing.JTextField();
+        jButton2 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jButton14 = new javax.swing.JButton();
         jLabel21 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        jTextFieldCI = new javax.swing.JTextField();
         jLabel22 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
+        jTextFieldSexM = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -71,36 +104,12 @@ public class frmHospitalizacion extends javax.swing.JDialog {
 
         jPanel2.setOpaque(false);
 
-        jTextArea2.setColumns(20);
-        jTextArea2.setRows(5);
-        jScrollPane3.setViewportView(jTextArea2);
+        jTextAreaMotivo.setColumns(20);
+        jTextAreaMotivo.setRows(5);
+        jScrollPane3.setViewportView(jTextAreaMotivo);
 
         jLabel15.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel15.setText("Motivo de la hospitalización:");
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel15)
-                .addGap(36, 36, 36)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 761, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel15)
-                .addContainerGap(111, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 350, 990, -1));
+        jLabel15.setText("Motivo:");
 
         jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel3.setOpaque(false);
@@ -117,7 +126,7 @@ public class frmHospitalizacion extends javax.swing.JDialog {
         jPanel3.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 30, -1, -1));
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel13.setText("Temperatura");
+        jLabel13.setText("Temperatura:");
         jPanel3.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 100, -1, -1));
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -131,66 +140,110 @@ public class frmHospitalizacion extends javax.swing.JDialog {
         jLabel17.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel17.setText("Convulsiones:");
         jPanel3.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 100, -1, -1));
-        jPanel3.add(jTextField17, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 90, 140, 30));
+        jPanel3.add(jTextFieldTem, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 90, 140, 30));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "si" }));
-        jPanel3.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 30, 120, -1));
+        jComboBoxHincha.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "NO", "SI" }));
+        jPanel3.add(jComboBoxHincha, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 20, 120, 30));
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "no" }));
-        jPanel3.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 30, 130, -1));
+        jComboBoxHinchazon.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "NO", "SI" }));
+        jComboBoxHinchazon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxHinchazonActionPerformed(evt);
+            }
+        });
+        jPanel3.add(jComboBoxHinchazon, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 20, 130, 30));
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ninguno" }));
-        jPanel3.add(jComboBox3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 90, 150, -1));
+        jComboBoxRespira.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "NO", "SI" }));
+        jPanel3.add(jComboBoxRespira, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 80, 150, 30));
 
-        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "si" }));
-        jPanel3.add(jComboBox4, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 30, 120, -1));
+        jComboBoxSangrado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "NO", "SI" }));
+        jPanel3.add(jComboBoxSangrado, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 20, 120, 30));
 
-        jComboBox5.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "no" }));
-        jPanel3.add(jComboBox5, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 90, -1, -1));
+        jComboBoxConvulcion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "NO", "SI" }));
+        jPanel3.add(jComboBoxConvulcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 90, 120, 30));
 
-        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 540, 1050, 140));
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 940, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel15)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 936, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(22, 22, 22))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel15)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 270, 1050, -1));
 
         jPanel6.setOpaque(false);
         jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel23.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel23.setText("Diagnóstico");
+        jLabel23.setText("Diagnóstico:");
         jPanel6.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setLineWrap(true);
-        jTextArea1.setRows(5);
-        jTextArea1.setWrapStyleWord(true);
-        jScrollPane1.setViewportView(jTextArea1);
+        jTextAreaDiagnos.setColumns(20);
+        jTextAreaDiagnos.setLineWrap(true);
+        jTextAreaDiagnos.setRows(5);
+        jTextAreaDiagnos.setWrapStyleWord(true);
+        jScrollPane1.setViewportView(jTextAreaDiagnos);
 
-        jPanel6.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 20, 700, 110));
+        jPanel6.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 20, 940, 110));
 
-        getContentPane().add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 700, 1000, 150));
+        getContentPane().add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 550, 1070, 150));
 
         jLabel18.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel18.setText("Nombre de la Mascota");
-        getContentPane().add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 190, -1, -1));
+        jLabel18.setText("Nombre de la Mascota:");
+        getContentPane().add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 160, -1, -1));
 
         jLabel19.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel19.setText("Dueño de la Mascota");
-        getContentPane().add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 120, 140, -1));
+        jLabel19.setText("Dueño de la Mascota:");
+        getContentPane().add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 117, 140, 20));
 
         jLabel20.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel20.setText("Veterinario");
-        getContentPane().add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 280, -1, -1));
+        jLabel20.setText("Veterinario:");
+        getContentPane().add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 220, -1, -1));
 
-        jTextField8.addActionListener(new java.awt.event.ActionListener() {
+        jTextFieldVeterinario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField8ActionPerformed(evt);
+                jTextFieldVeterinarioActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextField8, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 270, 260, 30));
+        getContentPane().add(jTextFieldVeterinario, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 210, 260, 30));
 
         jLabel9.setFont(new java.awt.Font("Constantia", 1, 36)); // NOI18N
         jLabel9.setText("REGISTRAR HOSPITALIZACIÓN");
         getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 40, 754, -1));
-        getContentPane().add(jTextField9, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 190, 260, 30));
-        getContentPane().add(jTextField14, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 110, 260, 30));
+        getContentPane().add(jTextFieldNombreM, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 160, 260, 30));
+        getContentPane().add(jTextFieldCedu, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 110, 260, 30));
+
+        jButton2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButton2.setText("Guardar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 720, 90, 30));
 
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton1.setText("Atras");
@@ -199,7 +252,7 @@ public class frmHospitalizacion extends javax.swing.JDialog {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 870, 70, 30));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 720, 90, 30));
 
         jButton14.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/search.png"))); // NOI18N
@@ -211,14 +264,14 @@ public class frmHospitalizacion extends javax.swing.JDialog {
         getContentPane().add(jButton14, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 110, -1, -1));
 
         jLabel21.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel21.setText("Sexo de la mascota");
-        getContentPane().add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 180, -1, 20));
-        getContentPane().add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 120, 260, -1));
+        jLabel21.setText("Sexo de la mascota:");
+        getContentPane().add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 170, -1, 20));
+        getContentPane().add(jTextFieldCI, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 110, 300, 30));
 
         jLabel22.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel22.setText("CI");
-        getContentPane().add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 120, 90, -1));
-        getContentPane().add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 180, 260, -1));
+        jLabel22.setText("CI:");
+        getContentPane().add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 120, 90, -1));
+        getContentPane().add(jTextFieldSexM, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 160, 300, 30));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/FONDOP1.jpg"))); // NOI18N
         jLabel1.setText("jLabel1");
@@ -229,15 +282,93 @@ public class frmHospitalizacion extends javax.swing.JDialog {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
         // TODO add your handling code here:
+        if (listaMascotas == null) {
+            listaMascotas = new controladorMascota();
+            listaMascotas.crearLista();
+        }
+        listPersonas = new ArrayList<>();
+        Rol r = new Rol("Administrador");
+        Cuenta c = new Cuenta("CTA1", "123", true);
+        Persona p1 = new Persona("PSN01", "CARLOS", "ORDOÑES", "GMAIL", "01", "2572220", "MEXICO", r, c);
+        Persona p2 = new Persona("PSN01", "LUIS", "PEÑA", "GMAIL", "02", "2572220", "MEXICO", r, c);
+        listPersonas.add(p1);
+        listPersonas.add(p2);
+        listaMascotas.getListaMascota().clear();
+        listaMascotas.agregarMacota("m002", "lucy", 10, "perro", "doverman", "Mediano", "Macho", "Gris", p2);
+        listaMascotas.agregarMacota("m002", "per", 10, "gato", "doverman", "Grande", "Hembra", "Gris", p2);
+        listaMascotas.agregarMacota("m002", "lili", 10, "perro", "doverman", "Pequeño", "Macho", "Gris", p2);
+        listaMascotas.agregarMacota("m002", "sesi", 10, "gato", "doverman", "Mediano", "Hembra", "Gris", p1);
+        listaMascotas.agregarMacota("m002", "corvi", 10, "perro", "doverman", "Mediano", "Macho", "Gris", p1);
+
+        if (esNumerico(jTextFieldCedu.getText()) == true) {
+            int cont = 0;
+            for (int i = 0; i < listPersonas.size(); i++) {
+                if (listPersonas.get(i).getCedula().equals(jTextFieldCedu.getText())) {
+                    cont++;
+                }
+            }
+            if (cont != 0) {//si se encotro la cedula
+                jTextFieldCI.setText(jTextFieldCedu.getText());
+                lista = listaMascotas.buscarMascotas(jTextFieldCedu.getText());
+
+                String pre = "";
+                for (int i = 0; i < lista.size(); i++) {
+                    pre += (i + 1) + ". " + "Nombre: " + lista.get(i).getNombre() + "\n"
+                            + "Raza: " + lista.get(i).getRaza() + "\n"
+                            + "Sexo: " + lista.get(i).getSexo() + "\n\n";
+                }
+                op = Integer.parseInt(JOptionPane.showInputDialog(null, "****Mascotas****\n" + pre));
+                try {
+                    mascota = lista.get(op - 1);
+                    jTextFieldNombreM.setText(mascota.getNombre());
+                    jTextFieldSexM.setText(mascota.getSexo());
+
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, "Opcion no valida");
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Persona no encontrada");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Ingrese solo numeros");
+        }
     }//GEN-LAST:event_jButton14ActionPerformed
 
-    private void jTextField8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField8ActionPerformed
+    private void jTextFieldVeterinarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldVeterinarioActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField8ActionPerformed
+    }//GEN-LAST:event_jTextFieldVeterinarioActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        if (!jTextFieldCedu.getText().equals("")) {
+            if (!jTextFieldVeterinario.getText().equals("")) {
+                if (!jTextAreaMotivo.getText().equals("") && !jTextAreaMotivo.getText().equals("") && !jTextFieldTem.getText().equals("")
+                        && !jTextAreaDiagnos.getText().equals("")) {
+                    java.util.Date fecha = new Date();                
+                    ch.registrarHospitalizacion(0, 0, jTextAreaDiagnos.getText(), jTextAreaMotivo.getText(), Integer.parseInt(jTextFieldTem.getText()), jComboBoxSangrado.getSelectedItem().toString(), jComboBoxConvulcion.getSelectedItem().toString(), jComboBoxHinchazon.getSelectedItem().toString(), jComboBoxRespira.getSelectedItem().toString(), jComboBoxHincha.getSelectedItem().toString(), fecha, null,jTextFieldVeterinario.getText(), "Hospitalizado", mascota);
+                    JOptionPane.showMessageDialog(null, "Hospitalizacion Guardada");
+                } else {
+                    JOptionPane.showMessageDialog(null, "Llene todos los datos");
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "El nombre el veterinario es obligatorio");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Es nesesario escribir un cliente");
+        }
+        
+        
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jComboBoxHinchazonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxHinchazonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxHinchazonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -287,11 +418,12 @@ public class frmHospitalizacion extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton14;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox<String> jComboBox3;
-    private javax.swing.JComboBox<String> jComboBox4;
-    private javax.swing.JComboBox<String> jComboBox5;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JComboBox<String> jComboBoxConvulcion;
+    private javax.swing.JComboBox<String> jComboBoxHincha;
+    private javax.swing.JComboBox<String> jComboBoxHinchazon;
+    private javax.swing.JComboBox<String> jComboBoxRespira;
+    private javax.swing.JComboBox<String> jComboBoxSangrado;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -314,13 +446,13 @@ public class frmHospitalizacion extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextArea jTextArea2;
-    private javax.swing.JTextField jTextField14;
-    private javax.swing.JTextField jTextField17;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
+    private javax.swing.JTextArea jTextAreaDiagnos;
+    private javax.swing.JTextArea jTextAreaMotivo;
+    private javax.swing.JTextField jTextFieldCI;
+    private javax.swing.JTextField jTextFieldCedu;
+    private javax.swing.JTextField jTextFieldNombreM;
+    private javax.swing.JTextField jTextFieldSexM;
+    private javax.swing.JTextField jTextFieldTem;
+    private javax.swing.JTextField jTextFieldVeterinario;
     // End of variables declaration//GEN-END:variables
 }

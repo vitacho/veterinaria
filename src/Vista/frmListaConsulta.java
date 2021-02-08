@@ -11,7 +11,6 @@ import Modelo.Consulta;
 import Modelo.Mascota;
 import Modelo.Persona;
 import static Vista.frmConsulta.cc;
-import static Vista.frmConsulta.listPersonas;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
@@ -25,10 +24,7 @@ import javax.swing.table.TableModel;
 public class frmListaConsulta extends javax.swing.JDialog {
 
     ArrayList<Consulta> listaConsulta;
-    //ArrayList<Persona> listPersonas;
-    ArrayList<Mascota> lista = new ArrayList<>();
-
-    controladorMascota listaMascotas;
+    ArrayList<Persona> listPersonas;
 
     /**
      * Creates new form frmListaConsulta
@@ -200,7 +196,7 @@ public class frmListaConsulta extends javax.swing.JDialog {
                 listaCon = cc.buscarConsulta(jTextField1.getText());
                 llenarTabla(listaCon);
             } else {
-                JOptionPane.showMessageDialog(null, "Persona no Encontrada");
+                JOptionPane.showMessageDialog(null, "Persona no encontrada");
             }
         } else {
             JOptionPane.showMessageDialog(null, "Ingrese solo numeros");

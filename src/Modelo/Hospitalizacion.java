@@ -18,19 +18,18 @@ public class Hospitalizacion {
     private String diagnostico;
     private String motivo;
     private int temp;
-    private boolean sangrado;
-    private boolean conbulcion;
-    private boolean intoxicacion;
-    private boolean probleResp;
-    private boolean inchazon;
+    private String sangrado;
+    private String conbulcion;
+    private String intoxicacion;
+    private String probleResp;
+    private String inchazon;
     private Date ingreso;
     private Date salida;
-    private int dias;
     private String vereterinario;
     private String estado;
     private Mascota mascota;
 
-    public Hospitalizacion(int id, int external_hosp, String diagnostico, String motivo, int temp, boolean sangrado, boolean conbulcion, boolean intoxicacion, boolean probleResp, boolean inchazon, Date ingreso, Date salida, int dias, String vereterinario, String estado, Mascota mascota) {
+    public Hospitalizacion(int id, int external_hosp, String diagnostico, String motivo, int temp, String sangrado, String conbulcion, String intoxicacion, String probleResp, String inchazon, Date ingreso, Date salida, String vereterinario, String estado, Mascota mascota) {
         this.id = id;
         this.external_hosp = external_hosp;
         this.diagnostico = diagnostico;
@@ -43,7 +42,6 @@ public class Hospitalizacion {
         this.inchazon = inchazon;
         this.ingreso = ingreso;
         this.salida = salida;
-        this.dias = dias;
         this.vereterinario = vereterinario;
         this.estado = estado;
         this.mascota = mascota;
@@ -89,43 +87,43 @@ public class Hospitalizacion {
         this.temp = temp;
     }
 
-    public boolean isSangrado() {
+    public String getSangrado() {
         return sangrado;
     }
 
-    public void setSangrado(boolean sangrado) {
+    public void setSangrado(String sangrado) {
         this.sangrado = sangrado;
     }
 
-    public boolean isConbulcion() {
+    public String getConbulcion() {
         return conbulcion;
     }
 
-    public void setConbulcion(boolean conbulcion) {
+    public void setConbulcion(String conbulcion) {
         this.conbulcion = conbulcion;
     }
 
-    public boolean isIntoxicacion() {
+    public String getIntoxicacion() {
         return intoxicacion;
     }
 
-    public void setIntoxicacion(boolean intoxicacion) {
+    public void setIntoxicacion(String intoxicacion) {
         this.intoxicacion = intoxicacion;
     }
 
-    public boolean isProbleResp() {
+    public String getProbleResp() {
         return probleResp;
     }
 
-    public void setProbleResp(boolean probleResp) {
+    public void setProbleResp(String probleResp) {
         this.probleResp = probleResp;
     }
 
-    public boolean isInchazon() {
+    public String getInchazon() {
         return inchazon;
     }
 
-    public void setInchazon(boolean inchazon) {
+    public void setInchazon(String inchazon) {
         this.inchazon = inchazon;
     }
 
@@ -143,14 +141,6 @@ public class Hospitalizacion {
 
     public void setSalida(Date salida) {
         this.salida = salida;
-    }
-
-    public int getDias() {
-        return dias;
-    }
-
-    public void setDias(int dias) {
-        this.dias = dias;
     }
 
     public String getVereterinario() {
