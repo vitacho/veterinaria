@@ -9,6 +9,7 @@ import Modelo.Consulta;
 import Modelo.Mascota;
 import java.util.ArrayList;
 import java.util.Date;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -21,22 +22,21 @@ public class controladorConsulta {
     public void registrarConsulta(int id, int external_consulta, String presion, int temp, double peso, String motivo, String diagnostico, String veterinario, Mascota mascota, Date fecha) {
         listaConsulta.add(new Consulta(id, external_consulta, presion, temp, peso, motivo, diagnostico, veterinario, mascota, fecha));
     }
-    
-    public void buscarConsulta(){
-        
-    }
-    
-    public ArrayList<Consulta> buscarConsulta(String cedula){
-        for (Consulta con : listaConsulta) {
-            if(con.getMascota().getPersona().getCedula().equals(cedula)){
-                listaConsulta.add(con);
+
+    public ArrayList<Consulta> buscarConsulta(String cedula) {
+        ArrayList<Consulta> lista = new ArrayList<>();
+        for (Consulta con : lista) {
+            if (con.getMascota().getPersona().getCedula().equals(cedula)) {
+                lista.add(con);
+            } else {
+                JOptionPane.showMessageDialog(null, "Persona no econtrada");
             }
         }
-        return listaConsulta;
+        return lista;
     }
-    
-    public ArrayList<Consulta> obtenerLista (ArrayList<Consulta> lista){
-        return lista = listaConsulta;
+
+    public ArrayList<Consulta> getListaConsulta() {
+        return listaConsulta;
     }
 
 }

@@ -8,7 +8,11 @@ package Vista;
 import Controlador.controladorConsulta;
 import Controlador.controladorMascota;
 import Modelo.Consulta;
+import Modelo.Mascota;
+import Modelo.Persona;
+import static Vista.frmConsulta.cc;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
@@ -19,15 +23,12 @@ import javax.swing.table.TableModel;
  */
 public class frmListaConsulta extends javax.swing.JDialog {
 
-    controladorConsulta cc = new controladorConsulta();
-    ArrayList<Consulta> listaConsulta = new ArrayList<>();
+    ArrayList<Consulta> listaConsulta;
+    ArrayList<Consulta> listaCon;
+    ArrayList<Persona> listPersonas;
+    ArrayList<Mascota> lista = new ArrayList<>();
 
-    public void actualizarPantalla() {
-        SwingUtilities.updateComponentTreeUI(this);
-        //SwingUtilities.updateTreeUI(this);
-
-        this.validateTree();
-    }
+    controladorMascota listaMascotas;
 
     /**
      * Creates new form frmListaConsulta
@@ -35,24 +36,38 @@ public class frmListaConsulta extends javax.swing.JDialog {
     public frmListaConsulta(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        listaConsulta = cc.obtenerLista(listaConsulta);
-        DefaultTableModel tabla = new DefaultTableModel(new String[]{"MASCOTA", "SEXO", "PRESIÓN", "TEMPERATURA", "PESO", "CEDULA", "DUEÑO", "VETERINARIO", "FECHA"}, listaConsulta.size());
+        listaConsulta = cc.getListaConsulta();
+        llenarTabla(listaConsulta);
+    }
+
+    public void llenarTabla(ArrayList<Consulta> lista) {
+
+        DefaultTableModel tabla = new DefaultTableModel(new String[]{"MASCOTA", "SEXO", "PRESIÓN", "TEMPERATURA", "PESO", "CEDULA", "DUEÑO", "VETERINARIO", "FECHA"}, lista.size());
         jTableConsultas.setModel(tabla);
         TableModel datosTabla = jTableConsultas.getModel();
 
-        for (int i = 0; i < listaConsulta.size(); i++) {
-            datosTabla.setValueAt(listaConsulta.get(i).getMascota().getNombre(), i, 0);
-            datosTabla.setValueAt(listaConsulta.get(i).getMascota().getSexo(), i, 1);
-            datosTabla.setValueAt(listaConsulta.get(i).getPresion(), i, 2);
-            datosTabla.setValueAt(listaConsulta.get(i).getTemp(), i, 3);
-            datosTabla.setValueAt(listaConsulta.get(i).getPeso(), i, 4);
-            datosTabla.setValueAt(listaConsulta.get(i).getMascota().getPersona().getCedula(), i, 5);
-            String nombres = listaConsulta.get(i).getMascota().getPersona().getNombre() + " " + listaConsulta.get(i).getMascota().getPersona().getApellido();
+        for (int i = 0; i < lista.size(); i++) {
+            datosTabla.setValueAt(lista.get(i).getMascota().getNombre(), i, 0);
+            datosTabla.setValueAt(lista.get(i).getMascota().getSexo(), i, 1);
+            datosTabla.setValueAt(lista.get(i).getPresion(), i, 2);
+            datosTabla.setValueAt(lista.get(i).getTemp(), i, 3);
+            datosTabla.setValueAt(lista.get(i).getPeso(), i, 4);
+            datosTabla.setValueAt(lista.get(i).getMascota().getPersona().getCedula(), i, 5);
+            String nombres = lista.get(i).getMascota().getPersona().getNombre() + " " + lista.get(i).getMascota().getPersona().getApellido();
             datosTabla.setValueAt(nombres, i, 6);
-            datosTabla.setValueAt(listaConsulta.get(i).getVeterinario(), i, 7);
-            datosTabla.setValueAt(listaConsulta.get(i).getFecha(), i, 8);
+            datosTabla.setValueAt(lista.get(i).getVeterinario(), i, 7);
+            datosTabla.setValueAt(lista.get(i).getFecha(), i, 8);
         }
     }
+
+    private static boolean esNumerico(String cadena) {
+        try {
+            Integer.parseInt(cadena);
+            return true;
+        } catch (NumberFormatException nfe) {
+            return false;
+        }
+    } 
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -173,8 +188,13 @@ public class frmListaConsulta extends javax.swing.JDialog {
 
     private void jButtonbuscarConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonbuscarConsultaActionPerformed
         // TODO add your handling code here:
-        String cedula = jTextField1.getText();
-        listaConsulta = cc.buscarConsulta(cedula);
+        if (esNumerico(jTextField1.getText()) == true) {        
+            listaCon = cc.buscarConsulta(jTextField1.getText());
+            llenarTabla(listaCon);
+        } else {
+            JOptionPane.showMessageDialog(null, "Ingrese solo numeros");
+        }
+
     }//GEN-LAST:event_jButtonbuscarConsultaActionPerformed
 
     /**
