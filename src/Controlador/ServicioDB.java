@@ -49,8 +49,8 @@ public class ServicioDB {
             JOptionPane.showMessageDialog(null, "ERROR AL ACTUALIZAR LOS DATOS "+e.getMessage(), "Mensaje", JOptionPane.ERROR_MESSAGE);
         }
     }
-    
-           public List<Servicio> cargaServicio(String est, List<Servicio> lis) {
+             
+         public List<Servicio> cargaServicio(String est, List<Servicio> lis) {
         try {
             lis = (List<Servicio>) st.createQuery("from servico where estado='" + est + "'order by nombreServicio").list();
         } catch (Exception e) {

@@ -102,4 +102,6 @@ public class DetalleFactura implements Serializable {
         this.id_servicio = servicio;
     }
     
+    
+    
 }
