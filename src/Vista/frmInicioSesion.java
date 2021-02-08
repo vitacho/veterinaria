@@ -134,7 +134,6 @@ public class frmInicioSesion extends javax.swing.JDialog {
 //        listCuenta = cueDB.traeUsuarios("A", listCuenta);
       
         if (listCuenta.size() > 0) {
-           
 //            c = cueDB.traeCuentaUsuario(txtUsuario.getText());
             
             if (txtUsuario.getText().equals("")||txtcontra.getText().equals("")) {
