@@ -7,6 +7,7 @@ package Modelo;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.OneToMany;
@@ -18,7 +19,7 @@ import javax.persistence.OneToMany;
 public class Receta implements Serializable {
 
     private int id_receta;
-    ///ojo variable falta de tipo date
+    private Calendar fecha_receta;
     private String medicamentos;
     private String indicaciones;
     private int num_receta;
