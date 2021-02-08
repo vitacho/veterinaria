@@ -22,10 +22,12 @@ import javax.swing.JOptionPane;
 public class frmConsulta extends javax.swing.JDialog {
 
     controladorMascota listaMascotas;
-    ArrayList<Persona> listPersonas;
+    public static ArrayList<Persona> listPersonas;
+    ArrayList<Mascota> lista = new ArrayList<>();
+    int op;
 
-    controladorConsulta cc = new controladorConsulta();
-    controladorMascota cm = new controladorMascota();
+    public static controladorConsulta cc = new controladorConsulta();
+    public static controladorMascota cm = new controladorMascota();
 
     Mascota mascota = new Mascota();
 
@@ -296,12 +298,9 @@ public class frmConsulta extends javax.swing.JDialog {
 
         if (esNumerico(jTextFieldDueno.getText()) == true) {
             int cont = 0;
-            ArrayList<Mascota> lista = new ArrayList<>();
-            String buscadaN = "";
             for (int i = 0; i < listPersonas.size(); i++) {
                 if (listPersonas.get(i).getCedula().equals(jTextFieldDueno.getText())) {
                     cont++;
-                    buscadaN = listPersonas.get(i).getNombre().toUpperCase() + " " + listPersonas.get(i).getApellido().toUpperCase();
                 }
             }
             if (cont != 0) {//si se encotro la cedula
@@ -309,7 +308,6 @@ public class frmConsulta extends javax.swing.JDialog {
                 lista = listaMascotas.buscarMascotas(jTextFieldDueno.getText());
 
                 String pre = "";
-                int op;
                 for (int i = 0; i < lista.size(); i++) {
                     pre += (i + 1) + ". " + "Nombre: " + lista.get(i).getNombre() + "\n"
                             + "Raza: " + lista.get(i).getRaza() + "\n"
@@ -337,20 +335,25 @@ public class frmConsulta extends javax.swing.JDialog {
     }//GEN-LAST:event_jTextFieldDuenoActionPerformed
 
     private void jButtonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGuardarActionPerformed
-        // TODO add your handling code here:
-        if (!jTextFieldVeterinario.getText().equals("")) {
-            if (!jTextAreaMotivo.getText().equals("") && !jTextFieldPresion.getText().equals("") && !jTextFieldTemp.getText().equals("")
-                    && !jTextFieldPeso.getText().equals("") && !jTextAreaDiag.getText().equals("")) {
-                java.util.Date fecha = new Date();
-                double peso = Double.parseDouble(jTextFieldPeso.getText());
-                cc.registrarConsulta(WIDTH, EXIT_ON_CLOSE, jTextFieldPresion.getText(), Integer.parseInt(jTextFieldTemp.getText()), peso, jTextAreaMotivo.getText(), jTextAreaDiag.getText(), jTextFieldVeterinario.getText(), mascota, fecha);
-                JOptionPane.showMessageDialog(null, "Consulta Guardada");
+        // TODO add your handling code here:        
+        if (!jTextFieldDueno.getText().equals("")) {
+            if (!jTextFieldVeterinario.getText().equals("")) {
+                if (!jTextAreaMotivo.getText().equals("") && !jTextFieldPresion.getText().equals("") && !jTextFieldTemp.getText().equals("")
+                        && !jTextFieldPeso.getText().equals("") && !jTextAreaDiag.getText().equals("")) {
+                    java.util.Date fecha = new Date();
+                    double peso = Double.parseDouble(jTextFieldPeso.getText());
+                    cc.registrarConsulta(01, 01, jTextFieldPresion.getText(), Integer.parseInt(jTextFieldTemp.getText()), peso, jTextAreaMotivo.getText(), jTextAreaDiag.getText(), jTextFieldVeterinario.getText(), mascota = lista.get(op - 1), fecha);
+                    JOptionPane.showMessageDialog(null, "Consulta Guardada");
+                } else {
+                    JOptionPane.showMessageDialog(null, "Llene todos los datos");
+                }
             } else {
-                JOptionPane.showMessageDialog(null, "Llene todos los datos");
+                JOptionPane.showMessageDialog(null, "El nombre el veterinario es obligatorio");
             }
         } else {
-            JOptionPane.showMessageDialog(null, "El nombre el veterinario es obligatorio");
+            JOptionPane.showMessageDialog(null, "Es nesesario escribir un cliente");
         }
+
     }//GEN-LAST:event_jButtonGuardarActionPerformed
 
     private void jTextFieldCIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldCIActionPerformed

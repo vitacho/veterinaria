@@ -6,18 +6,25 @@
 package Modelo;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
+import javax.persistence.CascadeType;
+import javax.persistence.OneToMany;
 
 /**
  *
  * @author Personal
  */
 public class Receta implements Serializable {
-     private int id_receta;
+    private int id_receta;
+    private Calendar fecha_receta;
+    private String medicamentos;
+    private String indicaciones;
+    private int num_receta;
+    private List<Consulta> ListaFactura = new ArrayList<Consulta>();
+    
      private String external_receta;
-     ///ojo variable falta de tipo date
-     private String medicamentos;
-     private String indicaciones;
-     private int num_receta;
 
     public int getId_receta() {
         return id_receta;
@@ -58,6 +65,13 @@ public class Receta implements Serializable {
     public void setNum_receta(int num_receta) {
         this.num_receta = num_receta;
     }
-     
-    
+
+    public List<Consulta> getListaFactura() {
+        return ListaFactura;
+    }
+
+    @OneToMany(mappedBy = "receta", cascade = CascadeType.ALL)
+    public void setListaFactura(List<Consulta> ListaFactura) {
+        this.ListaFactura = ListaFactura;
+    }
 }
