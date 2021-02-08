@@ -16,27 +16,25 @@ import javax.swing.JOptionPane;
  * @author Darley
  */
 public class controladorConsulta {
-
+    
     ArrayList<Consulta> listaConsulta = new ArrayList<>();
-
+    
     public void registrarConsulta(int id, int external_consulta, String presion, int temp, double peso, String motivo, String diagnostico, String veterinario, Mascota mascota, Date fecha) {
         listaConsulta.add(new Consulta(id, external_consulta, presion, temp, peso, motivo, diagnostico, veterinario, mascota, fecha));
     }
-
+    
     public ArrayList<Consulta> buscarConsulta(String cedula) {
         ArrayList<Consulta> lista = new ArrayList<>();
-        for (Consulta con : lista) {
+        for (Consulta con : listaConsulta) {
             if (con.getMascota().getPersona().getCedula().equals(cedula)) {
                 lista.add(con);
-            } else {
-                JOptionPane.showMessageDialog(null, "Persona no econtrada");
             }
         }
         return lista;
     }
-
+    
     public ArrayList<Consulta> getListaConsulta() {
         return listaConsulta;
     }
-
+    
 }

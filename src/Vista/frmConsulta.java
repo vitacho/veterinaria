@@ -22,7 +22,7 @@ import javax.swing.JOptionPane;
 public class frmConsulta extends javax.swing.JDialog {
 
     controladorMascota listaMascotas;
-    ArrayList<Persona> listPersonas;
+    public static ArrayList<Persona> listPersonas;
     ArrayList<Mascota> lista = new ArrayList<>();
     int op;
 
@@ -298,11 +298,9 @@ public class frmConsulta extends javax.swing.JDialog {
 
         if (esNumerico(jTextFieldDueno.getText()) == true) {
             int cont = 0;
-            //String buscadaN = "";
             for (int i = 0; i < listPersonas.size(); i++) {
                 if (listPersonas.get(i).getCedula().equals(jTextFieldDueno.getText())) {
                     cont++;
-                    //buscadaN = listPersonas.get(i).getNombre().toUpperCase() + " " + listPersonas.get(i).getApellido().toUpperCase();
                 }
             }
             if (cont != 0) {//si se encotro la cedula

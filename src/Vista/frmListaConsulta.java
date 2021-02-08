@@ -11,6 +11,7 @@ import Modelo.Consulta;
 import Modelo.Mascota;
 import Modelo.Persona;
 import static Vista.frmConsulta.cc;
+import static Vista.frmConsulta.listPersonas;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
@@ -24,8 +25,7 @@ import javax.swing.table.TableModel;
 public class frmListaConsulta extends javax.swing.JDialog {
 
     ArrayList<Consulta> listaConsulta;
-    ArrayList<Consulta> listaCon;
-    ArrayList<Persona> listPersonas;
+    //ArrayList<Persona> listPersonas;
     ArrayList<Mascota> lista = new ArrayList<>();
 
     controladorMascota listaMascotas;
@@ -67,7 +67,7 @@ public class frmListaConsulta extends javax.swing.JDialog {
         } catch (NumberFormatException nfe) {
             return false;
         }
-    } 
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -188,9 +188,20 @@ public class frmListaConsulta extends javax.swing.JDialog {
 
     private void jButtonbuscarConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonbuscarConsultaActionPerformed
         // TODO add your handling code here:
-        if (esNumerico(jTextField1.getText()) == true) {        
-            listaCon = cc.buscarConsulta(jTextField1.getText());
-            llenarTabla(listaCon);
+        if (esNumerico(jTextField1.getText()) == true) {
+            int cont = 0;
+            for (int i = 0; i < listPersonas.size(); i++) {
+                if (listPersonas.get(i).getCedula().equals(jTextField1.getText())) {
+                    cont++;
+                }
+            }
+            if (cont != 0) {
+                ArrayList<Consulta> listaCon;
+                listaCon = cc.buscarConsulta(jTextField1.getText());
+                llenarTabla(listaCon);
+            } else {
+                JOptionPane.showMessageDialog(null, "Persona no Encontrada");
+            }
         } else {
             JOptionPane.showMessageDialog(null, "Ingrese solo numeros");
         }
