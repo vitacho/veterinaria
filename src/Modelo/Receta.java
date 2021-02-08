@@ -17,7 +17,6 @@ import javax.persistence.OneToMany;
  * @author Personal
  */
 public class Receta implements Serializable {
-
     private int id_receta;
     private Calendar fecha_receta;
     private String medicamentos;
