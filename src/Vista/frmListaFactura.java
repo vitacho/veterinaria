@@ -5,11 +5,15 @@
  */
 package Vista;
 
+import Controlador.Validaciones;
+
 /**
  *
  * @author Personal
  */
 public class frmListaFactura extends javax.swing.JDialog {
+
+    Validaciones vali = new Validaciones();
 
     /**
      * Creates new form ListaServicio
@@ -31,12 +35,12 @@ public class frmListaFactura extends javax.swing.JDialog {
         jLabel6 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        txtcedula = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablacuentas = new javax.swing.JTable();
-        jButton2 = new javax.swing.JButton();
+        visualizar = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
-        jButton14 = new javax.swing.JButton();
+        jbuscar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -55,12 +59,17 @@ public class frmListaFactura extends javax.swing.JDialog {
         jLabel3.setText("Cédula");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 100, -1, -1));
 
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        txtcedula.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                txtcedulaActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 90, 270, -1));
+        txtcedula.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtcedulaKeyTyped(evt);
+            }
+        });
+        getContentPane().add(txtcedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 90, 270, -1));
 
         tablacuentas.setFont(new java.awt.Font("MS Reference Sans Serif", 0, 12)); // NOI18N
         tablacuentas.setModel(new javax.swing.table.DefaultTableModel(
@@ -88,9 +97,14 @@ public class frmListaFactura extends javax.swing.JDialog {
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 170, 720, 260));
 
-        jButton2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButton2.setText("Visualizar factura");
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 490, 150, 40));
+        visualizar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        visualizar.setText("Visualizar factura");
+        visualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                visualizarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(visualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 490, 150, 40));
 
         jButton4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton4.setText("Atrás");
@@ -101,14 +115,14 @@ public class frmListaFactura extends javax.swing.JDialog {
         });
         getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 490, 110, 40));
 
-        jButton14.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButton14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/search.png"))); // NOI18N
-        jButton14.addActionListener(new java.awt.event.ActionListener() {
+        jbuscar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jbuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/search.png"))); // NOI18N
+        jbuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton14ActionPerformed(evt);
+                jbuscarActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton14, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 80, -1, -1));
+        getContentPane().add(jbuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 80, -1, -1));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/FONDOP1.jpg"))); // NOI18N
@@ -118,17 +132,27 @@ public class frmListaFactura extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void txtcedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtcedulaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_txtcedulaActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
+
+
     }//GEN-LAST:event_jButton4ActionPerformed
 
-    private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton14ActionPerformed
+    private void jbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbuscarActionPerformed
+        vali.validadorDeCedula(txtcedula.getText(), txtcedula);
+    }//GEN-LAST:event_jbuscarActionPerformed
+
+    private void txtcedulaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtcedulaKeyTyped
+        vali.valNum(evt, txtcedula, 10);
+    }//GEN-LAST:event_txtcedulaKeyTyped
+
+    private void visualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_visualizarActionPerformed
+        frmVisualizarFactura factura = new frmVisualizarFactura(new javax.swing.JDialog(), true);
+        factura.setVisible(true);
+    }//GEN-LAST:event_visualizarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -176,15 +200,15 @@ public class frmListaFactura extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton14;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JButton jbuscar;
     private javax.swing.JTable tablacuentas;
+    private javax.swing.JTextField txtcedula;
+    private javax.swing.JButton visualizar;
     // End of variables declaration//GEN-END:variables
 }

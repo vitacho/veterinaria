@@ -5,18 +5,50 @@
  */
 package Vista;
 
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.print.PageFormat;
+import java.awt.print.Printable;
+import java.awt.print.PrinterException;
+import java.awt.print.PrinterJob;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author DELL
  */
-public class frmVisualizarFactura extends javax.swing.JDialog {
+public class frmVisualizarFactura extends javax.swing.JDialog implements Printable {
 
     /**
      * Creates new form frmVisualizarFactura
      */
-    public frmVisualizarFactura(java.awt.Frame parent, boolean modal) {
+    public frmVisualizarFactura(javax.swing.JDialog parent, boolean modal) {
         super(parent, modal);
         initComponents();
+    }
+    public void ocultar(boolean bl){
+            jPanel4.setVisible(bl);
+            butonimprimir.setVisible(bl);
+            jButtonAtras.setVisible(bl);
+            jButtonCancelar.setVisible(bl);
+                    
+            
+            }
+    public void imprimir() {
+        try {
+            PrinterJob g = PrinterJob.getPrinterJob();
+            g.setPrintable(this);
+            boolean top = g.printDialog();//para ve el como la entrada de imprimir 
+            // si se pone acpatar se vuelve 1
+            if (top) {
+                g.print();
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "ERRROR DE¨PROGRAMA ", "ERROR" + e, JOptionPane.INFORMATION_MESSAGE);
+        }
+    }
+    public void cargardatos(){
+    
     }
 
     /**
@@ -34,7 +66,7 @@ public class frmVisualizarFactura extends javax.swing.JDialog {
         jPanel4 = new javax.swing.JPanel();
         jLabel19 = new javax.swing.JLabel();
         jTextField14 = new javax.swing.JTextField();
-        jButton9 = new javax.swing.JButton();
+        butonimprimir = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jLabel22 = new javax.swing.JLabel();
         jTextField18 = new javax.swing.JTextField();
@@ -48,8 +80,8 @@ public class frmVisualizarFactura extends javax.swing.JDialog {
         jLabel26 = new javax.swing.JLabel();
         jLabel28 = new javax.swing.JLabel();
         jLabel27 = new javax.swing.JLabel();
-        jButton8 = new javax.swing.JButton();
-        jButton10 = new javax.swing.JButton();
+        jButtonAtras = new javax.swing.JButton();
+        jButtonCancelar = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel16 = new javax.swing.JLabel();
         jTextField12 = new javax.swing.JTextField();
@@ -112,11 +144,11 @@ public class frmVisualizarFactura extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/print.png"))); // NOI18N
-        jButton9.setText("Imprimir");
-        jButton9.addActionListener(new java.awt.event.ActionListener() {
+        butonimprimir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/print.png"))); // NOI18N
+        butonimprimir.setText("Imprimir");
+        butonimprimir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton9ActionPerformed(evt);
+                butonimprimirActionPerformed(evt);
             }
         });
 
@@ -206,9 +238,9 @@ public class frmVisualizarFactura extends javax.swing.JDialog {
         jLabel27.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel27.setText("Factura N°:");
 
-        jButton8.setText("Atrás");
+        jButtonAtras.setText("Atrás");
 
-        jButton10.setText("Cancelar");
+        jButtonCancelar.setText("Cancelar");
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -304,11 +336,11 @@ public class frmVisualizarFactura extends javax.swing.JDialog {
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jButton9)
-                                .addGap(25, 25, 25)
-                                .addComponent(jButton10)
-                                .addGap(34, 34, 34)
-                                .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(butonimprimir)
+                                .addGap(35, 35, 35)
+                                .addComponent(jButtonCancelar)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButtonAtras, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(30, Short.MAX_VALUE))
         );
@@ -321,18 +353,22 @@ public class frmVisualizarFactura extends javax.swing.JDialog {
                     .addComponent(jLabel28))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(4, 4, 4)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton9)
-                    .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 78, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(36, 36, 36)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 75, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(butonimprimir)
+                            .addComponent(jButtonAtras, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap())))
         );
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 700));
@@ -352,9 +388,13 @@ public class frmVisualizarFactura extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField17ActionPerformed
 
-    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        
-    }//GEN-LAST:event_jButton9ActionPerformed
+    private void butonimprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butonimprimirActionPerformed
+        //ocultamos los botones del panel 
+        ocultar(false);
+        imprimir();
+        //moestramos otra vez los botones
+        ocultar(true);
+    }//GEN-LAST:event_butonimprimirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -386,7 +426,7 @@ public class frmVisualizarFactura extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                frmVisualizarFactura dialog = new frmVisualizarFactura(new javax.swing.JFrame(), true);
+                frmVisualizarFactura dialog = new frmVisualizarFactura(new javax.swing.JDialog(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -399,9 +439,9 @@ public class frmVisualizarFactura extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
+    private javax.swing.JButton butonimprimir;
+    private javax.swing.JButton jButtonAtras;
+    private javax.swing.JButton jButtonCancelar;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
@@ -431,4 +471,20 @@ public class frmVisualizarFactura extends javax.swing.JDialog {
     private javax.swing.JTextField jTextField21;
     private javax.swing.JTextField jTextField22;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public int print(Graphics graf, PageFormat pagfor, int index) throws PrinterException {
+
+        if (index > 0) {
+            return NO_SUCH_PAGE;
+        }
+        Graphics2D hub = (Graphics2D) graf;
+        hub.translate(pagfor.getImageableX(), pagfor.getImageableY());
+        hub.scale(0.5, 0.5);
+        // lo que se va  a imprimir 
+        jPanel1.printAll(graf);
+
+        return PAGE_EXISTS;
+
+    }
 }
