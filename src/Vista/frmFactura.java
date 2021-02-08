@@ -5,6 +5,7 @@
  */
 package Vista;
 
+import Controlador.Validaciones;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.print.PageFormat;
@@ -25,6 +26,7 @@ import javax.swing.table.DefaultTableModel;
 public class frmFactura extends javax.swing.JDialog implements Printable {
 
     DefaultTableModel model = new DefaultTableModel();
+    Validaciones vali = new Validaciones();
 
     /**
      * parte para la integracion de ls servicios solo
@@ -36,6 +38,7 @@ public class frmFactura extends javax.swing.JDialog implements Printable {
         txtdecuento.setText("0");
 
     }
+   
 
     public static String fechaactual() {
         Date fecha = new Date();
@@ -227,6 +230,12 @@ public class frmFactura extends javax.swing.JDialog implements Printable {
         jLabel30.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel30.setText("Código");
 
+        textcodigo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                textcodigoKeyTyped(evt);
+            }
+        });
+
         jLabel31.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel31.setText("Precio");
 
@@ -315,6 +324,11 @@ public class frmFactura extends javax.swing.JDialog implements Printable {
         jTextcedula.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextcedulaActionPerformed(evt);
+            }
+        });
+        jTextcedula.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextcedulaKeyTyped(evt);
             }
         });
 
@@ -585,19 +599,22 @@ public class frmFactura extends javax.swing.JDialog implements Printable {
     }//GEN-LAST:event_jButtonbuscarActionPerformed
 
     private void jButtonimprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonimprimirActionPerformed
-        controldescuento();
-        
-        frmVuelto vuelto = new frmVuelto(new javax.swing.JDialog(), true);
-        vuelto.setTotal(txttotal.getText());
-        vuelto.setVisible(true);
-        //ocultamos los paneles y botones para que no aparecan al imprimir 
-        escoderAparecer(false);
-        //metodo para la impresion de panel 
-        imprimir();
-        //mostramos otra vez los que se escondio
-        escoderAparecer(false);
-        //neviamos los datos de la factura a jpanel para imprimirlo
-        ;
+        //verificamos que la cedula este corecta o si no se hace nada
+        if (vali.validadorDeCedula(jTextcedula.getText(), jTextcedula)) {
+            controldescuento();
+            frmVuelto vuelto = new frmVuelto(new javax.swing.JDialog(), true);
+            vuelto.setTotal(txttotal.getText());
+            vuelto.setVisible(true);
+            //ocultamos los paneles y botones para que no aparecan al imprimir 
+            escoderAparecer(false);
+            //metodo para la impresion de panel 
+            imprimir();
+            //mostramos otra vez los que se escondio
+            escoderAparecer(false);
+            //neviamos los datos de la factura a jpanel para imprimirlo
+
+        }
+
     }//GEN-LAST:event_jButtonimprimirActionPerformed
 
     private void txtdecuentoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtdecuentoKeyTyped
@@ -635,6 +652,21 @@ public class frmFactura extends javax.swing.JDialog implements Printable {
     private void textdescribcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textdescribcionActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_textdescribcionActionPerformed
+
+    private void jTextcedulaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextcedulaKeyTyped
+        vali.valNum(evt, jTextcedula, 10);
+//        char validar = evt.getKeyChar();
+//
+//        if (Character.isLetter(validar)) {
+//            getToolkit().beep();
+//            evt.consume();
+//            JOptionPane.showMessageDialog(rootPane, "Ingrese solo números");
+//        }
+    }//GEN-LAST:event_jTextcedulaKeyTyped
+
+    private void textcodigoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textcodigoKeyTyped
+
+    }//GEN-LAST:event_textcodigoKeyTyped
 
     /**
      * @param args the command line arguments

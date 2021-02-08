@@ -7,6 +7,7 @@ package Modelo;
 
 import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.OneToOne;
 
 /**
  *
@@ -23,7 +24,7 @@ public class Factura implements Serializable{
     private Persona persona;
 
     
-    
+    @OneToOne
     public Persona getPersona() {
         return persona;
     }

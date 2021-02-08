@@ -8,13 +8,18 @@ package Modelo;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 /**
  *
  * @author DELL
  */
 public class DetalleFactura implements Serializable {
-    private String iddetallefactura;
+
+    private int iddetallefactura;
     private int cantidad;
     private String detalle;
     private String descripcion;
@@ -22,19 +27,18 @@ public class DetalleFactura implements Serializable {
     private double preciototal;
     private String esternal_hos;
     private String external_consulta;
-    private int id_factura;
-    private int id_servicio; 
     private Factura factura;
     private Servicio servicio;
-    
-    List<Servicio> listaServicios=new ArrayList<>();
-    
-    
-    public String getIddetallefactura() {
+
+    List<Servicio> listaServicios = new ArrayList<>();
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    public int getIddetallefactura() {
         return iddetallefactura;
     }
 
-    public void setIddetallefactura(String iddetallefactura) {
+    public void setIddetallefactura(int iddetallefactura) {
         this.iddetallefactura = iddetallefactura;
     }
 
@@ -86,22 +90,22 @@ public class DetalleFactura implements Serializable {
         this.external_consulta = external_consulta;
     }
 
-    public int getId_factura() {
-        return id_factura;
+    @ManyToOne
+    public Factura getFactura() {
+        return factura;
     }
 
-    public void setId_factura(int id_factura) {
-        this.id_factura = id_factura;
+    public void setFactura(Factura factura) {
+        this.factura = factura;
     }
 
-    public int getServicio() {
-        return id_servicio;
+    @ManyToOne
+    public Servicio getServicio() {
+        return servicio;
     }
 
-    public void setServicio(int servicio) {
-        this.id_servicio = servicio;
+    public void setServicio(Servicio servicio) {
+        this.servicio = servicio;
     }
-    
-    
-    
+
 }

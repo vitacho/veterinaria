@@ -22,7 +22,7 @@ public class frmVisualizarFactura extends javax.swing.JDialog implements Printab
     /**
      * Creates new form frmVisualizarFactura
      */
-    public frmVisualizarFactura(java.awt.Frame parent, boolean modal) {
+    public frmVisualizarFactura(javax.swing.JDialog parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
@@ -426,7 +426,7 @@ public class frmVisualizarFactura extends javax.swing.JDialog implements Printab
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                frmVisualizarFactura dialog = new frmVisualizarFactura(new javax.swing.JFrame(), true);
+                frmVisualizarFactura dialog = new frmVisualizarFactura(new javax.swing.JDialog(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
