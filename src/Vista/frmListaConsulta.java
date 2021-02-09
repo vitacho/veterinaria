@@ -6,7 +6,7 @@
 package Vista;
 
 import Controlador.controladorConsulta;
-import Controlador.controladorMascota;
+import Controlador.MascotaDB;
 import Modelo.Consulta;
 import Modelo.Mascota;
 import Modelo.Persona;

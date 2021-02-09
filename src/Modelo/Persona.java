@@ -5,9 +5,11 @@
  */
 package Modelo;
 
+import javax.persistence.CascadeType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 /**
  *
@@ -40,7 +42,8 @@ public class Persona {
         this.rol = rol;
         this.cuenta = cuenta;
     }
-
+    
+    @OneToOne(mappedBy = "cuenta", cascade = CascadeType.ALL)
     public Cuenta getCuenta() {
         return cuenta;
     }
@@ -49,6 +52,7 @@ public class Persona {
         this.cuenta = cuenta;
     }
     
+    @OneToOne(mappedBy = "rol", cascade = CascadeType.ALL)
     public Rol getRol() {
         return rol;
     }

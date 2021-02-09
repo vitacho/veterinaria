@@ -5,11 +5,12 @@
  */
 package Vista;
 
-import Controlador.controladorPersona;
+import Controlador.PersonaDB;
 import Modelo.Cuenta;
 import Modelo.Persona;
 import Modelo.Rol;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
@@ -22,7 +23,7 @@ public class frmListaPersonas extends javax.swing.JDialog {
     /**
      * Creates new form BuscarPersona
      */
-    controladorPersona listaPersonas;
+    PersonaDB listaPersonas;
     public frmListaPersonas(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -51,7 +52,6 @@ public class frmListaPersonas extends javax.swing.JDialog {
         jTextIngresarBusqueda = new javax.swing.JTextField();
         jButtonBuscar = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
-        Alerta = new javax.swing.JLabel();
         fondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -126,10 +126,6 @@ public class frmListaPersonas extends javax.swing.JDialog {
         jLabel4.setText("Número de Cédula");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 120, -1, 30));
 
-        Alerta.setFont(new java.awt.Font("Constantia", 1, 14)); // NOI18N
-        Alerta.setForeground(new java.awt.Color(255, 0, 0));
-        getContentPane().add(Alerta, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 80, 330, 30));
-
         fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/FONDOP1.jpg"))); // NOI18N
         fondo.setText("jLabel1");
         getContentPane().add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1150, 640));
@@ -164,7 +160,6 @@ public class frmListaPersonas extends javax.swing.JDialog {
        
         
         limpiarTabla();
-         Alerta.setText("");
         if(!jTextIngresarBusqueda.getText().equals("")){
             if(jRBuscarCedula.isSelected()==true){
                 if(listaPersonas.validarBusquedaPorCedula(jTextIngresarBusqueda.getText())){
@@ -174,7 +169,7 @@ public class frmListaPersonas extends javax.swing.JDialog {
                     llenarTabla(lista);
                     lista.clear();
                 }else{
-                     Alerta.setText("PERSONA NO ENCONTRADA");
+                     JOptionPane.showMessageDialog(null, "PERSONA NO ENCONTRADA");
                 }  
             }else if(jRBuscarNombre.isSelected()==true){
                 if(listaPersonas.validarBusquedaPorNombre(jTextIngresarBusqueda.getText())){
@@ -185,14 +180,14 @@ public class frmListaPersonas extends javax.swing.JDialog {
                     }
                     llenarTabla(lista);
                 }else{
-                     Alerta.setText("PERSONA NO ENCONTRADA");
+                     JOptionPane.showMessageDialog(null, "PERSONA NO ENCONTRADA");
                 } 
                 
             }else{
-                Alerta.setText("SELECCIONE UNA OPCION DE BUSQUEDA");
+                JOptionPane.showMessageDialog(null, "SELECCIONE UNA OPCION DE BUSQUEDA");
             }
         }else{
-            Alerta.setText("INGRECE EL DATO DE BUSQUEDA");
+            JOptionPane.showMessageDialog(null, "INGRECE EL DATO DE BUSQUEDA");
         }
         jRBuscarCedula.enable();
         jRBuscarNombre.enable();
@@ -221,7 +216,7 @@ public class frmListaPersonas extends javax.swing.JDialog {
     
     public void quemarDatosPrueba(){
          if(listaPersonas==null){
-            listaPersonas = new controladorPersona();
+            listaPersonas = new PersonaDB();
             listaPersonas.crearLista();
         }
         Rol rol = new Rol("Cliente");
@@ -285,7 +280,6 @@ public class frmListaPersonas extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel Alerta;
     private javax.swing.JLabel fondo;
     private javax.swing.JButton jButtonAtras;
     private javax.swing.JButton jButtonBuscar;

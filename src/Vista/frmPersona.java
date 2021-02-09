@@ -5,9 +5,10 @@
  */
 package Vista;
 
-import Controlador.controladorPersona;
+import Controlador.PersonaDB;
 import Modelo.Cuenta;
 import Modelo.Rol;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -15,7 +16,7 @@ import Modelo.Rol;
  */
 public class frmPersona extends javax.swing.JDialog {
 
-    controladorPersona listaPersonas;
+    PersonaDB listaPersonas;
     boolean esCliente;
     public frmPersona(java.awt.Frame parent, boolean modal,boolean vrf) {
         super(parent, modal);
@@ -66,7 +67,6 @@ public class frmPersona extends javax.swing.JDialog {
         jLabel18 = new javax.swing.JLabel();
         jBGuardar = new javax.swing.JButton();
         jLabel16 = new javax.swing.JLabel();
-        ALERTA = new javax.swing.JLabel();
         fondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -199,10 +199,6 @@ public class frmPersona extends javax.swing.JDialog {
         jLabel16.setText("REGISTRAR PERSONA ");
         getContentPane().add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 70, -1, -1));
 
-        ALERTA.setFont(new java.awt.Font("Constantia", 1, 14)); // NOI18N
-        ALERTA.setForeground(new java.awt.Color(255, 0, 0));
-        getContentPane().add(ALERTA, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 540, 310, 30));
-
         fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/FONDOP1.jpg"))); // NOI18N
         fondo.setText("jLabel1");
         getContentPane().add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1140, 640));
@@ -224,10 +220,9 @@ public class frmPersona extends javax.swing.JDialog {
 
     public void registrarCuenta(){
         if(listaPersonas==null){
-            listaPersonas = new controladorPersona();
+            listaPersonas = new PersonaDB();
             listaPersonas.crearLista();
         }
-        ALERTA.setText("");
         String cedula = jTexCedula.getText().trim();
         if(!jTexApellido.getText().equals("")&&!jTexCedula.getText().equals("")&&!jTextCorreo.getText().equals("")
            &&!jTextDireccion.getText().equals("")&&!jTextNombre.getText().equals("")&&!jTextPasword.getText().equals("")
@@ -251,34 +246,33 @@ public class frmPersona extends javax.swing.JDialog {
                             listaPersonas.agregarPersona("P01",nombre, apellido, correo, cedula, telefono, direccion, rol, cuenta);
                             limpiarJText();
                         }else{
-                            ALERTA.setText("LAS CONTRASEÑAS NO COINCIDEN");
+                            JOptionPane.showMessageDialog(null, "LAS CONTRASEÑAS NO COINCIDEN");
                             jTextPasword.setText("");
                             jTextValPasword.setText("");
                         }
                     }else{
-                        ALERTA.setText("TELEFONO NO VALIDO");
+                        JOptionPane.showMessageDialog(null, "TELEFONO NO VALIDO");
                         jTextTelefono.setText("");
                     }
                 }else{
-                     ALERTA.setText("CEDULA REPETIDA");
+                     JOptionPane.showMessageDialog(null, "CEDULA REPETIDA");
                         jTexCedula.setText("");
                 }   
             }else {
-                ALERTA.setText("CEDULA NO VALIDA");
+                JOptionPane.showMessageDialog(null, "CEDULA NO VALIDA");
                 jTexCedula.setText("");
             }
         }else{
-            ALERTA.setText("LLENE TODOS LOS CAMPOS");
+            JOptionPane.showMessageDialog(null, "LLENE TODOS LOS CAMPOS");
         }
     }
     
     public void registrarCliente(){
         if(listaPersonas==null){
-            listaPersonas = new controladorPersona();
+            listaPersonas = new PersonaDB();
             listaPersonas.crearLista();
         }
         bloquearCamposCuenta();
-        ALERTA.setText("");
         String cedula = jTexCedula.getText().trim();
         if(!jTexApellido.getText().equals("")&&!jTexCedula.getText().equals("")&&!jTextCorreo.getText().equals("")
            &&!jTextDireccion.getText().equals("")&&!jTextNombre.getText().equals("")&&!jTextPasword.getText().equals("")
@@ -296,19 +290,19 @@ public class frmPersona extends javax.swing.JDialog {
                         listaPersonas.agregarPersona("P01",nombre, apellido, correo, cedula, telefono, direccion, rol, cuenta);
                         limpiarJText();
                     }else{
-                        ALERTA.setText("TELEFONO NO VALIDO");
+                        JOptionPane.showMessageDialog(null, "TELEFONO NO VALIDO");
                         jTextTelefono.setText("");
                     }
                 }else{
-                     ALERTA.setText("CEDULA REPETIDA");
+                     JOptionPane.showMessageDialog(null, "CEDULA REPETIDA");
                         jTexCedula.setText("");
                 }   
             }else {
-                ALERTA.setText("CEDULA NO VALIDA");
+                JOptionPane.showMessageDialog(null, "CEDULA NO VALIDA");
                 jTexCedula.setText("");
             }
         }else{
-            ALERTA.setText("LLENE TODOS LOS CAMPOS");
+            JOptionPane.showMessageDialog(null, "LLENE TODOS LOS CAMPOS");
         }
     }
     
@@ -385,7 +379,6 @@ public class frmPersona extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel ALERTA;
     private javax.swing.JLabel fondo;
     private javax.swing.JButton jBAtras;
     private javax.swing.JButton jBGuardar;

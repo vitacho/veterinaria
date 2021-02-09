@@ -9,14 +9,25 @@ import Modelo.Cuenta;
 import Modelo.Persona;
 import Modelo.Rol;
 import java.util.ArrayList;
+import org.hibernate.Session;
+import utilidad.HibernateUtil;
 
 /**
  *
  * @author Darley
  */
-public class controladorPersona {
+public class PersonaDB {
     
     ArrayList<Persona> listaPersona;
+    private Session st;
+    public PersonaDB() {
+        sessionHibernate();
+    }
+    
+    public void sessionHibernate() {
+        st = HibernateUtil.getSessionFactory().openSession();
+    }
+    
     
     public void crearLista(){
         listaPersona= new ArrayList<>();

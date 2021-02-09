@@ -5,12 +5,13 @@
  */
 package Vista;
 
-import Controlador.controladorMascota;
+import Controlador.MascotaDB;
 import Modelo.Cuenta;
 import Modelo.Mascota;
 import Modelo.Persona;
 import Modelo.Rol;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
@@ -19,7 +20,7 @@ import javax.swing.table.TableModel;
  * @author Personal
  */
 public class frmMascota extends javax.swing.JDialog {
-    controladorMascota listaMascotas;
+    MascotaDB listaMascotas;
     ArrayList<Persona> listPersonas;
     /**
      * Creates new form frmMascota
@@ -60,7 +61,6 @@ public class frmMascota extends javax.swing.JDialog {
         jComboBoxTamaño = new javax.swing.JComboBox<>();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        Alertas = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
         jTextRaza = new javax.swing.JTextField();
         jTextEdad = new javax.swing.JTextField();
@@ -74,13 +74,11 @@ public class frmMascota extends javax.swing.JDialog {
         jLabel28 = new javax.swing.JLabel();
         jTextBuscarCedula = new javax.swing.JTextField();
         jButtonBuscar = new javax.swing.JButton();
-        AlertaBuscar = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabelFondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("REGISTRAR MASCOTA");
-        setAlwaysOnTop(true);
         setMinimumSize(new java.awt.Dimension(1366, 768));
         setPreferredSize(new java.awt.Dimension(1366, 768));
         setSize(new java.awt.Dimension(0, 0));
@@ -194,10 +192,6 @@ public class frmMascota extends javax.swing.JDialog {
         jLabel12.setText("Edad:");
         jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 120, 87, -1));
 
-        Alertas.setFont(new java.awt.Font("Constantia", 1, 14)); // NOI18N
-        Alertas.setForeground(new java.awt.Color(255, 0, 0));
-        jPanel1.add(Alertas, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 170, 290, 30));
-
         jLabel25.setFont(new java.awt.Font("Constantia", 1, 14)); // NOI18N
         jLabel25.setText("Color de Pelaje :");
         jPanel1.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 120, -1, -1));
@@ -271,10 +265,6 @@ public class frmMascota extends javax.swing.JDialog {
         });
         getContentPane().add(jButtonBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 100, -1, 30));
 
-        AlertaBuscar.setFont(new java.awt.Font("Constantia", 1, 14)); // NOI18N
-        AlertaBuscar.setForeground(new java.awt.Color(255, 0, 0));
-        getContentPane().add(AlertaBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 100, 210, 30));
-
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel3.setText("Número de Cédula");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 100, -1, 30));
@@ -346,7 +336,7 @@ public class frmMascota extends javax.swing.JDialog {
    
     public void quemarDatosPrueba(){
         if(listaMascotas==null){
-            listaMascotas=new controladorMascota();
+            listaMascotas=new MascotaDB();
             listaMascotas.crearLista();
         }
         listPersonas = new ArrayList<>();
@@ -365,7 +355,7 @@ public class frmMascota extends javax.swing.JDialog {
     }
     public void registrarMascota(){
         if(listaMascotas==null){
-            listaMascotas=new controladorMascota();
+            listaMascotas=new MascotaDB();
             listaMascotas.crearLista();
         }
         habititalJtext();
@@ -391,16 +381,15 @@ public class frmMascota extends javax.swing.JDialog {
                     limpiarJtext();
                     jTextPresentarCedulaPersona.setText("");
                     jTextPresentarNombrePersona.setText("");
-                    Alertas.setText("");
                 }else{
                     jTextEdad.setText("");
-                    Alertas.setText("INGRESE LA EDAD EN NUMEROS");
+                    JOptionPane.showMessageDialog(null, "INGRESE LA EDAD EN NUMEROS");
                 }
             }else{
-                Alertas.setText("LLENE TODOS LOS CAMPOS");
+                JOptionPane.showMessageDialog(null, "LLENE TODOS LOS CAMPOS");
             }
         }else{
-            Alertas.setText("BUSQUE AL DUEÑO DE LA MASCOTA");
+            JOptionPane.showMessageDialog(null, "BUSQUE AL DUEÑO DE LA MASCOTA");
         }
     }
     public void modificarMascota(){
@@ -442,10 +431,10 @@ public class frmMascota extends javax.swing.JDialog {
                     jButtonRegistrar.setVisible(false);
                 }
             }else{
-                Alertas.setText("SELECCIONE UNA FILA");
+                JOptionPane.showMessageDialog(null, "SELECCIONE UNA FILA");
             }
         }else{
-             Alertas.setText("BUSQUE AL DUEÑO DE LA MASCOTA");
+             JOptionPane.showMessageDialog(null, "BUSQUE AL DUEÑO DE LA MASCOTA");
              limpiarTabla();
         }
     }
@@ -468,16 +457,15 @@ public class frmMascota extends javax.swing.JDialog {
                 habititalJtext();
                 actualizarJtext();
                 jTextBuscarCedula.setText("");
-                AlertaBuscar.setText("");
             }else{
-                AlertaBuscar.setText("PERSONA NO ENCONTRADA");
+                JOptionPane.showMessageDialog(null, "PERSONA NO ENCONTRADA");
                 limpiarTabla();
                 jTextBuscarCedula.setText("");
                 jTextPresentarNombrePersona.setText("");
                 jTextPresentarCedulaPersona.setText("");
             }
         }else{
-            AlertaBuscar.setText("INGRESE SOLO NUMEROS");
+            JOptionPane.showMessageDialog(null, "INGRESE SOLO NUMEROS");
             jTextBuscarCedula.setText("");
             jTextPresentarNombrePersona.setText("");
             jTextPresentarCedulaPersona.setText("");
@@ -504,7 +492,7 @@ public class frmMascota extends javax.swing.JDialog {
             jButtonRegistrar.setVisible(true);
             llenarTabla(listaMascotas.getListaMascota());
         }else{
-            Alertas.setText("INGRESE LA EDAD EN NUMEROS");
+            JOptionPane.showMessageDialog(null, "INGRESE LA EDAD EN NUMEROS");
         }
     }
     public void llenarTabla(ArrayList<Mascota> lista){
@@ -574,7 +562,7 @@ public class frmMascota extends javax.swing.JDialog {
     public void Tips(){
        jTextBuscarCedula.setToolTipText("Ingrese la cedula del dueño de la mascota. ");
        jButtonModificar.setToolTipText("Seleccione la mascota de la tabla antes de modificar.");
-       jTextEdad.setToolTipText("Ingrese la edad en años.");
+       jTextEdad.setToolTipText("Ingrese la edad en meses.");
     }
     
     /**
@@ -621,8 +609,6 @@ public class frmMascota extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel AlertaBuscar;
-    private javax.swing.JLabel Alertas;
     private javax.swing.JButton jButtonBuscar;
     private javax.swing.JButton jButtonCancelar;
     private javax.swing.JButton jButtonGuardar;

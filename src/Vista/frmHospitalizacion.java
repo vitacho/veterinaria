@@ -7,7 +7,7 @@ package Vista;
 
 import Controlador.controladorConsulta;
 import Controlador.controladorHospitalizacion;
-import Controlador.controladorMascota;
+import Controlador.MascotaDB;
 import Modelo.Cuenta;
 import Modelo.Mascota;
 import Modelo.Persona;
@@ -22,7 +22,7 @@ import javax.swing.JOptionPane;
  */
 public class frmHospitalizacion extends javax.swing.JDialog {
 
-    controladorMascota listaMascotas;
+    MascotaDB listaMascotas;
     ArrayList<Persona> listPersonas;
     ArrayList<Mascota> lista = new ArrayList<>();
     int op;
@@ -288,7 +288,7 @@ public class frmHospitalizacion extends javax.swing.JDialog {
     private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
         // TODO add your handling code here:
         if (listaMascotas == null) {
-            listaMascotas = new controladorMascota();
+            listaMascotas = new MascotaDB();
             listaMascotas.crearLista();
         }
         listPersonas = new ArrayList<>();

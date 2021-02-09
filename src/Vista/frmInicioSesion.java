@@ -6,7 +6,7 @@
 package Vista;
 
 import Controlador.CuentaDB;
-import Controlador.controladorPersona;
+import Controlador.PersonaDB;
 import Modelo.Cuenta;
 import Controlador.Validaciones;
 import java.util.List;
@@ -22,7 +22,7 @@ public class frmInicioSesion extends javax.swing.JDialog {
      * Creates new form frmInicioSesion
      */
     CuentaDB cueDB = new CuentaDB();
-    controladorPersona persoDB = new controladorPersona();
+    PersonaDB persoDB = new PersonaDB();
     Validaciones val = new Validaciones();
 
     String tipo = "";

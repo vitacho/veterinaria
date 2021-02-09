@@ -8,17 +8,22 @@ package Controlador;
 import Modelo.Mascota;
 import Modelo.Persona;
 import java.util.ArrayList;
+import org.hibernate.Session;
+import utilidad.HibernateUtil;
 
 /**
  *
  * @author DELL
  */
-public class controladorMascota {
+public class MascotaDB {
     ArrayList<Mascota> listaMascotas;
-
-    public controladorMascota() {
+    private Session st;
+    public MascotaDB() {
+        sessionHibernate();
     }
-    
+    public void sessionHibernate() {
+        st = HibernateUtil.getSessionFactory().openSession();
+    }
     public void crearLista(){
         listaMascotas=new ArrayList<>();
     }
