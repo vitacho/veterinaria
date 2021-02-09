@@ -21,6 +21,8 @@ public class frmPersona extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         esCliente=vrf;
+        tipoderegistro();
+        
     }
 
     /**
@@ -239,7 +241,8 @@ public class frmPersona extends javax.swing.JDialog {
                             boolean estado;
                             if(jComboEstado.getSelectedItem().toString().equals("Activada"))estado=true;
                             else estado=false;
-                            Cuenta cuenta = new Cuenta("CTA1", jTextPasword.getText(), estado);
+                            Cuenta cuenta = new Cuenta("CTA1", estado);
+                            cuenta.setClave(jTextPasword.getText());
                             String nombre = jTextNombre.getText().trim();
                             String apellido = jTexApellido.getText().trim();
                             String correo = jTextCorreo.getText().trim();
@@ -284,7 +287,7 @@ public class frmPersona extends javax.swing.JDialog {
                 if(!listaPersonas.cedulaRepetida(cedula)){
                     if(esNumerico(jTextTelefono.getText().trim())){
                         Rol rol = new Rol("Cliente");
-                        Cuenta cuenta = new Cuenta("CTA1", "", true);//clientes sin contraseña
+                        Cuenta cuenta = new Cuenta("CTA1", true);//clientes sin contraseña
                         String nombre = jTextNombre.getText().trim();
                         String apellido = jTexApellido.getText().trim();
                         String correo = jTextCorreo.getText().trim();

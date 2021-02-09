@@ -225,7 +225,7 @@ public class frmListaPersonas extends javax.swing.JDialog {
             listaPersonas.crearLista();
         }
         Rol rol = new Rol("Cliente");
-        Cuenta cuenta = new Cuenta("CTA1", "", true);
+        Cuenta cuenta = new Cuenta("CTA1", true);
         String nombre = "Carlos";
         String apellido = "Lopez";
         String correo = "@";

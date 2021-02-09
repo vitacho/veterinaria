@@ -284,7 +284,7 @@ public class frmConsulta extends javax.swing.JDialog {
         }
         listPersonas = new ArrayList<>();
         Rol r = new Rol("Administrador");
-        Cuenta c = new Cuenta("CTA1", "123", true);
+        Cuenta c = new Cuenta("CTA1", true);
         Persona p1 = new Persona("PSN01", "CARLOS", "ORDOÑES", "GMAIL", "01", "2572220", "MEXICO", r, c);
         Persona p2 = new Persona("PSN01", "LUIS", "PEÑA", "GMAIL", "02", "2572220", "MEXICO", r, c);
         listPersonas.add(p1);

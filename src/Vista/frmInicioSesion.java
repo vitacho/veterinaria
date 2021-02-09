@@ -141,16 +141,16 @@ public class frmInicioSesion extends javax.swing.JDialog {
                 txtcontra.setText(null); txtUsuario.setText(null); txtUsuario.requestFocus();
             }
 
-            if (c.getPersona().getCed_per().equals(txtUsuario.getText())
-                && c.getContra_usu().equals(txtcontra.getText())) {
-                tipo = c.getPersona().getRol().getDes_rol();
+            if (c.getPersona().getCedula().equals(txtUsuario.getText())
+                && c.getClave().equals(txtcontra.getText())) {
+                tipo = c.getPersona().getRol().getNombre();
                 JOptionPane.showMessageDialog(this, "Acceso Tipo: " + tipo, "ACCESO AL SISTEMA", JOptionPane.INFORMATION_MESSAGE);
 
                 //AQUI ENVIAR EL FORMULARIO
 
-                frmPrincipal pricipal = new frmPrincipal(c.getPersona().getRol().getId_rol());
-                pricipal.setTitle("Menú Principal");
-                pricipal.setVisible(true);
+                //frmPrincipal pricipal = new frmPrincipal(c.getPersona().getRol().getId());
+                //pricipal.setTitle("Menú Principal");
+                //pricipal.setVisible(true);
            
                 this.dispose();
             }

@@ -18,15 +18,24 @@ public class Cuenta {
     private String external_cuenta;
     private String clave;
     private boolean estado;
+    private Persona persona;
 
     public Cuenta() {
     }
 
-    public Cuenta( String external_cuenta, String clave, boolean estado) {
+    public Cuenta( String external_cuenta, boolean estado) {
         this.external_cuenta = external_cuenta;
-        this.clave = clave;
         this.estado = estado;
     }
+
+    public Persona getPersona() {
+        return persona;
+    }
+
+    public void setPersona(Persona persona) {
+        this.persona = persona;
+    }
+    
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
