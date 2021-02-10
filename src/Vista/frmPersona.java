@@ -7,6 +7,7 @@ package Vista;
 
 import Controlador.PersonaDB;
 import Modelo.Cuenta;
+import Modelo.Persona;
 import Modelo.Rol;
 import javax.swing.JOptionPane;
 
@@ -66,7 +67,7 @@ public class frmPersona extends javax.swing.JDialog {
         jLabel15 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         jBGuardar = new javax.swing.JButton();
-        jLabel16 = new javax.swing.JLabel();
+        jLTitulo = new javax.swing.JLabel();
         fondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -195,9 +196,9 @@ public class frmPersona extends javax.swing.JDialog {
         });
         getContentPane().add(jBGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 540, 90, 30));
 
-        jLabel16.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
-        jLabel16.setText("REGISTRAR PERSONA ");
-        getContentPane().add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 70, -1, -1));
+        jLTitulo.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
+        jLTitulo.setText("REGISTRAR CUENTA ");
+        getContentPane().add(jLTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 70, -1, -1));
 
         fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/FONDOP1.jpg"))); // NOI18N
         fondo.setText("jLabel1");
@@ -238,12 +239,19 @@ public class frmPersona extends javax.swing.JDialog {
                             else estado=false;
                             Cuenta cuenta = new Cuenta("CTA1", estado);
                             cuenta.setClave(jTextPasword.getText());
-                            String nombre = jTextNombre.getText().trim();
-                            String apellido = jTexApellido.getText().trim();
-                            String correo = jTextCorreo.getText().trim();
-                            String telefono = jTextTelefono.getText().trim();
-                            String direccion = jTextDireccion.getText().trim();
-                            listaPersonas.agregarPersona("P01",nombre, apellido, correo, cedula, telefono, direccion, rol, cuenta);
+                            Persona p =new Persona();
+                            p.setExternal_persona("P01");
+                            p.setNombre(jTextNombre.getText().trim());
+                            p.setApellido(jTexApellido.getText().trim());
+                            p.setCorreoElectronico(jTextCorreo.getText().trim());
+                            p.setCedula(cedula);
+                            p.setTelefono(jTextTelefono.getText().trim());
+                            p.setDireccion(jTextDireccion.getText().trim());
+                            p.setRol(rol);
+                            p.setCuenta(cuenta);
+                            cuenta.setPersona(p);
+                            rol.setPersona(p);
+                            listaPersonas.getListaPersonas().add(p);
                             limpiarJText();
                         }else{
                             JOptionPane.showMessageDialog(null, "LAS CONTRASEÑAS NO COINCIDEN");
@@ -282,12 +290,19 @@ public class frmPersona extends javax.swing.JDialog {
                     if(esNumerico(jTextTelefono.getText().trim())){
                         Rol rol = new Rol("Cliente");
                         Cuenta cuenta = new Cuenta("CTA1", true);//clientes sin contraseña
-                        String nombre = jTextNombre.getText().trim();
-                        String apellido = jTexApellido.getText().trim();
-                        String correo = jTextCorreo.getText().trim();
-                        String telefono = jTextTelefono.getText().trim();
-                        String direccion = jTextDireccion.getText().trim();
-                        listaPersonas.agregarPersona("P01",nombre, apellido, correo, cedula, telefono, direccion, rol, cuenta);
+                        Persona p =new Persona();
+                        p.setExternal_persona("P01");
+                        p.setNombre(jTextNombre.getText().trim());
+                        p.setApellido(jTexApellido.getText().trim());
+                        p.setCorreoElectronico(jTextCorreo.getText().trim());
+                        p.setCedula(cedula);
+                        p.setTelefono(jTextTelefono.getText().trim());
+                        p.setDireccion(jTextDireccion.getText().trim());
+                        p.setRol(rol);
+                        p.setCuenta(cuenta);
+                        cuenta.setPersona(p);
+                        rol.setPersona(p);
+                        listaPersonas.getListaPersonas().add(p);
                         limpiarJText();
                     }else{
                         JOptionPane.showMessageDialog(null, "TELEFONO NO VALIDO");
@@ -333,7 +348,10 @@ public class frmPersona extends javax.swing.JDialog {
         jComboEstado.disable();
     }
     public void tipoderegistro(){
-        if(esCliente==true)bloquearCamposCuenta(); 
+        if(esCliente==true){
+            bloquearCamposCuenta();
+            jLTitulo.setText("REGISTRAR CLIENTE ");
+        } 
     }
     /**
      * @param args the command line arguments
@@ -384,11 +402,11 @@ public class frmPersona extends javax.swing.JDialog {
     private javax.swing.JButton jBGuardar;
     private javax.swing.JComboBox<String> jComboEstado;
     private javax.swing.JComboBox<String> jComboRol;
+    private javax.swing.JLabel jLTitulo;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel23;

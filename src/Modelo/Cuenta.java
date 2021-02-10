@@ -5,15 +5,18 @@
  */
 package Modelo;
 
+import java.io.Serializable;
+import javax.persistence.CascadeType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 /**
  *
  * @author DELL
  */
-public class Cuenta {
+public class Cuenta implements Serializable{
     private int id;
     private String external_cuenta;
     private String clave;
@@ -22,12 +25,13 @@ public class Cuenta {
 
     public Cuenta() {
     }
-
+    
     public Cuenta( String external_cuenta, boolean estado) {
         this.external_cuenta = external_cuenta;
         this.estado = estado;
     }
-
+    
+    @OneToOne(mappedBy = "persona", cascade = CascadeType.ALL)
     public Persona getPersona() {
         return persona;
     }

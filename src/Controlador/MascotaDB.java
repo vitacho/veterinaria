@@ -19,7 +19,7 @@ public class MascotaDB {
     ArrayList<Mascota> listaMascotas;
     private Session st;
     public MascotaDB() {
-        sessionHibernate();
+        //sessionHibernate();
     }
     public void sessionHibernate() {
         st = HibernateUtil.getSessionFactory().openSession();

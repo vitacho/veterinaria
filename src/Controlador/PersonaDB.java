@@ -21,7 +21,7 @@ public class PersonaDB {
     ArrayList<Persona> listaPersona;
     private Session st;
     public PersonaDB() {
-        sessionHibernate();
+        //sessionHibernate();
     }
     
     public void sessionHibernate() {

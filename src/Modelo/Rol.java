@@ -5,18 +5,21 @@
  */
 package Modelo;
 
+import java.io.Serializable;
+import javax.persistence.CascadeType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 /**
  *
  * @author DELL
  */
-public class Rol {
+public class Rol implements Serializable{
     private int id;
     private String Nombre;
-
+    private Persona Persona;
     public Rol() {
     }
 
@@ -24,6 +27,16 @@ public class Rol {
         this.Nombre = Nombre;
     }
     
+    @OneToOne(mappedBy = "persona", cascade = CascadeType.ALL)
+    public Persona getPersona() {
+        return Persona;
+    }
+
+    public void setPersona(Persona Persona) {
+        this.Persona = Persona;
+    }
+    
+   
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int getId() {

@@ -5,6 +5,7 @@
  */
 package Modelo;
 
+import java.io.Serializable;
 import javax.persistence.CascadeType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,7 +16,7 @@ import javax.persistence.OneToOne;
  *
  * @author DELL
  */
-public class Persona {
+public class Persona implements Serializable{
 
     private int id;
     private String external_persona;

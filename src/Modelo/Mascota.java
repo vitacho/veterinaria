@@ -5,6 +5,7 @@
  */
 package Modelo;
 
+import java.io.Serializable;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -14,7 +15,7 @@ import javax.persistence.ManyToOne;
  *
  * @author DELL
  */
-public class Mascota {
+public class Mascota implements Serializable{
     private int id;
     private String external_mascota;
     private String nombre;
