@@ -5,6 +5,8 @@
  */
 package Vista;
 
+import Modelo.Hospitalizacion;
+
 /**
  *
  * @author Personal
@@ -290,7 +292,7 @@ public class frmPrincipal extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        frmHospitalizacion fh = new frmHospitalizacion(this, false);
+        frmHospitalizacion fh = new frmHospitalizacion(this, false, false, new Hospitalizacion());
         fh.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 

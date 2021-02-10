@@ -29,6 +29,10 @@ public class Hospitalizacion {
     private String estado;
     private Mascota mascota;
 
+    public Hospitalizacion() {
+    }
+
+    
     public Hospitalizacion(int id, int external_hosp, String diagnostico, String motivo, int temp, String sangrado, String conbulcion, String intoxicacion, String probleResp, String inchazon, Date ingreso, Date salida, String vereterinario, String estado, Mascota mascota) {
         this.id = id;
         this.external_hosp = external_hosp;

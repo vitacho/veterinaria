@@ -20,6 +20,7 @@ import javax.swing.table.TableModel;
 public class frmListaHospitalización extends javax.swing.JDialog {
 
     ArrayList<Hospitalizacion> listaHosp;
+    Hospitalizacion eleccion;
     ArrayList<Persona> listPersonas;
 
     /**
@@ -34,7 +35,7 @@ public class frmListaHospitalización extends javax.swing.JDialog {
 
     public void llenarTabla(ArrayList<Hospitalizacion> lista) {
 
-        DefaultTableModel tabla = new DefaultTableModel(new String[]{"MASCOTA", "SEXO", "CEDULA", "DUEÑO", "VETERINARIO", "FECHA DE INGRESO", "STADO"}, lista.size());
+        DefaultTableModel tabla = new DefaultTableModel(new String[]{"MASCOTA", "SEXO", "CEDULA", "DUEÑO", "VETERINARIO", "FECHA DE INGRESO", "ESTADO"}, lista.size());
         jTableHospi.setModel(tabla);
         TableModel datosTabla = jTableHospi.getModel();
 
@@ -124,6 +125,11 @@ public class frmListaHospitalización extends javax.swing.JDialog {
 
         jButton2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton2.setText("Ver hospitalización ");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 690, 180, 30));
 
         jButton4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -186,6 +192,22 @@ public class frmListaHospitalización extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null, "Seleccione una fila");
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        DefaultTableModel table = (DefaultTableModel) jTableHospi.getModel();
+        String nombreM = (String) table.getValueAt(jTableHospi.getSelectedRow(), 0);
+        String cedula = (String) table.getValueAt(jTableHospi.getSelectedRow(), 2);
+        for (int i = 0; i < listaHosp.size(); i++) {
+            if (listaHosp.get(i).getMascota().getNombre().equals(nombreM)
+                    && listaHosp.get(i).getMascota().getPersona().getCedula().equals(cedula)) {
+                eleccion = listaHosp.get(i);
+            }
+        }
+        frmHospitalizacion fh = new frmHospitalizacion(new javax.swing.JFrame(), false, true, eleccion);
+        fh.setVisible(true);
+
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments

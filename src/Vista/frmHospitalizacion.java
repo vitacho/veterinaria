@@ -9,6 +9,7 @@ import Controlador.controladorConsulta;
 import Controlador.controladorHospitalizacion;
 import Controlador.MascotaDB;
 import Modelo.Cuenta;
+import Modelo.Hospitalizacion;
 import Modelo.Mascota;
 import Modelo.Persona;
 import Modelo.Rol;
@@ -25,8 +26,11 @@ public class frmHospitalizacion extends javax.swing.JDialog {
     MascotaDB listaMascotas;
     ArrayList<Persona> listPersonas;
     ArrayList<Mascota> lista = new ArrayList<>();
+    Hospitalizacion datosHos;
     int op;
-    
+    boolean porLista;
+    int cont = 0;
+
     public static controladorHospitalizacion ch = new controladorHospitalizacion();
 
     Mascota mascota = new Mascota();
@@ -34,12 +38,16 @@ public class frmHospitalizacion extends javax.swing.JDialog {
     /**
      * Creates new form frmDetalleListaHospitalizacion
      */
-    public frmHospitalizacion(java.awt.Frame parent, boolean modal) {
+    public frmHospitalizacion(java.awt.Frame parent, boolean modal, boolean vrf, Hospitalizacion eleccion) {
         super(parent, modal);
         initComponents();
         jTextFieldCI.setEditable(false);
         jTextFieldNombreM.setEditable(false);
         jTextFieldSexM.setEditable(false);
+        porLista = vrf;
+        datosHos = eleccion;
+        tipodeEntrada();
+
     }
 
     private static boolean esNumerico(String cadena) {
@@ -48,6 +56,59 @@ public class frmHospitalizacion extends javax.swing.JDialog {
             return true;
         } catch (NumberFormatException nfe) {
             return false;
+        }
+    }
+
+    private void bloquearCampos() {
+        jTextFieldCedu.setEditable(false);
+        jTextFieldVeterinario.setEditable(false);
+        jTextAreaMotivo.setEditable(false);
+        jComboBoxSangrado.setEnabled(false);
+        jComboBoxHincha.setEnabled(false);
+        jComboBoxintox.setEnabled(false);
+        jComboBoxRespira.setEnabled(false);
+        jComboBoxConvulcion.setEnabled(false);
+        jTextFieldTem.setEditable(false);
+        jTextAreaDiagnos.setEditable(false);
+        jButtonBuscar.setEnabled(false);
+
+    }
+
+    private void tipodeEntrada() {
+        if (porLista == true) {
+            bloquearCampos();
+            jLabelTitulo.setText("VER HOSPITALIZACION");
+            llenarDatos(datosHos);
+        }
+    }
+
+    private void llenarDatos(Hospitalizacion datos) {
+        jTextFieldNombreM.setText(datos.getMascota().getNombre());
+        jTextFieldCI.setText(datos.getMascota().getPersona().getCedula());
+        jTextFieldSexM.setText(datos.getMascota().getSexo());
+        jTextFieldVeterinario.setText(datos.getVereterinario());
+        jTextAreaMotivo.setText(datos.getMotivo());
+        jComboBoxSangrado.setSelectedItem(datos.getSangrado());
+        jComboBoxHincha.setSelectedItem(datos.getInchazon());
+        jComboBoxintox.setSelectedItem(datos.getIntoxicacion());
+        jComboBoxRespira.setSelectedItem(datos.getProbleResp());
+        jComboBoxConvulcion.setSelectedItem(datos.getConbulcion());
+        jTextFieldTem.setText(Integer.toString(datos.getTemp()));
+        jTextAreaDiagnos.setText(datos.getDiagnostico());
+    }
+
+    private void limpiarDatos() {
+        jTextFieldVeterinario.setText("");
+        jTextAreaMotivo.setText("");
+        jTextFieldTem.setText("");
+        jTextAreaDiagnos.setText("");
+    }
+
+    private void buscarPersona() {
+        for (int i = 0; i < listPersonas.size(); i++) {
+            if (listPersonas.get(i).getCedula().equals(jTextFieldCedu.getText())) {
+                cont++;
+            }
         }
     }
 
@@ -75,7 +136,7 @@ public class frmHospitalizacion extends javax.swing.JDialog {
         jLabel17 = new javax.swing.JLabel();
         jTextFieldTem = new javax.swing.JTextField();
         jComboBoxHincha = new javax.swing.JComboBox<>();
-        jComboBoxHinchazon = new javax.swing.JComboBox<>();
+        jComboBoxintox = new javax.swing.JComboBox<>();
         jComboBoxRespira = new javax.swing.JComboBox<>();
         jComboBoxSangrado = new javax.swing.JComboBox<>();
         jComboBoxConvulcion = new javax.swing.JComboBox<>();
@@ -87,12 +148,12 @@ public class frmHospitalizacion extends javax.swing.JDialog {
         jLabel19 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
         jTextFieldVeterinario = new javax.swing.JTextField();
-        jLabel9 = new javax.swing.JLabel();
+        jLabelTitulo = new javax.swing.JLabel();
         jTextFieldNombreM = new javax.swing.JTextField();
         jTextFieldCedu = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
-        jButton14 = new javax.swing.JButton();
+        jButtonBuscar = new javax.swing.JButton();
         jLabel21 = new javax.swing.JLabel();
         jTextFieldCI = new javax.swing.JTextField();
         jLabel22 = new javax.swing.JLabel();
@@ -140,18 +201,24 @@ public class frmHospitalizacion extends javax.swing.JDialog {
         jLabel17.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel17.setText("Convulsiones:");
         jPanel3.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 100, -1, -1));
+
+        jTextFieldTem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldTemActionPerformed(evt);
+            }
+        });
         jPanel3.add(jTextFieldTem, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 90, 140, 30));
 
         jComboBoxHincha.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "NO", "SI" }));
         jPanel3.add(jComboBoxHincha, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 20, 120, 30));
 
-        jComboBoxHinchazon.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "NO", "SI" }));
-        jComboBoxHinchazon.addActionListener(new java.awt.event.ActionListener() {
+        jComboBoxintox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "NO", "SI" }));
+        jComboBoxintox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxHinchazonActionPerformed(evt);
+                jComboBoxintoxActionPerformed(evt);
             }
         });
-        jPanel3.add(jComboBoxHinchazon, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 20, 130, 30));
+        jPanel3.add(jComboBoxintox, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 20, 130, 30));
 
         jComboBoxRespira.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "NO", "SI" }));
         jPanel3.add(jComboBoxRespira, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 80, 150, 30));
@@ -230,9 +297,9 @@ public class frmHospitalizacion extends javax.swing.JDialog {
         });
         getContentPane().add(jTextFieldVeterinario, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 210, 260, 30));
 
-        jLabel9.setFont(new java.awt.Font("Constantia", 1, 36)); // NOI18N
-        jLabel9.setText("REGISTRAR HOSPITALIZACIÓN");
-        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 40, 754, -1));
+        jLabelTitulo.setFont(new java.awt.Font("Constantia", 1, 36)); // NOI18N
+        jLabelTitulo.setText("REGISTRAR HOSPITALIZACIÓN");
+        getContentPane().add(jLabelTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 40, 754, -1));
         getContentPane().add(jTextFieldNombreM, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 160, 260, 30));
         getContentPane().add(jTextFieldCedu, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 110, 260, 30));
 
@@ -254,14 +321,14 @@ public class frmHospitalizacion extends javax.swing.JDialog {
         });
         getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 720, 90, 30));
 
-        jButton14.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButton14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/search.png"))); // NOI18N
-        jButton14.addActionListener(new java.awt.event.ActionListener() {
+        jButtonBuscar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButtonBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/search.png"))); // NOI18N
+        jButtonBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton14ActionPerformed(evt);
+                jButtonBuscarActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton14, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 110, -1, -1));
+        getContentPane().add(jButtonBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 110, -1, -1));
 
         jLabel21.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel21.setText("Sexo de la mascota:");
@@ -285,7 +352,7 @@ public class frmHospitalizacion extends javax.swing.JDialog {
         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
+    private void jButtonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarActionPerformed
         // TODO add your handling code here:
         if (listaMascotas == null) {
             listaMascotas = new MascotaDB();
@@ -306,16 +373,10 @@ public class frmHospitalizacion extends javax.swing.JDialog {
         listaMascotas.agregarMacota("m002", "corvi", 10, "perro", "doverman", "Mediano", "Macho", "Gris", p1);
 
         if (esNumerico(jTextFieldCedu.getText()) == true) {
-            int cont = 0;
-            for (int i = 0; i < listPersonas.size(); i++) {
-                if (listPersonas.get(i).getCedula().equals(jTextFieldCedu.getText())) {
-                    cont++;
-                }
-            }
+            buscarPersona();
             if (cont != 0) {//si se encotro la cedula
                 jTextFieldCI.setText(jTextFieldCedu.getText());
                 lista = listaMascotas.buscarMascotas(jTextFieldCedu.getText());
-
                 String pre = "";
                 for (int i = 0; i < lista.size(); i++) {
                     pre += (i + 1) + ". " + "Nombre: " + lista.get(i).getNombre() + "\n"
@@ -337,7 +398,7 @@ public class frmHospitalizacion extends javax.swing.JDialog {
         } else {
             JOptionPane.showMessageDialog(null, "Ingrese solo numeros");
         }
-    }//GEN-LAST:event_jButton14ActionPerformed
+    }//GEN-LAST:event_jButtonBuscarActionPerformed
 
     private void jTextFieldVeterinarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldVeterinarioActionPerformed
         // TODO add your handling code here:
@@ -349,9 +410,18 @@ public class frmHospitalizacion extends javax.swing.JDialog {
             if (!jTextFieldVeterinario.getText().equals("")) {
                 if (!jTextAreaMotivo.getText().equals("") && !jTextAreaMotivo.getText().equals("") && !jTextFieldTem.getText().equals("")
                         && !jTextAreaDiagnos.getText().equals("")) {
-                    java.util.Date fecha = new Date();                
-                    ch.registrarHospitalizacion(0, 0, jTextAreaDiagnos.getText(), jTextAreaMotivo.getText(), Integer.parseInt(jTextFieldTem.getText()), jComboBoxSangrado.getSelectedItem().toString(), jComboBoxConvulcion.getSelectedItem().toString(), jComboBoxHinchazon.getSelectedItem().toString(), jComboBoxRespira.getSelectedItem().toString(), jComboBoxHincha.getSelectedItem().toString(), fecha, null,jTextFieldVeterinario.getText(), "Hospitalizado", mascota);
-                    JOptionPane.showMessageDialog(null, "Hospitalizacion Guardada");
+                    if (esNumerico(jTextFieldTem.getText()) == true) {
+                        java.util.Date fecha = new Date();
+                        ch.registrarHospitalizacion(0, 0, jTextAreaDiagnos.getText(), jTextAreaMotivo.getText(),
+                                Integer.parseInt(jTextFieldTem.getText()), jComboBoxSangrado.getSelectedItem().toString(),
+                                jComboBoxConvulcion.getSelectedItem().toString(), jComboBoxintox.getSelectedItem().toString(),
+                                jComboBoxRespira.getSelectedItem().toString(), jComboBoxHincha.getSelectedItem().toString(), fecha,
+                                null, jTextFieldVeterinario.getText(), "Hospitalizado", mascota);
+                        JOptionPane.showMessageDialog(null, "Hospitalizacion Guardada");
+                        limpiarDatos();
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Ingrese una temperatura valida");
+                    }
                 } else {
                     JOptionPane.showMessageDialog(null, "Llene todos los datos");
                 }
@@ -361,14 +431,15 @@ public class frmHospitalizacion extends javax.swing.JDialog {
         } else {
             JOptionPane.showMessageDialog(null, "Es nesesario escribir un cliente");
         }
-        
-        
-        
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jComboBoxHinchazonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxHinchazonActionPerformed
+    private void jComboBoxintoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxintoxActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBoxHinchazonActionPerformed
+    }//GEN-LAST:event_jComboBoxintoxActionPerformed
+
+    private void jTextFieldTemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldTemActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldTemActionPerformed
 
     /**
      * @param args the command line arguments
@@ -403,7 +474,7 @@ public class frmHospitalizacion extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                frmHospitalizacion dialog = new frmHospitalizacion(new javax.swing.JFrame(), true);
+                frmHospitalizacion dialog = new frmHospitalizacion(new javax.swing.JFrame(), true, false, new Hospitalizacion());
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -417,13 +488,13 @@ public class frmHospitalizacion extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton14;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButtonBuscar;
     private javax.swing.JComboBox<String> jComboBoxConvulcion;
     private javax.swing.JComboBox<String> jComboBoxHincha;
-    private javax.swing.JComboBox<String> jComboBoxHinchazon;
     private javax.swing.JComboBox<String> jComboBoxRespira;
     private javax.swing.JComboBox<String> jComboBoxSangrado;
+    private javax.swing.JComboBox<String> jComboBoxintox;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -440,7 +511,7 @@ public class frmHospitalizacion extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLabelTitulo;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel6;
