@@ -22,7 +22,7 @@ public class MascotaDB {
         //sessionHibernate();
     }
     public void sessionHibernate() {
-        st = HibernateUtil.getSessionFactory().openSession();
+        //st = HibernateUtil.getSessionFactory().openSession();
     }
     public void crearLista(){
         listaMascotas=new ArrayList<>();

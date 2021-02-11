@@ -19,11 +19,15 @@ public class frmPersona extends javax.swing.JDialog {
 
     PersonaDB listaPersonas;
     boolean esCliente;
-    public frmPersona(java.awt.Frame parent, boolean modal,boolean vrf) {
+    boolean modificacion;
+    String cedModificar;
+    public frmPersona(java.awt.Frame parent, boolean modal,boolean vrf,boolean mdf, String cedmdf) {
         super(parent, modal);
         initComponents();
         esCliente=vrf;
-        tipoderegistro();
+        modificacion=mdf;
+        cedModificar=cedmdf;
+        inicializar();
         
     }
 
@@ -163,7 +167,7 @@ public class frmPersona extends javax.swing.JDialog {
         jPanel2.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, 20, -1));
         jPanel2.add(jTextPasword, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 20, 186, 30));
 
-        jComboRol.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrador", "Segretaria(a)", "Veterinario" }));
+        jComboRol.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrador", "Segretaria", "Veterinario" }));
         jPanel2.add(jComboRol, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 100, 190, 30));
 
         jLabel28.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -210,8 +214,15 @@ public class frmPersona extends javax.swing.JDialog {
 
     private void jBGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardarActionPerformed
         // TODO add your handling code here:
-        if(esCliente==true)registrarCliente();
-        else registrarCuenta();
+        if(esCliente==true&&modificacion==false){
+            registrarCliente();
+        }else if(esCliente==false&&modificacion==false){
+            registrarCuenta();
+        }else if(esCliente==false&&modificacion==true){
+            modificarCuenta();
+        }else if(esCliente==true&&modificacion==true){
+            modificarCliente();
+        }
     }//GEN-LAST:event_jBGuardarActionPerformed
 
     private void jBAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAtrasActionPerformed
@@ -321,6 +332,82 @@ public class frmPersona extends javax.swing.JDialog {
         }
     }
     
+    public void modificarCliente(){
+        for (Persona persona : listaPersonas.getListaPersonas()) {
+            if(cedModificar.equals(persona.getCedula())){
+                jTextCorreo.setText(persona.getCorreoElectronico());
+                jTextDireccion.setText(persona.getDireccion());
+                jTextTelefono.setText(persona.getTelefono());
+                ////////////////////
+                if(!jTextCorreo.getText().equals("")&&!jTextDireccion.getText().equals("")
+                   &&!jTextTelefono.getText().equals("")){
+                    if(esNumerico(jTextTelefono.getText().trim())){
+                            persona.setDireccion(jTextDireccion.getText());
+                            persona.setTelefono(jTextTelefono.getText());
+                            persona.setCorreoElectronico(jTextCorreo.getText());
+                            limpiarJText();
+                    }else{
+                        JOptionPane.showMessageDialog(null, "TELEFONO NO VALIDO");
+                        jTextTelefono.setText("");
+                    }
+                }else{
+                    JOptionPane.showMessageDialog(null, "LLENE TODOS LOS CAMPOS");
+                }
+            }
+        }
+    }
+    public void modificarCuenta(){
+        for (Persona persona : listaPersonas.getListaPersonas()) {
+            if(cedModificar.equals(persona.getCedula())){
+                if(!jTextCorreo.getText().equals("")&&!jTextDireccion.getText().equals("")&&!jTextPasword.getText().equals("")
+                   &&!jTextTelefono.getText().equals("")&&!jTextValPasword.getText().equals("")){
+                    if(esNumerico(jTextTelefono.getText().trim())){
+                        if(listaPersonas.validarPasword(jTextPasword.getText().trim(), jTextValPasword.getText().trim())){
+                            persona.setDireccion(jTextDireccion.getText());
+                            persona.setTelefono(jTextTelefono.getText());
+                            persona.setCorreoElectronico(jTextCorreo.getText());
+                            String clave=jTextPasword.getText();
+                            String r = jComboRol.getSelectedItem().toString();
+                            Rol rol = new Rol(r);
+                            persona.setRol(rol);
+                            boolean etd;
+                            if(jComboEstado.getSelectedItem().toString().equals("Activada"))etd=true;
+                            else etd=false;
+                            Cuenta cuenta = new Cuenta(persona.getCuenta().getExternal_cuenta(), etd);
+                            persona.setCuenta(cuenta);
+                            limpiarJText();
+                        }else{
+                            JOptionPane.showMessageDialog(null, "LAS CONTRASEÑAS NO COINCIDEN");
+                            jTextPasword.setText("");
+                            jTextValPasword.setText("");
+                        }
+                    }else{
+                        JOptionPane.showMessageDialog(null, "TELEFONO NO VALIDO");
+                        jTextTelefono.setText("");
+                    }
+                }else{
+                    JOptionPane.showMessageDialog(null, "LLENE TODOS LOS CAMPOS");
+                }
+            }
+        }
+    }
+    public void quemarDatosPrueba(){
+         if(listaPersonas==null){
+            listaPersonas = new PersonaDB();
+            listaPersonas.crearLista();
+        }
+        Rol rol = new Rol("Cliente");
+        Cuenta cuenta = new Cuenta("CTA1", true);
+        String nombre = "Carlos";
+        String apellido = "Lopez";
+        String correo = "@";
+        String telefono = "1324242";
+        String direccion = "loja";
+        listaPersonas.agregarPersona("P01",nombre, "Perez", correo, "01", telefono, direccion, rol, cuenta);
+        listaPersonas.agregarPersona("P02","Carlos", apellido, correo, "02", telefono, direccion, rol, cuenta);
+        listaPersonas.agregarPersona("P01",nombre, apellido, correo, "03", telefono, direccion, rol, cuenta);
+    }
+    
     private static boolean esNumerico(String cadena){
 	try {
 		Integer.parseInt(cadena);
@@ -347,11 +434,54 @@ public class frmPersona extends javax.swing.JDialog {
         jComboRol.disable();
         jComboEstado.disable();
     }
-    public void tipoderegistro(){
-        if(esCliente==true){
+    public void inicializar(){
+        quemarDatosPrueba();
+        for (Persona persona :listaPersonas.getListaPersonas()) {
+            System.out.println(persona.getCedula());
+        }
+        if(esCliente==true&&modificacion==false){
             bloquearCamposCuenta();
             jLTitulo.setText("REGISTRAR CLIENTE ");
-        } 
+        }else if(esCliente==true&&modificacion==true){
+            jTexCedula.disable();
+            jTexApellido.disable();
+            jTextNombre.disable();
+            bloquearCamposCuenta();
+            jLTitulo.setText("MODIFICAR CLIENTE ");
+            for (Persona persona : listaPersonas.getListaPersonas()) {
+                if(cedModificar.equals(persona.getCedula())){
+                    jTextCorreo.setText(persona.getCorreoElectronico());
+                    jTextDireccion.setText(persona.getDireccion());
+                    jTextTelefono.setText(persona.getDireccion());
+                }else{
+                    System.out.println("no");
+                }   
+            }
+        }else if(esCliente==false&&modificacion==true){
+            jLTitulo.setText("MODIFICAR CUENTA ");
+            jTexCedula.disable();
+            jTexApellido.disable();
+            jTextNombre.disable();
+            for (Persona persona : listaPersonas.getListaPersonas()) {
+                if(cedModificar.equals(persona.getCedula())){
+                    jTextCorreo.setText(persona.getCorreoElectronico());
+                    jTextDireccion.setText(persona.getDireccion());
+                    jTextTelefono.setText(persona.getTelefono());
+                    jTextPasword.setText(persona.getCuenta().getClave());
+                    boolean estado = persona.getCuenta().isEstado();
+                    if(estado==true)jComboEstado.setSelectedIndex(0);
+                    else jComboEstado.setSelectedIndex(1);
+                    String rl = persona.getRol().getNombre();
+                    if(rl.equals("Administrador"))jComboRol.setSelectedIndex(0);
+                    else if(rl.equals("Segretaria"))jComboRol.setSelectedIndex(1);
+                    else jComboRol.setSelectedIndex(2);
+                    jTextPasword.setText(persona.getCuenta().getClave());
+                    jTextValPasword.setText(persona.getCuenta().getClave());
+                }else{
+                    System.out.println("no");
+                }
+            }
+        }
     }
     /**
      * @param args the command line arguments
@@ -384,7 +514,7 @@ public class frmPersona extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                frmPersona dialog = new frmPersona(new javax.swing.JFrame(), true,false);
+                frmPersona dialog = new frmPersona(new javax.swing.JFrame(), true,false,false,"");
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

@@ -19,13 +19,13 @@ import utilidad.HibernateUtil;
 public class PersonaDB {
     
     ArrayList<Persona> listaPersona;
-    private Session st;
+    //private Session st;
     public PersonaDB() {
         //sessionHibernate();
     }
     
     public void sessionHibernate() {
-        st = HibernateUtil.getSessionFactory().openSession();
+        //st = HibernateUtil.getSessionFactory().openSession();
     }
     
     

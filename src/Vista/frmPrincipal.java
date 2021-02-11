@@ -248,14 +248,14 @@ public class frmPrincipal extends javax.swing.JFrame {
 
     private void jCheckRegistrarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckRegistrarClienteActionPerformed
         // TODO add your handling code here:
-        frmPersona rp = new frmPersona(this, false,true);
+        frmPersona rp = new frmPersona(this, false,true,false,"");
         rp.setVisible(true);
     }//GEN-LAST:event_jCheckRegistrarClienteActionPerformed
 
     private void jCheckListaClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckListaClientesActionPerformed
         // TODO add your handling code here:
-        frmListaConsulta fc = new frmListaConsulta(this, false);
-        fc.setVisible(true);
+        frmListaPersonas lp = new frmListaPersonas(this, false,true);
+        lp.setVisible(true);
     }//GEN-LAST:event_jCheckListaClientesActionPerformed
 
     private void jCheckBoxMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuItem9ActionPerformed
@@ -282,7 +282,7 @@ public class frmPrincipal extends javax.swing.JFrame {
 
     private void jCheckListaCuentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckListaCuentasActionPerformed
         // TODO add your handling code here:
-        frmListaPersonas lp = new frmListaPersonas(this, false);
+        frmListaPersonas lp = new frmListaPersonas(this, false,false);
         lp.setVisible(true);
     }//GEN-LAST:event_jCheckListaCuentasActionPerformed
 
@@ -302,7 +302,7 @@ public class frmPrincipal extends javax.swing.JFrame {
 
     private void jCheckRegistrarCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckRegistrarCuentaActionPerformed
         // TODO add your handling code here:
-        frmPersona rp = new frmPersona(this, false,false);
+        frmPersona rp = new frmPersona(this, false,true,false,"");
         rp.setVisible(true);
     }//GEN-LAST:event_jCheckRegistrarCuentaActionPerformed
 
