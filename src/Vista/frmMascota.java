@@ -28,9 +28,9 @@ public class frmMascota extends javax.swing.JDialog {
     public frmMascota(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        bloquearJtext();
-        quemarDatosPrueba();//datos quemados para pruebas sin BD
-        Tips();
+        //bloquearJtext();
+        //quemarDatosPrueba();//datos quemados para pruebas sin BD
+        //Tips();
         jButtonGuardar.setVisible(false);
         jButtonGuardar.disable();
     }
@@ -286,18 +286,18 @@ public class frmMascota extends javax.swing.JDialog {
 
     private void jButtonModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarActionPerformed
         // TODO add your handling code here:
-            modificarMascota();
+            //modificarMascota();
     }//GEN-LAST:event_jButtonModificarActionPerformed
 
     private void jButtonRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegistrarActionPerformed
         // TODO add your handling code here:
-        registrarMascota();
+        //registrarMascota();
         
     }//GEN-LAST:event_jButtonRegistrarActionPerformed
     
     private void jButtonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGuardarActionPerformed
         // TODO add your handling code here:
-        guardarModificacion();
+        //guardarModificacion();
         
     }//GEN-LAST:event_jButtonGuardarActionPerformed
 
@@ -324,7 +324,7 @@ public class frmMascota extends javax.swing.JDialog {
 
     private void jButtonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarActionPerformed
         // TODO add your handling code here:
-        buscarMascota();
+        //buscarMascota();
     }//GEN-LAST:event_jButtonBuscarActionPerformed
     
     
@@ -333,7 +333,7 @@ public class frmMascota extends javax.swing.JDialog {
         // TODO add your handling code here:
         this.setVisible(false);
     }//GEN-LAST:event_jButtonCancelarActionPerformed
-   
+    /*
     public void quemarDatosPrueba(){
         if(listaMascotas==null){
             listaMascotas=new MascotaDB();
@@ -564,7 +564,7 @@ public class frmMascota extends javax.swing.JDialog {
        jButtonModificar.setToolTipText("Seleccione la mascota de la tabla antes de modificar.");
        jTextEdad.setToolTipText("Ingrese la edad en meses.");
     }
-    
+    */
     /**
      * @param args the command line arguments
      */

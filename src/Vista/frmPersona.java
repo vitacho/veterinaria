@@ -27,7 +27,7 @@ public class frmPersona extends javax.swing.JDialog {
         esCliente=vrf;
         modificacion=mdf;
         cedModificar=cedmdf;
-        inicializar();
+        //inicializar();
         
     }
 
@@ -214,7 +214,7 @@ public class frmPersona extends javax.swing.JDialog {
 
     private void jBGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardarActionPerformed
         // TODO add your handling code here:
-        if(esCliente==true&&modificacion==false){
+       /* if(esCliente==true&&modificacion==false){
             registrarCliente();
         }else if(esCliente==false&&modificacion==false){
             registrarCuenta();
@@ -222,14 +222,14 @@ public class frmPersona extends javax.swing.JDialog {
             modificarCuenta();
         }else if(esCliente==true&&modificacion==true){
             modificarCliente();
-        }
+        }*/
     }//GEN-LAST:event_jBGuardarActionPerformed
 
     private void jBAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAtrasActionPerformed
         // TODO add your handling code here:
-        this.setVisible(false);
+        //this.setVisible(false);
     }//GEN-LAST:event_jBAtrasActionPerformed
-
+    /*
     public void registrarCuenta(){
         if(listaPersonas==null){
             listaPersonas = new PersonaDB();
@@ -483,6 +483,7 @@ public class frmPersona extends javax.swing.JDialog {
             }
         }
     }
+    */
     /**
      * @param args the command line arguments
      */

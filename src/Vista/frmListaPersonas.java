@@ -29,7 +29,7 @@ public class frmListaPersonas extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         esCliente=esCli;
-        quemarDatosPrueba();//datos para pruebas sin bd
+        //quemarDatosPrueba();//datos para pruebas sin bd
         jRBuscarCedula.setToolTipText("Seleccione para buscar por cedula");
         jRBuscarNombre.setToolTipText("Seleccione para buscar por nombre");
     }
@@ -165,19 +165,19 @@ public class frmListaPersonas extends javax.swing.JDialog {
 
     private void jButtonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarActionPerformed
         // TODO add your handling code here:
-        buscarPersona();
+        //buscarPersona();
     }//GEN-LAST:event_jButtonBuscarActionPerformed
 
     private void jButtonModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarActionPerformed
         // TODO add your handling code here:
-        modificarPersona();
+        //modificarPersona();
     }//GEN-LAST:event_jButtonModificarActionPerformed
 
     private void jButtonAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAtrasActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
     }//GEN-LAST:event_jButtonAtrasActionPerformed
-    
+ /*   
     public void buscarPersona(){
         limpiarTabla();
         if(!jTextIngresarBusqueda.getText().equals("")){
@@ -264,6 +264,7 @@ public class frmListaPersonas extends javax.swing.JDialog {
         listaPersonas.agregarPersona("P02","Carlos", apellido, correo, "02", telefono, direccion, rol, cuenta);
         listaPersonas.agregarPersona("P01",nombre, apellido, correo, "03", telefono, direccion, rol, cuenta);
     }
+    */
     /**
      * @param args the command line arguments
      */
